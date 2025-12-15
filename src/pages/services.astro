@@ -1,37 +1,73 @@
 ---
 /**
- * Services page - loads from pre-fetched JSON data with hero section
+ * Services page - ABA therapy services overview
  */
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import Breadcrumbs from '@/components/common/Breadcrumbs.astro';
-import { generateWebPageSchema } from '@/lib/utils/schema';
-import { getPageBySlug, decodeHtmlEntities } from '@/lib/utils/get-page-data';
+import Button from '@/components/ui/Button.astro';
+import services from '@/data/services.json';
 
-const pageData = getPageBySlug('services');
-
-const title = decodeHtmlEntities(pageData?.title || 'Services');
-const content = pageData?.content || '';
+const title = 'ABA therapy services';
 const canonical = 'https://prosperahealthcare.com/services/';
-
-const schema = generateWebPageSchema(
-  { title, content, uri: '/services/', date: pageData?.date || '', modified: pageData?.modified || '' },
-  canonical
-);
 
 const breadcrumbs = [
   { name: 'Home', href: '/' },
   { name: 'Services', href: '/services/' },
 ];
+
+const serviceDetails = [
+  {
+    id: 'in-home-aba',
+    title: 'In-home 1:1 ABA therapy',
+    description: 'Therapy in your home, where your child learns best. Sessions focus on communication, social skills, and daily living—tailored to your child\'s goals.',
+    features: ['1:1 sessions with certified RBTs', 'Treatment plans designed by BCBAs', 'Learn in natural settings', 'Parents involved in every session', 'Flexible morning or afternoon times'],
+    image: '/images/wp/AdobeStock_569313061.jpeg'
+  },
+  {
+    id: 'behavioral-intervention',
+    title: 'Behavioral intervention',
+    description: 'Early intensive therapy that addresses challenging behaviors and builds foundational skills. Best for children under 6 during critical development windows.',
+    features: ['Reduce challenging behaviors', 'Build positive alternatives', 'Track progress with data', 'Family-centered approach', 'Prevent future crises'],
+    image: '/images/wp/Behavior-Intervention.jpeg'
+  },
+  {
+    id: 'behavior-assessment',
+    title: 'Behavior assessment',
+    description: 'BCBAs conduct functional behavior assessments (FBAs) to find out why behaviors happen. Then we create a plan to address them.',
+    features: ['Functional behavior assessment', 'Written intervention plan', 'Environmental analysis', 'Trigger identification', 'Ongoing adjustments'],
+    image: '/images/wp/Behavior-Assessment.jpeg'
+  },
+  {
+    id: 'skills-assessment',
+    title: 'Skills assessment',
+    description: 'We measure your child\'s skills using VB-MAPP, ABLLS-R, and AFLS tools. These assessments show where they are now and track growth over time.',
+    features: ['VB-MAPP assessment', 'ABLLS-R evaluation', 'AFLS skill tracking', 'Monthly progress reports', 'Goals adjusted as skills grow'],
+    image: '/images/wp/Skills-Assessment.jpeg'
+  },
+  {
+    id: 'parent-training',
+    title: 'Parent training',
+    description: 'Learn ABA techniques you can use at home. When parents reinforce therapy goals between sessions, children progress faster.',
+    features: ['ABA techniques for home', 'Manage difficult behaviors', 'Improve communication', 'Support skill generalization', 'Ongoing coaching'],
+    image: '/images/wp/Family-Centered.jpeg'
+  },
+  {
+    id: 'remote-assessments',
+    title: 'Remote assessments',
+    description: 'Can\'t make it in person? We offer virtual assessments and consultations so you get expert guidance from anywhere in Texas.',
+    features: ['Video consultations', 'Remote skill assessments', 'Virtual parent training', 'Flexible scheduling', 'Secure platform'],
+    image: '/images/wp/Remote-Assessments.jpeg'
+  }
+];
 ---
 
 <BaseLayout
   title={title}
-  description="Explore Prospera Healthcare's ABA therapy services including in-home therapy, center-based programs, and parent training."
+  description="Explore Prospera Healthcare's ABA therapy services including in-home therapy, behavior assessment, skills assessment, and parent training."
   canonical={canonical}
-  schema={schema}
 >
   <!-- Hero Section -->
-  <section class="relative min-h-[400px] lg:min-h-[450px] text-white overflow-hidden">
+  <section class="relative min-h-[50vh] text-white overflow-hidden">
     <div class="absolute inset-0">
       <img
         src="/images/wp/Texas-ABA-Therapy-scaled.jpeg"
@@ -40,25 +76,79 @@ const breadcrumbs = [
       />
       <div class="absolute inset-0 bg-gradient-to-r from-primary-900/90 via-primary-800/80 to-primary-700/60"></div>
     </div>
-    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-20 flex items-center min-h-[400px] lg:min-h-[450px]">
-      <div>
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-28 flex items-center min-h-[50vh]">
+      <div class="max-w-3xl">
         <div class="mb-6">
           <Breadcrumbs items={breadcrumbs} />
         </div>
-        <h1 class="text-4xl md:text-5xl font-bold leading-tight mb-4 drop-shadow-lg text-white">
+        <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6 drop-shadow-lg text-white">
           {title}
         </h1>
-        <p class="text-lg md:text-xl text-white/90 max-w-2xl drop-shadow">
-          Comprehensive ABA therapy services tailored to your child's unique needs.
+        <p class="text-xl text-white/90 max-w-2xl drop-shadow">
+          Therapy tailored to your child. We support development at every stage.
         </p>
       </div>
     </div>
   </section>
 
-  <!-- Content Section -->
-  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
-    <article class="prose prose-lg max-w-none">
-      <div set:html={content} />
-    </article>
-  </div>
+  <!-- Services Overview -->
+  <section class="py-16 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {services.map((service) => (
+          <a href={`#${service.id}`} class="group bg-neutral-50 rounded-xl p-6 hover:bg-primary-50 transition-colors no-underline border border-neutral-200 hover:border-primary-300">
+            <h3 class="text-lg font-bold text-neutral-900 group-hover:text-primary-700 mb-2">{service.title}</h3>
+            <p class="text-neutral-600 text-sm">{service.description}</p>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Detailed Service Sections -->
+  {serviceDetails.map((service, index) => (
+    <section id={service.id} class={`py-20 ${index % 2 === 0 ? 'bg-neutral-50' : 'bg-white'}`}>
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class={`grid lg:grid-cols-2 gap-12 items-center ${index % 2 === 1 ? 'lg:flex-row-reverse' : ''}`}>
+          <div class={index % 2 === 1 ? 'lg:order-2' : ''}>
+            <div class="rounded-2xl overflow-hidden shadow-xl">
+              <img
+                src={service.image}
+                alt={service.title}
+                class="w-full h-80 object-cover"
+              />
+            </div>
+          </div>
+          <div class={index % 2 === 1 ? 'lg:order-1' : ''}>
+            <h2 class="text-3xl md:text-4xl font-bold text-neutral-900 mb-6">{service.title}</h2>
+            <p class="text-lg text-neutral-600 mb-8 leading-relaxed">{service.description}</p>
+            <ul class="space-y-3 mb-8">
+              {service.features.map((feature) => (
+                <li class="flex items-start gap-3">
+                  <svg class="w-6 h-6 text-primary-500 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                  </svg>
+                  <span class="text-neutral-700">{feature}</span>
+                </li>
+              ))}
+            </ul>
+            <Button href="/contact/">Start here</Button>
+          </div>
+        </div>
+      </div>
+    </section>
+  ))}
+
+  <!-- CTA Section -->
+  <section class="py-20 bg-primary-600 text-white">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="text-3xl md:text-4xl font-bold mb-6">Start with a free consultation</h2>
+      <p class="text-xl text-primary-100 mb-8 max-w-2xl mx-auto">
+        Talk to our team about your child's needs. We'll help you find the right services.
+      </p>
+      <Button href="/contact/" variant="secondary" size="lg" class="!text-white !border-white hover:!bg-white hover:!text-primary-600">
+        Schedule consultation
+      </Button>
+    </div>
+  </section>
 </BaseLayout>

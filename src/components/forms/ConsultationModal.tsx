@@ -90,11 +90,11 @@ export default function ConsultationModal({
 
   return (
     <>
-      {/* Trigger Button */}
+      {/* Trigger Button - Primary style, 48px min touch target per Practical UI */}
       <button
         ref={triggerRef}
         onClick={openModal}
-        className="inline-flex items-center justify-center px-6 py-3 text-base font-semibold text-white bg-primary-500 rounded-lg hover:bg-primary-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 transition-colors"
+        className="inline-flex items-center justify-center px-6 min-h-[48px] text-base font-bold text-white bg-primary-500 rounded-lg hover:bg-primary-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 transition-colors"
         aria-haspopup="dialog"
       >
         {triggerText || defaultTrigger}
@@ -128,9 +128,10 @@ export default function ConsultationModal({
               >
                 {modalTitle}
               </h2>
+              {/* Close button - 48px min touch target per Practical UI */}
               <button
                 onClick={closeModal}
-                className="p-2 text-neutral-500 hover:text-neutral-700 hover:bg-neutral-100 rounded-lg transition-colors"
+                className="p-2.5 min-w-[48px] min-h-[48px] flex items-center justify-center text-neutral-500 hover:text-neutral-700 hover:bg-neutral-100 rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-primary-500"
                 aria-label={closeLabel}
               >
                 <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">

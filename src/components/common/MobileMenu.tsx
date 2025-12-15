@@ -113,11 +113,11 @@ export default function MobileMenu({
 
   return (
     <>
-      {/* Hamburger Button */}
+      {/* Hamburger Button - 48px min touch target per Practical UI */}
       <button
         ref={buttonRef}
         onClick={toggleMenu}
-        className="inline-flex items-center justify-center p-2 rounded-md text-neutral-700 hover:text-primary-600 hover:bg-neutral-100 focus:outline-none focus:ring-2 focus:ring-primary-500"
+        className="inline-flex items-center justify-center p-2.5 min-w-[48px] min-h-[48px] rounded-lg text-neutral-700 hover:text-primary-600 hover:bg-neutral-100 focus:outline-none focus:ring-2 focus:ring-primary-500"
         aria-expanded={isOpen}
         aria-controls="mobile-menu"
         aria-label={isOpen ? closeLabel : menuLabel}
@@ -155,13 +155,14 @@ export default function MobileMenu({
         <div className="flex flex-col h-full">
           {/* Header */}
           <div className="flex items-center justify-between p-4 border-b border-neutral-200">
-            <span className="text-lg font-semibold text-neutral-900">{menuLabel}</span>
+            <span className="text-lg font-bold text-neutral-900">{menuLabel}</span>
+            {/* Close button - 48px min touch target per Practical UI */}
             <button
               onClick={closeMenu}
-              className="p-2 rounded-md text-neutral-500 hover:text-neutral-700 hover:bg-neutral-100 focus:outline-none focus:ring-2 focus:ring-primary-500"
+              className="p-2.5 min-w-[48px] min-h-[48px] rounded-lg text-neutral-500 hover:text-neutral-700 hover:bg-neutral-100 focus:outline-none focus:ring-2 focus:ring-primary-500 flex items-center justify-center"
               aria-label={closeLabel}
             >
-              <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
               </svg>
             </button>
@@ -172,10 +173,11 @@ export default function MobileMenu({
             <ul className="space-y-1">
               {navItems.map((item) => (
                 <li key={item.href}>
+                  {/* Nav links - 48px min touch target per Practical UI */}
                   <a
                     href={item.href}
                     onClick={closeMenu}
-                    className={`block px-4 py-3 rounded-lg text-base font-medium no-underline transition-colors ${
+                    className={`flex items-center px-4 min-h-[48px] rounded-lg text-base font-medium no-underline transition-colors ${
                       currentPath === item.href || currentPath.startsWith(item.href)
                         ? 'bg-primary-50 text-primary-700'
                         : 'text-neutral-700 hover:bg-neutral-50 hover:text-primary-600'
@@ -189,25 +191,25 @@ export default function MobileMenu({
             </ul>
           </nav>
 
-          {/* Footer with CTA and Language Switch */}
+          {/* Footer with CTA and Language Switch - 48px min touch targets per Practical UI */}
           <div className="p-4 border-t border-neutral-200 space-y-3">
-            {/* Language Switch */}
+            {/* Language Switch - Secondary button style */}
             <a
               href={getAlternateUrl()}
               onClick={closeMenu}
-              className="flex items-center justify-center gap-2 w-full px-4 py-2.5 text-sm font-medium text-neutral-600 border border-neutral-300 rounded-lg hover:border-primary-400 hover:text-primary-600 no-underline transition-colors"
+              className="flex items-center justify-center gap-2 w-full px-4 min-h-[48px] text-sm font-bold text-neutral-600 border-2 border-neutral-300 rounded-lg hover:border-primary-400 hover:text-primary-600 no-underline transition-colors"
             >
-              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
               </svg>
               {switchLabel}
             </a>
 
-            {/* CTA Button */}
+            {/* CTA Button - Primary button style */}
             <a
               href={ctaHref}
               onClick={closeMenu}
-              className="flex items-center justify-center w-full px-4 py-3 text-base font-semibold text-white bg-primary-500 rounded-lg hover:bg-primary-600 no-underline transition-colors"
+              className="flex items-center justify-center w-full px-4 min-h-[48px] text-base font-bold text-white bg-primary-500 rounded-lg hover:bg-primary-600 no-underline transition-colors"
             >
               {ctaLabel}
             </a>

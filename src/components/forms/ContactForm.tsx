@@ -177,10 +177,11 @@ export default function ContactForm({
         <div>
           <label
             htmlFor="firstName"
-            className="block text-base font-medium text-neutral-700 mb-2"
+            className="block text-base font-bold text-neutral-700 mb-2"
           >
             {t.firstName} <span className="text-red-500">*</span>
           </label>
+          {/* Input - 48px min touch target per Practical UI */}
           <input
             type="text"
             id="firstName"
@@ -189,7 +190,7 @@ export default function ContactForm({
             onChange={handleChange}
             aria-invalid={!!errors.firstName}
             aria-describedby={errors.firstName ? 'firstName-error' : undefined}
-            className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 ${
+            className={`w-full px-4 min-h-[48px] border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 ${
               errors.firstName ? 'border-red-500' : 'border-neutral-300'
             }`}
           />
@@ -203,7 +204,7 @@ export default function ContactForm({
         <div>
           <label
             htmlFor="lastName"
-            className="block text-base font-medium text-neutral-700 mb-2"
+            className="block text-base font-bold text-neutral-700 mb-2"
           >
             {t.lastName} <span className="text-red-500">*</span>
           </label>
@@ -215,7 +216,7 @@ export default function ContactForm({
             onChange={handleChange}
             aria-invalid={!!errors.lastName}
             aria-describedby={errors.lastName ? 'lastName-error' : undefined}
-            className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 ${
+            className={`w-full px-4 min-h-[48px] border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 ${
               errors.lastName ? 'border-red-500' : 'border-neutral-300'
             }`}
           />
@@ -231,7 +232,7 @@ export default function ContactForm({
       <div>
         <label
           htmlFor="email"
-          className="block text-base font-medium text-neutral-700 mb-2"
+          className="block text-base font-bold text-neutral-700 mb-2"
         >
           {t.email} <span className="text-red-500">*</span>
         </label>
@@ -243,7 +244,7 @@ export default function ContactForm({
           onChange={handleChange}
           aria-invalid={!!errors.email}
           aria-describedby={errors.email ? 'email-error' : undefined}
-          className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 ${
+          className={`w-full px-4 min-h-[48px] border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 ${
             errors.email ? 'border-red-500' : 'border-neutral-300'
           }`}
         />
@@ -254,13 +255,13 @@ export default function ContactForm({
         )}
       </div>
 
-      {/* Phone */}
+      {/* Phone - Optional field marked per Practical UI */}
       <div>
         <label
           htmlFor="phone"
-          className="block text-base font-medium text-neutral-700 mb-2"
+          className="block text-base font-bold text-neutral-700 mb-2"
         >
-          {t.phone}
+          {t.phone} <span className="text-neutral-500 font-normal">({lang === 'es' ? 'opcional' : 'optional'})</span>
         </label>
         <input
           type="tel"
@@ -270,7 +271,7 @@ export default function ContactForm({
           onChange={handleChange}
           aria-invalid={!!errors.phone}
           aria-describedby={errors.phone ? 'phone-error' : undefined}
-          className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 ${
+          className={`w-full px-4 min-h-[48px] border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 ${
             errors.phone ? 'border-red-500' : 'border-neutral-300'
           }`}
         />
@@ -285,7 +286,7 @@ export default function ContactForm({
       <div>
         <label
           htmlFor="message"
-          className="block text-base font-medium text-neutral-700 mb-2"
+          className="block text-base font-bold text-neutral-700 mb-2"
         >
           {t.message} <span className="text-red-500">*</span>
         </label>
@@ -308,11 +309,11 @@ export default function ContactForm({
         )}
       </div>
 
-      {/* Submit Button */}
+      {/* Submit Button - Primary style, 48px min touch target per Practical UI */}
       <button
         type="submit"
         disabled={isSubmitting}
-        className="w-full md:w-auto px-8 py-3 text-base font-semibold text-white bg-primary-500 rounded-lg hover:bg-primary-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+        className="w-full md:w-auto px-8 min-h-[48px] text-base font-bold text-white bg-primary-500 rounded-lg hover:bg-primary-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
       >
         {isSubmitting ? t.sending : t.submit}
       </button>

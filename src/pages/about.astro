@@ -1,27 +1,70 @@
 ---
 /**
- * About page
- * Loads from pre-fetched JSON data with hero section
+ * About page - Cultivating Success In Every Child
+ * Matches WordPress design with proper Astro components
  */
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import Breadcrumbs from '@/components/common/Breadcrumbs.astro';
+import Button from '@/components/ui/Button.astro';
 import { generateWebPageSchema } from '@/lib/utils/schema';
-import { getPageBySlug, decodeHtmlEntities } from '@/lib/utils/get-page-data';
 
-const pageData = getPageBySlug('about');
-
-const title = decodeHtmlEntities(pageData?.title || 'About Us');
-const content = pageData?.content || '';
+const title = 'About Us';
 const canonical = 'https://prosperahealthcare.com/about/';
 
 const schema = generateWebPageSchema(
-  { title, content, uri: '/about/', date: pageData?.date || '', modified: pageData?.modified || '' },
+  { title, content: '', uri: '/about/', date: '', modified: '' },
   canonical
 );
 
 const breadcrumbs = [
   { name: 'Home', href: '/' },
   { name: 'About Us', href: '/about/' },
+];
+
+// Core values
+const values = [
+  {
+    icon: 'partnership',
+    title: 'Partnership',
+    description: 'We collaborate with families, children, clinicians, and staff to provide personalized, family-centered therapy. Together, we achieve better outcomes.',
+  },
+  {
+    icon: 'progress',
+    title: 'Progress',
+    description: 'Your child\'s advancement is our focus. We continuously evaluate and adjust our approach to ensure forward momentum, overcoming obstacles as they arise.',
+  },
+  {
+    icon: 'perseverance',
+    title: 'Perseverance',
+    description: 'We face challenges with determination. Our team is committed to finding solutions that work best for your family, navigating complex situations with patience and creativity.',
+  },
+  {
+    icon: 'play',
+    title: 'Play',
+    description: 'Learning should be enjoyable. We incorporate fun into our therapy sessions, creating an engaging environment that encourages participation and progress for children and families alike.',
+  },
+];
+
+// Service locations
+const locations = [
+  {
+    name: 'North Texas',
+    href: '/contact/north-texas/',
+    image: '/images/wp/North-Texas-ABA-Therapy-1.jpeg',
+    description: 'Serving the Dallas-Fort Worth metroplex and surrounding areas with personalized ABA therapy programs tailored to each child\'s unique needs.',
+  },
+  {
+    name: 'San Antonio',
+    href: '/contact/san-antonio/',
+    image: '/images/wp/San-Antonio-ABA-Therapy.jpeg',
+    description: 'Bringing innovative ABA interventions to families in San Antonio and the surrounding region, helping children with autism reach their full potential.',
+  },
+  {
+    name: 'El Paso',
+    href: '/contact/el-paso/',
+    image: '/images/wp/El-Paso-ABA-Therapy.jpeg',
+    description: 'Offering comprehensive ABA services to El Paso families, supporting children with autism in developing essential skills for a brighter future.',
+  },
 ];
 ---
 
@@ -32,7 +75,7 @@ const breadcrumbs = [
   schema={schema}
 >
   <!-- Hero Section -->
-  <section class="relative min-h-[400px] lg:min-h-[450px] text-white overflow-hidden">
+  <section class="relative min-h-[500px] lg:min-h-[550px] text-white overflow-hidden">
     <div class="absolute inset-0">
       <img
         src="/images/wp/ABA_Therapy_857157884-scaled.jpeg"
@@ -41,25 +84,165 @@ const breadcrumbs = [
       />
       <div class="absolute inset-0 bg-gradient-to-r from-primary-900/90 via-primary-800/80 to-primary-700/60"></div>
     </div>
-    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-20 flex items-center min-h-[400px] lg:min-h-[450px]">
-      <div>
-        <div class="mb-6">
-          <Breadcrumbs items={breadcrumbs} />
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24 flex items-center min-h-[500px] lg:min-h-[550px]">
+      <div class="grid lg:grid-cols-2 gap-12 items-center w-full">
+        <div>
+          <div class="mb-6">
+            <Breadcrumbs items={breadcrumbs} />
+          </div>
+          <span class="text-primary-300 font-semibold text-sm uppercase tracking-wider">Texas ABA Therapy</span>
+          <h1 class="text-4xl md:text-5xl font-bold leading-tight mt-2 mb-4 drop-shadow-lg">
+            Cultivating Success In Every Child
+          </h1>
+          <p class="text-lg text-white/90 max-w-xl drop-shadow">
+            Prospera Healthcare delivers expert in-home ABA therapy across Texas, serving North Texas, El Paso, and San Antonio areas.
+          </p>
         </div>
-        <h1 class="text-4xl md:text-5xl font-bold leading-tight mb-4 drop-shadow-lg text-white">
-          {title}
-        </h1>
-        <p class="text-lg md:text-xl text-white/90 max-w-2xl drop-shadow">
-          Providing compassionate, evidence-based ABA therapy for children with autism across Texas.
-        </p>
+        <div class="hidden lg:block">
+          <img
+            src="/images/wp/Texas-ABA-Therapy.png"
+            alt="Texas ABA Therapy Coverage Map"
+            class="w-full max-w-md mx-auto"
+          />
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- Content Section -->
-  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
-    <article class="prose prose-lg max-w-none">
-      <div set:html={content} />
-    </article>
-  </div>
+  <!-- Mission Section -->
+  <section class="py-16 lg:py-24 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid lg:grid-cols-2 gap-12 items-center">
+        <div>
+          <h2 class="text-3xl md:text-4xl font-bold text-neutral-900 mb-6">
+            Our Mission
+          </h2>
+          <p class="text-lg text-neutral-600 leading-relaxed">
+            Prospera Healthcare empowers individuals with autism and their families through innovative and compassionate Applied Behavior Analysis (ABA) therapy, unlocking potential and fostering meaningful progress.
+          </p>
+        </div>
+        <div>
+          <img
+            src="/images/wp/ABA-Therapy-Prospera-Healthcare_2-1.jpeg"
+            alt="ABA Therapy Session"
+            class="rounded-xl shadow-lg w-full"
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Values Section -->
+  <section class="py-16 lg:py-24 bg-neutral-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid lg:grid-cols-3 gap-8 mb-12">
+        <div>
+          <span class="text-primary-600 font-semibold text-sm uppercase tracking-wider">Prospera Healthcare</span>
+          <h2 class="text-3xl md:text-4xl font-bold text-neutral-900 mt-2">
+            Our Values
+          </h2>
+        </div>
+        <div class="lg:col-span-2">
+          <p class="text-lg text-neutral-600">
+            Our values of Partnership, Progress, Perseverance, and Play guide our collaborative approach to therapy, ensuring continuous advancement, resilience in the face of challenges, and an engaging, enjoyable experience for families and children alike.
+          </p>
+        </div>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-8">
+        {values.map((value) => (
+          <div class="bg-white rounded-xl p-8 shadow-sm">
+            <div class="w-14 h-14 bg-primary-100 rounded-full flex items-center justify-center mb-4">
+              {value.icon === 'partnership' && (
+                <svg class="w-7 h-7 text-primary-600" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M12.5 2C9.64 2 7.21 3.98 6.84 6.66L12 12l5.16-5.34C16.79 3.98 14.36 2 11.5 2h1zm-6 8.5c-2 0-4 1.5-4 4 0 1.57.75 3.07 2 4L12 26l7.5-7.5c1.25-.93 2-2.43 2-4 0-2.5-2-4-4-4-.88 0-1.7.26-2.4.7L12 14.8l-3.1-3.6c-.7-.44-1.52-.7-2.4-.7z"/>
+                </svg>
+              )}
+              {value.icon === 'progress' && (
+                <svg class="w-7 h-7 text-primary-600" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M3.5 18.49l6-6.01 4 4L22 6.92l-1.41-1.41-7.09 7.97-4-4L2 16.99z"/>
+                </svg>
+              )}
+              {value.icon === 'perseverance' && (
+                <svg class="w-7 h-7 text-primary-600" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M13.5 5.5c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zM9.8 8.9L7 23h2.1l1.8-8 2.1 2v6h2v-7.5l-2.1-2 .6-3C14.8 12 16.8 13 19 13v-2c-1.9 0-3.5-1-4.3-2.4l-1-1.6c-.4-.6-1-1-1.7-1-.3 0-.5.1-.8.1L6 8.3V13h2V9.6l1.8-.7"/>
+                </svg>
+              )}
+              {value.icon === 'play' && (
+                <svg class="w-7 h-7 text-primary-600" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                </svg>
+              )}
+            </div>
+            <h3 class="text-xl font-bold text-neutral-900 mb-3">
+              {value.title}
+            </h3>
+            <p class="text-neutral-600">
+              {value.description}
+            </p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Locations Section -->
+  <section class="py-16 lg:py-24 bg-neutral-900 text-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid lg:grid-cols-2 gap-8 mb-12">
+        <div>
+          <span class="text-primary-400 font-semibold text-sm uppercase tracking-wider">Locations</span>
+          <h2 class="text-3xl md:text-4xl font-bold mt-2">
+            Serving Texas Families
+          </h2>
+        </div>
+        <div>
+          <p class="text-lg text-neutral-300">
+            Prospera Healthcare is committed to supporting children with autism and their loved ones in communities throughout Texas.
+          </p>
+        </div>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-8">
+        {locations.map((location) => (
+          <a
+            href={location.href}
+            class="group block rounded-xl overflow-hidden bg-neutral-800 hover:bg-neutral-700 transition-colors no-underline"
+          >
+            <div class="h-48 overflow-hidden">
+              <img
+                src={location.image}
+                alt={`ABA Therapy ${location.name}`}
+                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                loading="lazy"
+              />
+            </div>
+            <div class="p-6">
+              <h3 class="text-xl font-semibold text-primary-400 mb-2">
+                {location.name}
+              </h3>
+              <p class="text-neutral-400">
+                {location.description}
+              </p>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="py-16 lg:py-24 bg-primary-600 text-white">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="text-3xl md:text-4xl font-bold mb-4">
+        Ready to Get Started?
+      </h2>
+      <p class="text-lg text-primary-100 mb-8 max-w-2xl mx-auto">
+        Take the first step toward your child's success. Schedule a free consultation with our team today.
+      </p>
+      <Button href="/contact/" size="lg" variant="secondary" class="!bg-white !text-primary-600 hover:!bg-primary-50">
+        Schedule Your Consultation
+      </Button>
+    </div>
+  </section>
 </BaseLayout>

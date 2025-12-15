@@ -15,6 +15,7 @@ import ProcessSteps from '@/components/home/ProcessSteps.astro';
 import AboutBlock from '@/components/home/AboutBlock.astro';
 import HomeFAQ from '@/components/home/HomeFAQ.astro';
 import BlogPreview from '@/components/home/BlogPreview.astro';
+import PartnershipBanner from '@/components/home/PartnershipBanner.astro';
 import { generateOrganizationSchema, generateWebsiteSchema } from '@/lib/utils/schema';
 
 const title = 'Prospera Healthcare | ABA Therapy Services in Texas';
@@ -75,6 +76,9 @@ const schemas = [generateOrganizationSchema(), generateWebsiteSchema()];
 
   <!-- Blog/Articles Preview -->
   <BlogPreview lang="en" limit={6} />
+
+  <!-- Finding YALL Partnership Banner -->
+  <PartnershipBanner lang="en" />
 
   <!-- CTA Section -->
   <section class="py-16 lg:py-24 bg-primary-600 text-white">

@@ -59,10 +59,10 @@ const ctaLabel = t(lang, 'nav.schedule');
       <div class="hidden lg:flex items-center gap-4">
         <LanguageSwitcher />
 
-        <!-- CTA Button - Primary action per Practical UI -->
+        <!-- CTA Button - Primary action per Practical UI (48px min touch target) -->
         <a
           href={lang === 'es' ? '/es/contacto/' : '/contact/'}
-          class="inline-flex items-center justify-center px-5 py-2.5 text-base font-semibold text-white bg-primary-500 rounded-lg hover:bg-primary-600 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 transition-colors no-underline"
+          class="inline-flex items-center justify-center px-5 py-3 text-base font-bold text-white bg-primary-500 rounded-lg hover:bg-primary-600 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 transition-colors no-underline min-h-[48px]"
         >
           {ctaLabel}
         </a>

@@ -38,14 +38,15 @@ export default function FAQAccordion({ faqs, lang = 'en', initialOpen }: FAQAcco
             key={itemId}
             className="border border-neutral-200 rounded-xl overflow-hidden bg-white"
           >
+            {/* FAQ button - min 48px touch target per Practical UI */}
             <button
               id={headerId}
               aria-expanded={isOpen}
               aria-controls={panelId}
               onClick={() => toggleItem(index)}
-              className="w-full flex items-center justify-between gap-4 p-5 text-left hover:bg-neutral-50 transition-colors focus:outline-none focus:ring-2 focus:ring-inset focus:ring-primary-500"
+              className="w-full flex items-center justify-between gap-4 p-5 min-h-[64px] text-left hover:bg-neutral-50 transition-colors focus:outline-none focus:ring-2 focus:ring-inset focus:ring-primary-500"
             >
-              <span className="font-semibold text-neutral-900 text-base md:text-lg">
+              <span className="font-bold text-neutral-900 text-base md:text-lg">
                 {faq.question}
               </span>
               <span

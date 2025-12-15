@@ -37,13 +37,14 @@ const sectionSubtitle = lang === 'es'
     <div class="space-y-4" id="faq-accordion">
       {faqs.map((faq, index) => (
         <div class="border border-neutral-200 rounded-lg overflow-hidden">
+          {/* FAQ button - min 48px touch target per Practical UI */}
           <button
-            class="faq-trigger w-full px-6 py-4 text-left flex items-center justify-between bg-white hover:bg-neutral-50 transition-colors"
+            class="faq-trigger w-full px-6 py-4 min-h-[64px] text-left flex items-center justify-between bg-white hover:bg-neutral-50 transition-colors"
             aria-expanded="false"
             aria-controls={`faq-answer-${index}`}
             data-faq-index={index}
           >
-            <span class="text-lg font-semibold text-neutral-900 pr-4">{faq.question}</span>
+            <span class="text-lg font-bold text-neutral-900 pr-4">{faq.question}</span>
             <svg
               class="faq-icon w-5 h-5 text-neutral-500 flex-shrink-0 transition-transform duration-200"
               fill="none"
