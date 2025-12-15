@@ -1,0 +1,45 @@
+---
+/**
+ * Spanish Dynamic Route for ABA Therapy Location Pages
+ * Handles URLs like /es/terapia-aba/texas/dallas/
+ * Reads from pre-fetched JSON data to avoid API rate limiting
+ */
+
+import LocationLayout from '@/layouts/LocationLayout.astro';
+import type { WPLocation } from '@/lib/graphql/types';
+
+export async function getStaticPaths() {
+  // Import JSON data inside getStaticPaths for SSG compatibility
+  const locationsData = await import('@/data/locations.json');
+  const locations = locationsData.default as WPLocation[];
+
+  const paths: Array<{ params: { city: string }; props: { location: WPLocation; nearbyLocations: WPLocation[] } }> = [];
+
+  console.log(`[ES] Loading ${locations.length} locations from JSON...`);
+
+  for (const location of locations) {
+    // Get nearby locations (alphabetically nearby for now)
+    const locationIndex = locations.findIndex((l) => l.slug === location.slug);
+    const nearbyLocations = locations
+      .filter((l, i) => l.slug !== location.slug && Math.abs(i - locationIndex) <= 4)
+      .slice(0, 8);
+
+    paths.push({
+      params: { city: location.slug },
+      props: { location, nearbyLocations },
+    });
+  }
+
+  console.log(`[ES] Location paths generated: ${paths.length}`);
+  return paths;
+}
+
+interface Props {
+  location: WPLocation;
+  nearbyLocations: WPLocation[];
+}
+
+const { location, nearbyLocations } = Astro.props;
+---
+
+<LocationLayout location={location} nearbyLocations={nearbyLocations} />

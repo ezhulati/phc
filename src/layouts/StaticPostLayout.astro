@@ -1,0 +1,138 @@
+---
+/**
+ * Static Post Layout
+ * Simplified layout for statically generated blog posts
+ */
+
+import BaseLayout from './BaseLayout.astro';
+import Breadcrumbs from '@/components/common/Breadcrumbs.astro';
+import { getLangFromUrl, t } from '@/i18n/ui';
+
+interface Props {
+  title: string;
+  slug: string;
+  date?: string;
+  excerpt?: string;
+  featuredImage?: string;
+  categories?: Array<{ name: string; slug: string }>;
+}
+
+const { title, slug, date, excerpt, featuredImage, categories = [] } = Astro.props;
+
+const lang = getLangFromUrl(Astro.url);
+const homeLabel = t(lang, 'nav.home');
+const homeHref = lang === 'es' ? '/es/' : '/';
+
+const description = excerpt || `${title} - Expert insights from Prospera Healthcare`;
+const canonicalUrl = `https://prosperahealthcare.com/blog/${slug}/`;
+
+const breadcrumbs = [
+  { name: homeLabel, href: homeHref },
+  { name: 'Blog', href: '/blog/' },
+  { name: title, href: `/blog/${slug}/` },
+];
+
+// Format date if provided
+function formatDate(dateStr?: string): string {
+  if (!dateStr) return '';
+  try {
+    const date = new Date(dateStr);
+    return date.toLocaleDateString('en-US', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric'
+    });
+  } catch {
+    return '';
+  }
+}
+
+const publishedDate = formatDate(date);
+const primaryCategory = categories[0];
+---
+
+<BaseLayout
+  title={`${title} | Prospera Healthcare`}
+  description={description}
+  canonical={canonicalUrl}
+  ogImage={featuredImage}
+  ogType="article"
+>
+  <article class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <!-- Breadcrumbs -->
+    <div class="mb-6">
+      <Breadcrumbs items={breadcrumbs} />
+    </div>
+
+    <!-- Article Header -->
+    <header class="mb-8">
+      {primaryCategory && (
+        <a
+          href={`/aba-therapy/${primaryCategory.slug}/`}
+          class="inline-block px-3 py-1 text-sm font-medium text-primary-700 bg-primary-50 rounded-full no-underline hover:bg-primary-100 transition-colors mb-4"
+        >
+          {primaryCategory.name}
+        </a>
+      )}
+
+      <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold text-neutral-900 leading-tight mb-4">
+        {title}
+      </h1>
+
+      <!-- Meta Info -->
+      <div class="flex flex-wrap items-center gap-4 text-sm text-neutral-600">
+        <div class="flex items-center gap-2">
+          <span>By Prospera Healthcare</span>
+        </div>
+
+        {publishedDate && (
+          <time datetime={date} class="flex items-center gap-1">
+            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+            </svg>
+            {publishedDate}
+          </time>
+        )}
+      </div>
+    </header>
+
+    <!-- Featured Image -->
+    {featuredImage && (
+      <figure class="mb-8 -mx-4 sm:mx-0">
+        <img
+          src={featuredImage}
+          alt={title}
+          class="w-full h-auto rounded-lg sm:rounded-xl"
+          loading="eager"
+        />
+      </figure>
+    )}
+
+    <!-- Article Content (slot) -->
+    <div class="prose prose-lg max-w-none
+      prose-headings:text-neutral-900 prose-headings:font-bold
+      prose-p:text-neutral-700 prose-p:leading-relaxed
+      prose-a:text-primary-600 prose-a:no-underline hover:prose-a:underline
+      prose-strong:text-neutral-900
+      prose-ul:text-neutral-700 prose-ol:text-neutral-700
+      prose-li:marker:text-primary-500
+      prose-img:rounded-lg prose-img:mx-auto
+      prose-blockquote:border-primary-500 prose-blockquote:text-neutral-600
+    ">
+      <slot />
+    </div>
+
+    <!-- Back to Blog -->
+    <div class="mt-12 pt-8 border-t border-neutral-200">
+      <a
+        href="/blog/"
+        class="inline-flex items-center gap-2 text-primary-600 hover:text-primary-700 font-medium"
+      >
+        <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+        </svg>
+        Back to Blog
+      </a>
+    </div>
+  </article>
+</BaseLayout>

@@ -1,0 +1,84 @@
+---
+/**
+ * Header Component
+ * Main site header with navigation and language switcher
+ */
+
+import { getLangFromUrl, t } from '@/i18n/ui';
+import LanguageSwitcher from './LanguageSwitcher.astro';
+import MobileMenu from './MobileMenu';
+
+const lang = getLangFromUrl(Astro.url);
+const currentPath = Astro.url.pathname;
+
+// Navigation items
+const navItems = [
+  { label: t(lang, 'nav.abaTherapy'), href: lang === 'es' ? '/es/terapia-aba/' : '/aba-therapy/' },
+  { label: t(lang, 'nav.about'), href: lang === 'es' ? '/es/acerca-de/' : '/about/' },
+  { label: t(lang, 'nav.careers'), href: lang === 'es' ? '/es/carreras/' : '/careers/' },
+  { label: t(lang, 'nav.contact'), href: lang === 'es' ? '/es/contacto/' : '/contact/' },
+];
+
+const homeHref = lang === 'es' ? '/es/' : '/';
+const ctaLabel = t(lang, 'nav.schedule');
+---
+
+<header class="sticky top-0 z-40 w-full bg-white border-b border-neutral-200">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex items-center justify-between h-16 lg:h-20">
+      <!-- Logo -->
+      <a href={homeHref} class="flex items-center gap-2 no-underline">
+        <img
+          src="/images/brand/Prospera_Blue_Green.png"
+          alt="Prospera Healthcare"
+          width="180"
+          height="40"
+          class="h-8 lg:h-10 w-auto"
+        />
+      </a>
+
+      <!-- Desktop Navigation -->
+      <nav class="hidden lg:flex items-center gap-8" aria-label="Main navigation">
+        {navItems.map((item) => (
+          <a
+            href={item.href}
+            class:list={[
+              'text-base font-medium no-underline transition-colors',
+              currentPath === item.href || currentPath.startsWith(item.href)
+                ? 'text-primary-600'
+                : 'text-neutral-700 hover:text-primary-600',
+            ]}
+            aria-current={currentPath === item.href ? 'page' : undefined}
+          >
+            {item.label}
+          </a>
+        ))}
+      </nav>
+
+      <!-- Desktop Actions -->
+      <div class="hidden lg:flex items-center gap-4">
+        <LanguageSwitcher />
+
+        <!-- CTA Button - Primary action per Practical UI -->
+        <a
+          href={lang === 'es' ? '/es/contacto/' : '/contact/'}
+          class="inline-flex items-center justify-center px-5 py-2.5 text-base font-semibold text-white bg-primary-500 rounded-lg hover:bg-primary-600 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 transition-colors no-underline"
+        >
+          {ctaLabel}
+        </a>
+      </div>
+
+      <!-- Mobile Menu Button -->
+      <div class="lg:hidden">
+        <MobileMenu
+          client:load
+          navItems={navItems}
+          ctaLabel={ctaLabel}
+          ctaHref={lang === 'es' ? '/es/contacto/' : '/contact/'}
+          currentPath={currentPath}
+          lang={lang}
+        />
+      </div>
+    </div>
+  </div>
+</header>

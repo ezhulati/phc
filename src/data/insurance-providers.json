@@ -1,0 +1,27 @@
+[
+  {
+    "name": "Aetna",
+    "logo": "/images/wp/640px-1_Heart_Aetna_logo_sm_rgb_violet.png",
+    "alt": "Aetna Insurance"
+  },
+  {
+    "name": "United Healthcare",
+    "logo": "/images/wp/united-healthcare-logo.png",
+    "alt": "United Healthcare Insurance"
+  },
+  {
+    "name": "Superior Healthplan",
+    "logo": "/images/wp/TX_MCD_logo_web-1.png",
+    "alt": "Superior Healthplan Insurance"
+  },
+  {
+    "name": "Cigna",
+    "logo": "/images/wp/Cigna-1.png",
+    "alt": "Cigna Insurance"
+  },
+  {
+    "name": "Blue Cross Blue Shield",
+    "logo": "/images/wp/Blue-Cross-Blue-Shield-ABA-Therapy.png",
+    "alt": "Blue Cross Blue Shield Insurance"
+  }
+]

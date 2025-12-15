@@ -1,0 +1,62 @@
+[
+  {
+    "id": "1",
+    "databaseId": 1,
+    "name": "ABA Therapy",
+    "slug": "aba-therapy",
+    "uri": "/aba-therapy/",
+    "description": "\r\n\r\n\r\n\r\nApplied Behavior Analysis (ABA) therapy is a scientifically validated approach to understanding and changing behavior. It is commonly used to treat autism.\r\n\r\n\r\n\r\n",
+    "count": 39,
+    "parentId": 0
+  },
+  {
+    "id": "15",
+    "databaseId": 15,
+    "name": "Autism",
+    "slug": "autism",
+    "uri": "/aba-therapy/autism/",
+    "description": "Discover expert insights on autism, including early intervention, therapy options, and family support to help you navigate the challenges and opportunities.",
+    "count": 9,
+    "parentId": 1
+  },
+  {
+    "id": "10",
+    "databaseId": 10,
+    "name": "Community",
+    "slug": "community",
+    "uri": "/aba-therapy/community/",
+    "description": "Connect with a supportive community of parents, caregivers, and professionals who understand the unique joys and challenges of raising a child with autism.",
+    "count": 2,
+    "parentId": 1
+  },
+  {
+    "id": "5",
+    "databaseId": 5,
+    "name": "Costs &amp; Insurance",
+    "slug": "costs-insurance",
+    "uri": "/aba-therapy/costs-insurance/",
+    "description": "Navigate the costs associated with autism treatment and learn about insurance coverage options to ensure your child receives the care they need.",
+    "count": 8,
+    "parentId": 1
+  },
+  {
+    "id": "8",
+    "databaseId": 8,
+    "name": "Health &amp; Care",
+    "slug": "health-and-care",
+    "uri": "/aba-therapy/health-and-care/",
+    "description": "Prioritize your child's overall health and well-being with our expert advice on nutrition, sleep, and medical care for children with autism.",
+    "count": 2,
+    "parentId": 1
+  },
+  {
+    "id": "7",
+    "databaseId": 7,
+    "name": "Parenting Tips",
+    "slug": "parenting-tips",
+    "uri": "/aba-therapy/parenting-tips/",
+    "description": "Discover effective parenting tips to support your child with autism, foster their growth, and create a nurturing home environment.",
+    "count": 9,
+    "parentId": 1
+  }
+]

@@ -1,0 +1,13 @@
+# Robots.txt for Prospera Healthcare
+# https://prosperahealthcare.com
+
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://prosperahealthcare.com/sitemap-index.xml
+
+# Disallow admin and internal paths
+Disallow: /admin/
+Disallow: /_astro/
+Disallow: /api/

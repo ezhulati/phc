@@ -1,0 +1,102 @@
+---
+/**
+ * Homepage FAQ Section Component
+ * Displays FAQ accordion for the homepage
+ */
+
+import faqData from '@/data/faq-home.json';
+
+interface Props {
+  lang?: 'en' | 'es';
+}
+
+const { lang = 'en' } = Astro.props;
+
+const faqs = faqData[lang] || faqData.en;
+
+const sectionTitle = lang === 'es'
+  ? 'Preguntas Frecuentes'
+  : 'Frequently Asked Questions';
+
+const sectionSubtitle = lang === 'es'
+  ? 'Obtenga respuestas a preguntas comunes sobre la terapia ABA'
+  : 'Get answers to common questions about ABA therapy';
+---
+
+<section class="py-16 lg:py-24 bg-white">
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-12">
+      <h2 class="text-3xl md:text-4xl font-bold text-neutral-900 mb-4">
+        {sectionTitle}
+      </h2>
+      <p class="text-lg text-neutral-600">
+        {sectionSubtitle}
+      </p>
+    </div>
+
+    <div class="space-y-4" id="faq-accordion">
+      {faqs.map((faq, index) => (
+        <div class="border border-neutral-200 rounded-lg overflow-hidden">
+          <button
+            class="faq-trigger w-full px-6 py-4 text-left flex items-center justify-between bg-white hover:bg-neutral-50 transition-colors"
+            aria-expanded="false"
+            aria-controls={`faq-answer-${index}`}
+            data-faq-index={index}
+          >
+            <span class="text-lg font-semibold text-neutral-900 pr-4">{faq.question}</span>
+            <svg
+              class="faq-icon w-5 h-5 text-neutral-500 flex-shrink-0 transition-transform duration-200"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </button>
+          <div
+            id={`faq-answer-${index}`}
+            class="faq-content hidden px-6 pb-4"
+            role="region"
+          >
+            <p class="text-neutral-600">{faq.answer}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<script>
+  // FAQ Accordion functionality
+  document.addEventListener('DOMContentLoaded', () => {
+    const triggers = document.querySelectorAll('.faq-trigger');
+
+    triggers.forEach((trigger) => {
+      trigger.addEventListener('click', () => {
+        const isExpanded = trigger.getAttribute('aria-expanded') === 'true';
+        const content = trigger.nextElementSibling as HTMLElement;
+        const icon = trigger.querySelector('.faq-icon') as HTMLElement;
+
+        // Close all other items
+        triggers.forEach((otherTrigger) => {
+          if (otherTrigger !== trigger) {
+            otherTrigger.setAttribute('aria-expanded', 'false');
+            const otherContent = otherTrigger.nextElementSibling as HTMLElement;
+            const otherIcon = otherTrigger.querySelector('.faq-icon') as HTMLElement;
+            if (otherContent) otherContent.classList.add('hidden');
+            if (otherIcon) otherIcon.style.transform = 'rotate(0deg)';
+          }
+        });
+
+        // Toggle current item
+        trigger.setAttribute('aria-expanded', (!isExpanded).toString());
+        if (content) {
+          content.classList.toggle('hidden', isExpanded);
+        }
+        if (icon) {
+          icon.style.transform = isExpanded ? 'rotate(0deg)' : 'rotate(180deg)';
+        }
+      });
+    });
+  });
+</script>

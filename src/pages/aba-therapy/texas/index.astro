@@ -1,0 +1,180 @@
+---
+/**
+ * Texas Service Areas Index
+ * List of all ABA therapy locations in Texas
+ * Reads from pre-fetched JSON data to avoid API rate limiting
+ */
+
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Breadcrumbs from '@/components/common/Breadcrumbs.astro';
+import Button from '@/components/ui/Button.astro';
+import locationsData from '@/data/locations.json';
+import type { WPLocation } from '@/lib/graphql/types';
+
+// Type and load locations from JSON
+const locations = locationsData as WPLocation[];
+
+// Helper function to get city name from location
+function getCityFromLocation(location: WPLocation): string {
+  return location.locationFields?.cityName ||
+    location.title?.replace(/ABA Therapy in |Terapia ABA en /gi, '') ||
+    location.slug?.split('-').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ') ||
+    '';
+}
+
+const title = 'ABA Therapy in Texas | Service Areas | Prospera Healthcare';
+const description = 'Prospera Healthcare provides ABA therapy services across Texas. Find in-home and center-based autism treatment in Dallas, Houston, San Antonio, and more.';
+const canonicalUrl = 'https://prosperahealthcare.com/aba-therapy/texas/';
+
+const breadcrumbs = [
+  { name: 'Home', href: '/' },
+  { name: 'ABA Therapy', href: '/aba-therapy/' },
+  { name: 'Texas', href: '/aba-therapy/texas/' },
+];
+
+// Sort alphabetically by city name
+locations.sort((a, b) => {
+  const cityA = getCityFromLocation(a);
+  const cityB = getCityFromLocation(b);
+  return cityA.localeCompare(cityB);
+});
+
+// Group by first letter for easier navigation
+const groupedLocations = locations.reduce((acc, location) => {
+  const city = getCityFromLocation(location);
+  const firstLetter = city.charAt(0).toUpperCase();
+  if (!acc[firstLetter]) {
+    acc[firstLetter] = [];
+  }
+  acc[firstLetter].push(location);
+  return acc;
+}, {} as Record<string, typeof locations>);
+
+const sortedLetters = Object.keys(groupedLocations).sort();
+
+// Featured cities
+const featuredCities = ['Dallas', 'Fort Worth', 'Houston', 'San Antonio', 'Austin', 'El Paso'];
+const featuredLocations = locations.filter((loc) =>
+  featuredCities.some((city) => getCityFromLocation(loc).toLowerCase() === city.toLowerCase())
+);
+---
+
+<BaseLayout title={title} description={description} canonical={canonicalUrl}>
+  <!-- Hero -->
+  <section class="relative min-h-[400px] lg:min-h-[450px] text-white overflow-hidden">
+    <div class="absolute inset-0">
+      <img
+        src="/images/wp/ProsperaHealthcare.jpg"
+        alt="ABA Therapy Services in Texas"
+        class="w-full h-full object-cover"
+      />
+      <div class="absolute inset-0 bg-gradient-to-r from-primary-900/90 via-primary-800/80 to-primary-700/60"></div>
+    </div>
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-20 flex items-center min-h-[400px] lg:min-h-[450px]">
+      <div>
+        <div class="mb-6">
+          <Breadcrumbs items={breadcrumbs} />
+        </div>
+
+        <h1 class="text-4xl md:text-5xl font-bold leading-tight mb-4 drop-shadow-lg text-white">
+          ABA Therapy Services in Texas
+        </h1>
+
+        <p class="text-lg md:text-xl text-white/90 max-w-2xl drop-shadow">
+          We provide in-home and center-based ABA therapy throughout the state of Texas. Find a location near you.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured Cities -->
+  {featuredLocations.length > 0 && (
+    <section class="py-12 bg-neutral-50">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 class="text-2xl font-bold text-neutral-900 mb-6">Major Service Areas</h2>
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+          {featuredLocations.map((location) => {
+            const city = getCityFromLocation(location);
+            return (
+              <a
+                href={`/aba-therapy/texas/${location.slug}/`}
+                class="flex items-center gap-4 p-5 bg-white border border-neutral-200 rounded-xl hover:border-primary-300 hover:shadow-md transition-all no-underline group"
+              >
+                <div class="w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                  <svg class="w-6 h-6 text-primary-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                  </svg>
+                </div>
+                <div>
+                  <h3 class="font-semibold text-neutral-900 group-hover:text-primary-600 transition-colors">
+                    {city}
+                  </h3>
+                  <p class="text-sm text-neutral-500">ABA Therapy Services</p>
+                </div>
+              </a>
+            );
+          })}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <!-- All Locations A-Z -->
+  <section class="py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-2xl font-bold text-neutral-900 mb-8">All Service Areas</h2>
+
+      <!-- Letter Navigation -->
+      <div class="flex flex-wrap gap-2 mb-8 pb-4 border-b border-neutral-200">
+        {sortedLetters.map((letter) => (
+          <a
+            href={`#section-${letter}`}
+            class="w-8 h-8 flex items-center justify-center text-sm font-medium text-neutral-600 hover:text-primary-600 hover:bg-primary-50 rounded no-underline transition-colors"
+          >
+            {letter}
+          </a>
+        ))}
+      </div>
+
+      <!-- Grouped Locations -->
+      <div class="space-y-8">
+        {sortedLetters.map((letter) => (
+          <div id={`section-${letter}`}>
+            <h3 class="text-lg font-bold text-neutral-900 mb-4 pb-2 border-b border-neutral-200">
+              {letter}
+            </h3>
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3">
+              {groupedLocations[letter].map((location) => {
+                const city = getCityFromLocation(location);
+                return (
+                  <a
+                    href={`/aba-therapy/texas/${location.slug}/`}
+                    class="px-4 py-2 text-neutral-700 hover:text-primary-600 hover:bg-primary-50 rounded-lg no-underline transition-colors"
+                  >
+                    {city}
+                  </a>
+                );
+              })}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="py-16 bg-primary-50">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="text-2xl md:text-3xl font-bold text-neutral-900 mb-4">
+        Don't See Your City?
+      </h2>
+      <p class="text-neutral-600 mb-8">
+        We're always expanding our service areas. Contact us to learn if we can serve your family.
+      </p>
+      <Button href="/contact/" size="lg">
+        Contact Us
+      </Button>
+    </div>
+  </section>
+</BaseLayout>

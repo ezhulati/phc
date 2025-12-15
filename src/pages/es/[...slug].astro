@@ -1,0 +1,91 @@
+---
+/**
+ * Spanish catch-all route for pages and blog posts
+ * Reads from pre-fetched JSON data to avoid API rate limiting
+ */
+
+import PageLayout from '@/layouts/PageLayout.astro';
+import PostLayout from '@/layouts/PostLayout.astro';
+import type { WPPage, WPPost } from '@/lib/graphql/types';
+
+export async function getStaticPaths() {
+  // Import JSON data inside getStaticPaths for SSG compatibility
+  const pagesModule = await import('@/data/pages.json');
+  const postsModule = await import('@/data/posts.json');
+  const pages = pagesModule.default as WPPage[];
+  const posts = postsModule.default as WPPost[];
+
+  const paths: Array<{
+    params: { slug: string | undefined };
+    props: { type: 'page' | 'post'; data: WPPage | WPPost };
+  }> = [];
+
+  // Add pages (Spanish versions)
+  console.log(`[ES] Loading ${pages.length} pages from JSON...`);
+  for (const page of pages) {
+    // Skip homepage (handled by es/index.astro)
+    if (page.slug === 'home' || page.uri === '/') continue;
+    // Skip admin page
+    if (page.slug === 'admin') continue;
+    // Skip pages with dedicated routes (about, contacto, carreras, servicios)
+    if (['about', 'contact', 'careers', 'services'].includes(page.slug)) continue;
+    // Skip contact sub-pages (handled separately)
+    if (['north-texas', 'san-antonio', 'el-paso'].includes(page.slug)) continue;
+
+    paths.push({
+      params: { slug: page.slug },
+      props: { type: 'page', data: page },
+    });
+  }
+
+  // Add blog posts (Spanish versions at /es/[slug]/)
+  console.log(`[ES] Loading ${posts.length} posts from JSON...`);
+  for (const post of posts) {
+    paths.push({
+      params: { slug: post.slug },
+      props: { type: 'post', data: post },
+    });
+  }
+
+  console.log(`[ES] Total paths generated: ${paths.length}`);
+  return paths;
+}
+
+interface Props {
+  type: 'page' | 'post';
+  data: WPPage | WPPost;
+}
+
+const { type, data } = Astro.props;
+
+// Helper to decode HTML entities
+function decodeHtmlEntities(str: string): string {
+  return str
+    .replace(/&amp;/g, '&')
+    .replace(/&lt;/g, '<')
+    .replace(/&gt;/g, '>')
+    .replace(/&quot;/g, '"')
+    .replace(/&#039;/g, "'")
+    .replace(/&hellip;/g, '...');
+}
+
+// Get clean title and description
+const title = decodeHtmlEntities(data.title || '');
+const rawDescription = data.excerpt?.replace(/<[^>]*>/g, '').trim() || '';
+const description = decodeHtmlEntities(rawDescription).slice(0, 160);
+---
+
+{type === 'post' ? (
+  <PostLayout post={data as WPPost} />
+) : (
+  <PageLayout
+    title={title}
+    description={description}
+    canonical={`https://prosperahealthcare.com/es/${(data as WPPage).slug}/`}
+  >
+    <article class="prose prose-lg max-w-none">
+      <h1>{title}</h1>
+      <Fragment set:html={(data as WPPage).content} />
+    </article>
+  </PageLayout>
+)}

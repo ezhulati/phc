@@ -1,0 +1,38 @@
+---
+/**
+ * Thank You page (form submission confirmation)
+ */
+import PageLayout from '@/layouts/PageLayout.astro';
+import { generateWebPageSchema } from '@/lib/utils/schema';
+
+const title = 'Thank You';
+const content = '<p>Thank you for contacting Prospera Healthcare. Our team will review your inquiry and get back to you within 24-48 business hours.</p><p>In the meantime, feel free to explore our resources to learn more about ABA therapy and how it can help your child.</p>';
+const canonical = 'https://prosperahealthcare.com/thank-you/';
+
+const schema = generateWebPageSchema(
+  { title, content, uri: '/thank-you/', date: new Date().toISOString(), modified: new Date().toISOString() },
+  canonical
+);
+---
+
+<PageLayout
+  title={title}
+  description="Thank you for contacting Prospera Healthcare. We will respond to your inquiry shortly."
+  canonical={canonical}
+  schema={schema}
+  noindex={true}
+  breadcrumbs={[
+    { name: 'Home', href: '/' },
+    { name: 'Thank You', href: '/thank-you/' },
+  ]}
+>
+  <article class="prose prose-lg max-w-none text-center py-16">
+    <h1>{title}</h1>
+    <div set:html={content} />
+    <div class="mt-8">
+      <a href="/" class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-primary-500 hover:bg-primary-600">
+        Return to Home
+      </a>
+    </div>
+  </article>
+</PageLayout>

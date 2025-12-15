@@ -1,0 +1,144 @@
+---
+/**
+ * Spanish Dynamic Route for Category Archive Pages
+ * Handles URLs like /es/terapia-aba/parenting-tips/
+ * Reads from pre-fetched JSON data to avoid API rate limiting
+ */
+
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Breadcrumbs from '@/components/common/Breadcrumbs.astro';
+import Card from '@/components/ui/Card.astro';
+import { formatDate } from '@/lib/utils/dates';
+import type { WPCategory, WPPost } from '@/lib/graphql/types';
+
+// Spanish category name translations
+const categoryTranslations: Record<string, string> = {
+  'parenting-tips': 'Consejos para Padres',
+  'costs-insurance': 'Costos y Seguro',
+  'health-and-care': 'Salud y Cuidado',
+  'community': 'Comunidad',
+  'autism': 'Autismo',
+  'aba-therapy': 'Terapia ABA',
+};
+
+export async function getStaticPaths() {
+  // Import JSON data inside getStaticPaths for SSG compatibility
+  const categoriesModule = await import('@/data/categories.json');
+  const postsModule = await import('@/data/posts.json');
+  const allCategories = categoriesModule.default as WPCategory[];
+  const allPosts = postsModule.default as WPPost[];
+
+  const paths: Array<{ params: { category: string }; props: { category: WPCategory; posts: WPPost[] } }> = [];
+
+  console.log(`[ES] Loading ${allCategories.length} categories from JSON...`);
+
+  for (const category of allCategories) {
+    // Skip the generic 'uncategorized' category
+    if (category.slug === 'uncategorized') continue;
+
+    // Find posts for this category
+    const categoryPosts = allPosts.filter(post =>
+      post.categories?.nodes?.some(cat => cat.slug === category.slug)
+    );
+
+    paths.push({
+      params: { category: category.slug },
+      props: {
+        category: {
+          ...category,
+          posts: { nodes: categoryPosts }
+        },
+        posts: categoryPosts
+      },
+    });
+  }
+
+  console.log(`[ES] Category paths generated: ${paths.length}`);
+  return paths;
+}
+
+interface Props {
+  category: WPCategory;
+}
+
+const { category } = Astro.props;
+
+// Get Spanish name or fall back to English
+const categoryName = categoryTranslations[category.slug] || category.name;
+
+const title = `${categoryName} | Recursos de Terapia ABA | Prospera Healthcare`;
+const description = category.description || `Explore nuestros recursos y artículos sobre ${categoryName.toLowerCase()} relacionados con la terapia ABA y el autismo.`;
+const canonicalUrl = `https://prosperahealthcare.com/es/terapia-aba/${category.slug}/`;
+
+const breadcrumbs = [
+  { name: 'Inicio', href: '/es/' },
+  { name: 'Terapia ABA', href: '/es/terapia-aba/' },
+  { name: categoryName, href: `/es/terapia-aba/${category.slug}/` },
+];
+
+const posts = category.posts?.nodes || [];
+---
+
+<BaseLayout title={title} description={description} canonical={canonicalUrl}>
+  <!-- Header -->
+  <section class="bg-gradient-to-br from-primary-500 to-primary-600 text-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-20">
+      <div class="mb-6">
+        <Breadcrumbs items={breadcrumbs} />
+      </div>
+
+      <h1 class="text-4xl md:text-5xl font-bold leading-tight mb-4">
+        {categoryName}
+      </h1>
+
+      {category.description && (
+        <p class="text-lg md:text-xl text-primary-100 max-w-2xl">
+          {category.description}
+        </p>
+      )}
+
+      {category.count && (
+        <p class="text-primary-200 mt-4">
+          {category.count} {category.count === 1 ? 'artículo' : 'artículos'}
+        </p>
+      )}
+    </div>
+  </section>
+
+  <!-- Articles Grid -->
+  <section class="py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      {posts.length > 0 ? (
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {posts.map((post) => (
+            <Card href={`/es/${post.slug}/`} variant="elevated" padding="none">
+              {post.featuredImage?.node && (
+                <img
+                  src={post.featuredImage.node.sourceUrl}
+                  alt={post.featuredImage.node.altText || post.title}
+                  class="w-full h-48 object-cover"
+                  loading="lazy"
+                />
+              )}
+              <div class="p-6">
+                <h2 class="text-lg font-semibold text-neutral-900 line-clamp-2">
+                  {post.title}
+                </h2>
+                {post.excerpt && (
+                  <p class="text-neutral-600 mt-2 line-clamp-3" set:html={post.excerpt} />
+                )}
+                <p class="text-sm text-neutral-500 mt-3">
+                  {formatDate(post.date, 'es')}
+                </p>
+              </div>
+            </Card>
+          ))}
+        </div>
+      ) : (
+        <div class="text-center py-12">
+          <p class="text-neutral-600">No se encontraron artículos en esta categoría todavía.</p>
+        </div>
+      )}
+    </div>
+  </section>
+</BaseLayout>

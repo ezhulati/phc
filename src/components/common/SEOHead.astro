@@ -1,0 +1,102 @@
+---
+/**
+ * SEO Head Component
+ * Handles all meta tags, Open Graph, Twitter Cards, and Schema.org
+ */
+
+interface AlternateLanguage {
+  hreflang: string;
+  href: string;
+}
+
+interface Props {
+  title: string;
+  description: string;
+  canonical?: string;
+  ogImage?: string;
+  ogType?: 'website' | 'article';
+  publishedTime?: string;
+  modifiedTime?: string;
+  author?: string;
+  noindex?: boolean;
+  alternateLanguages?: AlternateLanguage[];
+  schema?: object | object[];
+}
+
+const {
+  title,
+  description,
+  canonical = Astro.url.href,
+  ogImage = '/images/brand/og-default.jpg',
+  ogType = 'website',
+  publishedTime,
+  modifiedTime,
+  author,
+  noindex = false,
+  alternateLanguages = [],
+  schema,
+} = Astro.props;
+
+const siteName = 'Prospera Healthcare';
+const siteUrl = 'https://prosperahealthcare.com';
+
+// Ensure canonical URL is absolute
+const canonicalUrl = canonical.startsWith('http') ? canonical : `${siteUrl}${canonical}`;
+
+// Ensure OG image is absolute
+const ogImageUrl = ogImage.startsWith('http') ? ogImage : `${siteUrl}${ogImage}`;
+
+// Get current locale
+const currentLocale = Astro.url.pathname.startsWith('/es') ? 'es_MX' : 'en_US';
+
+// Compute default alternate if not provided
+const defaultAlternate = Astro.url.pathname.startsWith('/es')
+  ? { hreflang: 'en', href: canonicalUrl.replace('/es/', '/').replace('/es', '/') }
+  : { hreflang: 'es', href: canonicalUrl.replace(siteUrl, `${siteUrl}/es`) };
+
+const allAlternates = alternateLanguages.length > 0
+  ? alternateLanguages
+  : [defaultAlternate];
+
+// Schema.org JSON-LD
+const schemaArray = Array.isArray(schema) ? schema : schema ? [schema] : [];
+---
+
+<!-- Primary Meta Tags -->
+<title>{title}</title>
+<meta name="title" content={title} />
+<meta name="description" content={description} />
+<link rel="canonical" href={canonicalUrl} />
+
+{noindex && <meta name="robots" content="noindex, nofollow" />}
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content={ogType} />
+<meta property="og:url" content={canonicalUrl} />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:image" content={ogImageUrl} />
+<meta property="og:site_name" content={siteName} />
+<meta property="og:locale" content={currentLocale} />
+
+{publishedTime && <meta property="article:published_time" content={publishedTime} />}
+{modifiedTime && <meta property="article:modified_time" content={modifiedTime} />}
+{author && <meta property="article:author" content={author} />}
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:url" content={canonicalUrl} />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={ogImageUrl} />
+
+<!-- Hreflang for i18n -->
+{allAlternates.map(({ hreflang, href }) => (
+  <link rel="alternate" hreflang={hreflang} href={href} />
+))}
+<link rel="alternate" hreflang="x-default" href={canonicalUrl.replace('/es/', '/').replace('/es', '/')} />
+
+<!-- Schema.org JSON-LD -->
+{schemaArray.map((s) => (
+  <script type="application/ld+json" set:html={JSON.stringify(s)} />
+))}

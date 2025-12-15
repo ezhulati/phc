@@ -1,0 +1,181 @@
+---
+/**
+ * Spanish ABA Therapy Hub Page
+ * Main landing page for ABA therapy content
+ */
+
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Button from '@/components/ui/Button.astro';
+import Card from '@/components/ui/Card.astro';
+import Breadcrumbs from '@/components/common/Breadcrumbs.astro';
+import postsData from '@/data/posts.json';
+import categoriesData from '@/data/categories.json';
+import { formatDate } from '@/lib/utils/dates';
+import { generateServiceSchema } from '@/lib/utils/schema';
+import type { WPPost, WPCategory } from '@/lib/graphql/types';
+
+// Type the imported JSON
+const posts = postsData as WPPost[];
+const categories = categoriesData as WPCategory[];
+
+const title = 'Terapia ABA | Tratamiento Basado en Evidencia para el Autismo | Prospera Healthcare';
+const description = 'Conozca la terapia de Análisis Conductual Aplicado (ABA), el tratamiento estándar para el autismo. Explore recursos, guías y perspectivas de Prospera Healthcare.';
+const canonicalUrl = 'https://prosperahealthcare.com/es/terapia-aba/';
+
+const breadcrumbs = [
+  { name: 'Inicio', href: '/es/' },
+  { name: 'Terapia ABA', href: '/es/terapia-aba/' },
+];
+
+const schema = generateServiceSchema(
+  'Servicios de Terapia ABA',
+  description,
+  canonicalUrl
+);
+
+// Group posts by category for display
+const categoryGroups = [
+  { slug: 'parenting-tips', name: 'Consejos para Padres', href: '/es/terapia-aba/parenting-tips/' },
+  { slug: 'costs-insurance', name: 'Costos y Seguro', href: '/es/terapia-aba/costs-insurance/' },
+  { slug: 'health-and-care', name: 'Salud y Cuidado', href: '/es/terapia-aba/health-and-care/' },
+  { slug: 'community', name: 'Comunidad', href: '/es/terapia-aba/community/' },
+  { slug: 'autism', name: 'Autismo', href: '/es/terapia-aba/autism/' },
+];
+---
+
+<BaseLayout title={title} description={description} canonical={canonicalUrl} schema={schema}>
+  <!-- Hero Section -->
+  <section class="relative min-h-[500px] lg:min-h-[550px] text-white overflow-hidden">
+    <div class="absolute inset-0">
+      <img
+        src="/images/wp/AdobeStock_853019146-scaled.jpeg"
+        alt="Sesión de Terapia ABA"
+        class="w-full h-full object-cover"
+      />
+      <div class="absolute inset-0 bg-gradient-to-r from-primary-900/90 via-primary-800/80 to-primary-700/60"></div>
+    </div>
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24 flex items-center min-h-[500px] lg:min-h-[550px]">
+      <div>
+        <div class="mb-6">
+          <Breadcrumbs items={breadcrumbs} />
+        </div>
+
+        <h1 class="text-4xl md:text-5xl font-bold leading-tight mb-4 drop-shadow-lg text-white">
+          Tratamiento Basado en Evidencia para el Autismo
+        </h1>
+
+        <p class="text-lg md:text-xl text-white/90 max-w-2xl mb-8 drop-shadow">
+          El Análisis Conductual Aplicado (ABA) es el tratamiento estándar para el autismo, respaldado por la Academia Americana de Pediatría y apoyado por décadas de investigación.
+        </p>
+
+        <div class="flex flex-wrap gap-4">
+          <Button href="/es/contacto/" variant="secondary" class="!text-white !border-white hover:!bg-white hover:!text-primary-600">
+            Programe una Consulta
+          </Button>
+          <Button href="/es/what-is-aba-therapy/" variant="tertiary" class="!text-white">
+            ¿Qué es la Terapia ABA? →
+          </Button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Authority Section -->
+  <section class="py-8 bg-neutral-50 border-b border-neutral-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <p class="text-center text-sm text-neutral-600 mb-4">Respaldado por organizaciones médicas líderes:</p>
+      <div class="flex flex-wrap items-center justify-center gap-8">
+        <span class="text-neutral-700 font-medium">Academia Americana de Pediatría</span>
+        <span class="text-neutral-700 font-medium">Cirujano General de EE.UU.</span>
+        <span class="text-neutral-700 font-medium">NICHD</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Browse by Category -->
+  <section class="py-16 lg:py-24">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-neutral-900 mb-8">
+        Explorar por Tema
+      </h2>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {categoryGroups.map((category) => (
+          <a
+            href={category.href}
+            class="group p-6 bg-white border border-neutral-200 rounded-xl hover:border-primary-300 hover:shadow-md transition-all no-underline"
+          >
+            <h3 class="text-xl font-semibold text-neutral-900 group-hover:text-primary-600 transition-colors">
+              {category.name}
+            </h3>
+            <p class="text-neutral-600 mt-2">
+              Explore artículos sobre {category.name.toLowerCase()}
+            </p>
+            <span class="inline-flex items-center gap-1 text-primary-600 font-medium mt-4">
+              Ver Artículos
+              <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+              </svg>
+            </span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Recent Articles -->
+  <section class="py-16 lg:py-24 bg-neutral-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-neutral-900 mb-8">
+        Últimos Artículos
+      </h2>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {posts.slice(0, 9).map((post) => (
+          <Card href={`/es/${post.slug}/`} variant="elevated" padding="none">
+            {post.featuredImage?.node && (
+              <img
+                src={post.featuredImage.node.sourceUrl}
+                alt={post.featuredImage.node.altText || post.title}
+                class="w-full h-48 object-cover"
+                loading="lazy"
+              />
+            )}
+            <div class="p-6">
+              {post.categories?.nodes?.[0] && (
+                <span class="text-sm text-primary-600 font-medium">
+                  {post.categories.nodes[0].name}
+                </span>
+              )}
+              <h3 class="text-lg font-semibold text-neutral-900 mt-2 line-clamp-2">
+                {post.title}
+              </h3>
+              <p class="text-sm text-neutral-500 mt-2">
+                {formatDate(post.date, 'es')}
+              </p>
+            </div>
+          </Card>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Service Areas CTA -->
+  <section class="py-16 lg:py-24">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="bg-primary-50 rounded-2xl p-8 lg:p-12 flex flex-col lg:flex-row items-center justify-between gap-8">
+        <div>
+          <h2 class="text-2xl md:text-3xl font-bold text-neutral-900 mb-2">
+            Encuentre Terapia ABA Cerca de Usted
+          </h2>
+          <p class="text-neutral-600">
+            Brindamos servicios en todo Texas. Encuentre una ubicación cerca de usted.
+          </p>
+        </div>
+        <Button href="/es/terapia-aba/texas/" size="lg">
+          Ver Áreas de Servicio
+        </Button>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,91 @@
+---
+/**
+ * Process Steps Component
+ * Displays 3-step process visualization
+ */
+
+interface Props {
+  lang?: 'en' | 'es';
+}
+
+const { lang = 'en' } = Astro.props;
+
+const content = {
+  en: {
+    title: 'How We Help',
+    subtitle: 'A simple process to get your child the support they need',
+    steps: [
+      {
+        number: '1',
+        title: 'Schedule a Consultation',
+        description: 'Contact us for a free consultation to discuss your child\'s needs and learn how we can help.'
+      },
+      {
+        number: '2',
+        title: 'Comprehensive Assessment',
+        description: 'Our BCBAs conduct a thorough evaluation to understand your child\'s unique strengths and challenges.'
+      },
+      {
+        number: '3',
+        title: 'Custom Therapy Plan',
+        description: 'We create a personalized treatment plan and begin evidence-based ABA therapy.'
+      }
+    ]
+  },
+  es: {
+    title: 'Como Ayudamos',
+    subtitle: 'Un proceso simple para obtener el apoyo que su hijo necesita',
+    steps: [
+      {
+        number: '1',
+        title: 'Programe una Consulta',
+        description: 'Contactenos para una consulta gratuita para discutir las necesidades de su hijo y aprender como podemos ayudar.'
+      },
+      {
+        number: '2',
+        title: 'Evaluacion Integral',
+        description: 'Nuestros BCBAs realizan una evaluacion exhaustiva para comprender las fortalezas y desafios unicos de su hijo.'
+      },
+      {
+        number: '3',
+        title: 'Plan de Terapia Personalizado',
+        description: 'Creamos un plan de tratamiento personalizado y comenzamos la terapia ABA basada en evidencia.'
+      }
+    ]
+  }
+};
+
+const { title, subtitle, steps } = content[lang];
+---
+
+<section class="py-16 lg:py-24 bg-white">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center max-w-3xl mx-auto mb-12">
+      <h2 class="text-3xl md:text-4xl font-bold text-neutral-900 mb-4">
+        {title}
+      </h2>
+      <p class="text-lg text-neutral-600">
+        {subtitle}
+      </p>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-8 relative">
+      <!-- Connecting line (desktop only) -->
+      <div class="hidden md:block absolute top-16 left-1/6 right-1/6 h-0.5 bg-primary-200"></div>
+
+      {steps.map((step, index) => (
+        <div class="relative text-center">
+          <div class="relative z-10 w-16 h-16 mx-auto mb-6 bg-primary-500 rounded-full flex items-center justify-center shadow-lg">
+            <span class="text-2xl font-bold text-white">{step.number}</span>
+          </div>
+          <h3 class="text-xl font-semibold text-neutral-900 mb-3">
+            {step.title}
+          </h3>
+          <p class="text-neutral-600">
+            {step.description}
+          </p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

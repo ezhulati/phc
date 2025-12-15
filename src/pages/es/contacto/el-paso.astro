@@ -1,0 +1,36 @@
+---
+/**
+ * Spanish Contact El Paso page
+ */
+import PageLayout from '@/layouts/PageLayout.astro';
+import { generateWebPageSchema } from '@/lib/utils/schema';
+import { getPageBySlug } from '@/lib/utils/get-page-data';
+
+const pageData = getPageBySlug('el-paso');
+
+const title = 'El Paso';
+const content = pageData?.content || '';
+const canonical = 'https://prosperahealthcare.com/es/contacto/el-paso/';
+
+const schema = generateWebPageSchema(
+  { title, content, uri: '/es/contacto/el-paso/', date: pageData?.date || '', modified: pageData?.modified || '' },
+  canonical
+);
+---
+
+<PageLayout
+  title={`Contacto ${title}`}
+  description="Contacte la oficina de El Paso de Prospera Healthcare para servicios de terapia ABA en el área de El Paso."
+  canonical={canonical}
+  schema={schema}
+  breadcrumbs={[
+    { name: 'Inicio', href: '/es/' },
+    { name: 'Contacto', href: '/es/contacto/' },
+    { name: title, href: '/es/contacto/el-paso/' },
+  ]}
+>
+  <article class="prose prose-lg max-w-none">
+    <h1>Contacto {title}</h1>
+    <div set:html={content} />
+  </article>
+</PageLayout>

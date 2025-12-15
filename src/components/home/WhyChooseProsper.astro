@@ -1,0 +1,118 @@
+---
+/**
+ * Why Choose Prospera Section
+ * Highlights key benefits of choosing Prospera Healthcare
+ */
+
+interface Props {
+  lang?: 'en' | 'es';
+}
+
+const { lang = 'en' } = Astro.props;
+
+const content = {
+  en: {
+    title: 'Why Families Choose Prospera',
+    subtitle: 'We provide personalized, evidence-based ABA therapy that makes a real difference.',
+    features: [
+      {
+        icon: '/images/wp/Expert-Care-1.png',
+        title: 'Expert Care',
+        description: 'Our team of certified BCBAs and RBTs bring years of specialized experience in autism therapy.',
+      },
+      {
+        icon: '/images/wp/Personalized-Care.png',
+        title: 'Personalized',
+        description: 'Each treatment plan is customized to your child\'s unique needs, strengths, and goals.',
+      },
+      {
+        icon: '/images/wp/Evidence-Based.png',
+        title: 'Evidence-Based',
+        description: 'Our programs are built on proven ABA methodologies endorsed by leading autism organizations.',
+      },
+      {
+        icon: '/images/wp/Family-Collaboration-2.png',
+        title: 'Family-Centered',
+        description: 'We involve parents and caregivers in every step, empowering your whole family.',
+      },
+      {
+        icon: '/images/wp/Full-Support.png',
+        title: 'Ongoing Support',
+        description: 'Continuous guidance and resources for families throughout the therapy journey.',
+      },
+      {
+        icon: '/images/wp/Proven-Results.png',
+        title: 'Proven Results',
+        description: 'Track measurable progress with data-driven assessments and regular milestone reviews.',
+      },
+    ],
+  },
+  es: {
+    title: 'Por Qué las Familias Eligen Prospera',
+    subtitle: 'Brindamos terapia ABA personalizada y basada en evidencia que marca una diferencia real.',
+    features: [
+      {
+        icon: '/images/wp/Expert-Care-1.png',
+        title: 'Atención Experta',
+        description: 'Nuestro equipo de BCBAs y RBTs certificados aportan años de experiencia especializada en terapia del autismo.',
+      },
+      {
+        icon: '/images/wp/Personalized-Care.png',
+        title: 'Personalizado',
+        description: 'Cada plan de tratamiento está personalizado según las necesidades, fortalezas y metas únicas de su hijo.',
+      },
+      {
+        icon: '/images/wp/Evidence-Based.png',
+        title: 'Basada en Evidencia',
+        description: 'Nuestros programas están construidos sobre metodologías ABA comprobadas respaldadas por organizaciones líderes.',
+      },
+      {
+        icon: '/images/wp/Family-Collaboration-2.png',
+        title: 'Centrada en la Familia',
+        description: 'Involucramos a los padres y cuidadores en cada paso, empoderando a toda su familia.',
+      },
+      {
+        icon: '/images/wp/Full-Support.png',
+        title: 'Apoyo Continuo',
+        description: 'Orientación y recursos continuos para las familias durante todo el proceso de terapia.',
+      },
+      {
+        icon: '/images/wp/Proven-Results.png',
+        title: 'Resultados Comprobados',
+        description: 'Seguimiento de progreso medible con evaluaciones basadas en datos y revisiones regulares de hitos.',
+      },
+    ],
+  },
+};
+
+const t = content[lang];
+---
+
+<section class="py-16 lg:py-24 bg-neutral-50">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-12">
+      <h2 class="text-3xl md:text-4xl font-bold text-neutral-900 mb-4">
+        {t.title}
+      </h2>
+      <p class="text-lg text-neutral-600 max-w-2xl mx-auto">
+        {t.subtitle}
+      </p>
+    </div>
+
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+      {t.features.map((feature) => (
+        <div class="bg-white rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow text-center">
+          <div class="w-16 h-16 mx-auto mb-4">
+            <img src={feature.icon} alt={feature.title} class="w-full h-full object-contain" />
+          </div>
+          <h3 class="text-xl font-semibold text-neutral-900 mb-2">
+            {feature.title}
+          </h3>
+          <p class="text-neutral-600">
+            {feature.description}
+          </p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

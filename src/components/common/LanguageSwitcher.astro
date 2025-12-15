@@ -1,0 +1,59 @@
+---
+/**
+ * Language Switcher Component
+ * Allows users to switch between English and Spanish
+ */
+
+import { getLangFromUrl, languages, t } from '@/i18n/ui';
+
+const lang = getLangFromUrl(Astro.url);
+const currentPath = Astro.url.pathname;
+
+// Calculate alternate language URL
+function getAlternateUrl(path: string, targetLang: 'en' | 'es'): string {
+  if (targetLang === 'es') {
+    // EN to ES
+    if (path.startsWith('/aba-therapy/')) {
+      return path.replace('/aba-therapy/', '/es/terapia-aba/');
+    }
+    if (path === '/') return '/es/';
+    return `/es${path}`;
+  } else {
+    // ES to EN
+    if (path.startsWith('/es/terapia-aba/')) {
+      return path.replace('/es/terapia-aba/', '/aba-therapy/');
+    }
+    if (path === '/es/' || path === '/es') return '/';
+    return path.replace(/^\/es/, '');
+  }
+}
+
+const targetLang = lang === 'en' ? 'es' : 'en';
+const alternateUrl = getAlternateUrl(currentPath, targetLang);
+const targetLabel = languages[targetLang];
+const switchLabel = t(lang, 'a11y.switchLanguage');
+---
+
+<a
+  href={alternateUrl}
+  class="inline-flex items-center gap-1.5 px-3 py-1.5 text-sm font-medium text-neutral-600 hover:text-primary-600 border border-neutral-300 rounded-md hover:border-primary-400 transition-colors no-underline"
+  aria-label={`${switchLabel}: ${targetLabel}`}
+  hreflang={targetLang}
+>
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    class="w-4 h-4"
+    fill="none"
+    viewBox="0 0 24 24"
+    stroke="currentColor"
+    stroke-width="2"
+    aria-hidden="true"
+  >
+    <path
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"
+    />
+  </svg>
+  <span>{targetLabel}</span>
+</a>

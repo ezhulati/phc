@@ -1,0 +1,39 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist",
+  "framework": "astro",
+  "redirects": [
+    { "source": "/get-started", "destination": "/", "permanent": true },
+    { "source": "/service-areas", "destination": "/contact/", "permanent": true },
+    { "source": "/faqs", "destination": "/aba-therapy/", "permanent": true },
+    { "source": "/employees", "destination": "/admin/", "permanent": true },
+    { "source": "/feed/:path*", "destination": "/", "permanent": true },
+    { "source": "/wp-content/:path*", "destination": "/", "permanent": true },
+    { "source": "/wp-admin/:path*", "destination": "/admin/", "permanent": true },
+    { "source": "/wp-login.php", "destination": "/admin/", "permanent": true }
+  ],
+  "headers": [
+    {
+      "source": "/assets/(.*)",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
+      ]
+    },
+    {
+      "source": "/_astro/(.*)",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
+      ]
+    },
+    {
+      "source": "/(.*)",
+      "headers": [
+        { "key": "X-Content-Type-Options", "value": "nosniff" },
+        { "key": "X-Frame-Options", "value": "DENY" },
+        { "key": "X-XSS-Protection", "value": "1; mode=block" },
+        { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" }
+      ]
+    }
+  ]
+}

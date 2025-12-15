@@ -1,0 +1,36 @@
+---
+/**
+ * Spanish Contact San Antonio page
+ */
+import PageLayout from '@/layouts/PageLayout.astro';
+import { generateWebPageSchema } from '@/lib/utils/schema';
+import { getPageBySlug } from '@/lib/utils/get-page-data';
+
+const pageData = getPageBySlug('san-antonio');
+
+const title = 'San Antonio';
+const content = pageData?.content || '';
+const canonical = 'https://prosperahealthcare.com/es/contacto/san-antonio/';
+
+const schema = generateWebPageSchema(
+  { title, content, uri: '/es/contacto/san-antonio/', date: pageData?.date || '', modified: pageData?.modified || '' },
+  canonical
+);
+---
+
+<PageLayout
+  title={`Contacto ${title}`}
+  description="Contacte la oficina de San Antonio de Prospera Healthcare para servicios de terapia ABA en el área metropolitana de San Antonio."
+  canonical={canonical}
+  schema={schema}
+  breadcrumbs={[
+    { name: 'Inicio', href: '/es/' },
+    { name: 'Contacto', href: '/es/contacto/' },
+    { name: title, href: '/es/contacto/san-antonio/' },
+  ]}
+>
+  <article class="prose prose-lg max-w-none">
+    <h1>Contacto {title}</h1>
+    <div set:html={content} />
+  </article>
+</PageLayout>

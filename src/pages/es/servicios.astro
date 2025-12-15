@@ -1,0 +1,64 @@
+---
+/**
+ * Spanish Services page - with hero section
+ */
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Breadcrumbs from '@/components/common/Breadcrumbs.astro';
+import { generateWebPageSchema } from '@/lib/utils/schema';
+import { getPageBySlug } from '@/lib/utils/get-page-data';
+
+const pageData = getPageBySlug('services');
+
+const title = 'Servicios';
+const content = pageData?.content || '';
+const canonical = 'https://prosperahealthcare.com/es/servicios/';
+
+const schema = generateWebPageSchema(
+  { title, content, uri: '/es/servicios/', date: pageData?.date || '', modified: pageData?.modified || '' },
+  canonical
+);
+
+const breadcrumbs = [
+  { name: 'Inicio', href: '/es/' },
+  { name: 'Servicios', href: '/es/servicios/' },
+];
+---
+
+<BaseLayout
+  title={title}
+  description="Explore los servicios de terapia ABA de Prospera Healthcare, incluyendo terapia en el hogar, programas en centros y capacitación para padres."
+  canonical={canonical}
+  schema={schema}
+>
+  <!-- Hero Section -->
+  <section class="relative min-h-[400px] lg:min-h-[450px] text-white overflow-hidden">
+    <div class="absolute inset-0">
+      <img
+        src="/images/wp/Texas-ABA-Therapy-scaled.jpeg"
+        alt="Servicios de Terapia ABA"
+        class="w-full h-full object-cover"
+      />
+      <div class="absolute inset-0 bg-gradient-to-r from-primary-900/90 via-primary-800/80 to-primary-700/60"></div>
+    </div>
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-20 flex items-center min-h-[400px] lg:min-h-[450px]">
+      <div>
+        <div class="mb-6">
+          <Breadcrumbs items={breadcrumbs} />
+        </div>
+        <h1 class="text-4xl md:text-5xl font-bold leading-tight mb-4 drop-shadow-lg text-white">
+          {title}
+        </h1>
+        <p class="text-lg md:text-xl text-white/90 max-w-2xl drop-shadow">
+          Servicios integrales de terapia ABA adaptados a las necesidades únicas de su hijo.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Content Section -->
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
+    <article class="prose prose-lg max-w-none">
+      <div set:html={content} />
+    </article>
+  </div>
+</BaseLayout>

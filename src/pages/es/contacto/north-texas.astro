@@ -1,0 +1,36 @@
+---
+/**
+ * Spanish Contact North Texas page
+ */
+import PageLayout from '@/layouts/PageLayout.astro';
+import { generateWebPageSchema } from '@/lib/utils/schema';
+import { getPageBySlug } from '@/lib/utils/get-page-data';
+
+const pageData = getPageBySlug('north-texas');
+
+const title = 'North Texas';
+const content = pageData?.content || '';
+const canonical = 'https://prosperahealthcare.com/es/contacto/north-texas/';
+
+const schema = generateWebPageSchema(
+  { title, content, uri: '/es/contacto/north-texas/', date: pageData?.date || '', modified: pageData?.modified || '' },
+  canonical
+);
+---
+
+<PageLayout
+  title={`Contacto ${title}`}
+  description="Contacte la oficina de North Texas de Prospera Healthcare para servicios de terapia ABA en Dallas, Fort Worth y áreas circundantes."
+  canonical={canonical}
+  schema={schema}
+  breadcrumbs={[
+    { name: 'Inicio', href: '/es/' },
+    { name: 'Contacto', href: '/es/contacto/' },
+    { name: title, href: '/es/contacto/north-texas/' },
+  ]}
+>
+  <article class="prose prose-lg max-w-none">
+    <h1>Contacto {title}</h1>
+    <div set:html={content} />
+  </article>
+</PageLayout>

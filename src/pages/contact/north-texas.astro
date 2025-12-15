@@ -1,0 +1,36 @@
+---
+/**
+ * Contact North Texas page - loads from pre-fetched JSON data
+ */
+import PageLayout from '@/layouts/PageLayout.astro';
+import { generateWebPageSchema } from '@/lib/utils/schema';
+import { getPageBySlug, decodeHtmlEntities } from '@/lib/utils/get-page-data';
+
+const pageData = getPageBySlug('north-texas');
+
+const title = decodeHtmlEntities(pageData?.title || 'North Texas');
+const content = pageData?.content || '';
+const canonical = 'https://prosperahealthcare.com/contact/north-texas/';
+
+const schema = generateWebPageSchema(
+  { title, content, uri: '/contact/north-texas/', date: pageData?.date || '', modified: pageData?.modified || '' },
+  canonical
+);
+---
+
+<PageLayout
+  title={`Contact ${title}`}
+  description="Contact Prospera Healthcare's North Texas office for ABA therapy services in Dallas, Fort Worth, and surrounding areas."
+  canonical={canonical}
+  schema={schema}
+  breadcrumbs={[
+    { name: 'Home', href: '/' },
+    { name: 'Contact', href: '/contact/' },
+    { name: title, href: '/contact/north-texas/' },
+  ]}
+>
+  <article class="prose prose-lg max-w-none">
+    <h1>Contact {title}</h1>
+    <div set:html={content} />
+  </article>
+</PageLayout>

@@ -1,0 +1,505 @@
+[
+  {
+    "id": "cG9zdDo1MzIz",
+    "databaseId": 5323,
+    "slug": "lancaster",
+    "uri": "/aba-therapy/texas/lancaster/",
+    "title": "Lancaster",
+    "content": "",
+    "featuredImage": null
+  },
+  {
+    "id": "cG9zdDo1Mjk0",
+    "databaseId": 5294,
+    "slug": "forney",
+    "uri": "/aba-therapy/texas/forney/",
+    "title": "Forney",
+    "content": "",
+    "featuredImage": null
+  },
+  {
+    "id": "cG9zdDo1Mjkx",
+    "databaseId": 5291,
+    "slug": "midlothian",
+    "uri": "/aba-therapy/texas/midlothian/",
+    "title": "Midlothian",
+    "content": "",
+    "featuredImage": null
+  },
+  {
+    "id": "cG9zdDo1Mjg4",
+    "databaseId": 5288,
+    "slug": "mansfield",
+    "uri": "/aba-therapy/texas/mansfield/",
+    "title": "Mansfield",
+    "content": "",
+    "featuredImage": null
+  },
+  {
+    "id": "cG9zdDo1MjM2",
+    "databaseId": 5236,
+    "slug": "midland",
+    "uri": "/aba-therapy/texas/midland/",
+    "title": "Midland",
+    "content": "",
+    "featuredImage": {
+      "node": {
+        "sourceUrl": "https://ehosyjg2p9u.exactdn.com/wp-content/uploads/2024/09/Texas-Autism-Insurance-Law-.jpeg?strip=all",
+        "altText": "Texas Autism Insurance Law"
+      }
+    }
+  },
+  {
+    "id": "cG9zdDo1MjMy",
+    "databaseId": 5232,
+    "slug": "burleson",
+    "uri": "/aba-therapy/texas/burleson/",
+    "title": "Burleson",
+    "content": "",
+    "featuredImage": null
+  },
+  {
+    "id": "cG9zdDo1MjI1",
+    "databaseId": 5225,
+    "slug": "flower-mound",
+    "uri": "/aba-therapy/texas/flower-mound/",
+    "title": "Flower Mound",
+    "content": "",
+    "featuredImage": null
+  },
+  {
+    "id": "cG9zdDoxNjQ3",
+    "databaseId": 1647,
+    "slug": "anna",
+    "uri": "/aba-therapy/texas/anna/",
+    "title": "Anna",
+    "content": "",
+    "featuredImage": {
+      "node": {
+        "sourceUrl": "https://ehosyjg2p9u.exactdn.com/wp-content/uploads/2024/09/Texas-Autism-Insurance-Law-.jpeg?strip=all",
+        "altText": "Texas Autism Insurance Law"
+      }
+    }
+  },
+  {
+    "id": "cG9zdDoxNjQ5",
+    "databaseId": 1649,
+    "slug": "gunter",
+    "uri": "/aba-therapy/texas/gunter/",
+    "title": "Gunter",
+    "content": "",
+    "featuredImage": null
+  },
+  {
+    "id": "cG9zdDoxNjUx",
+    "databaseId": 1651,
+    "slug": "aubrey",
+    "uri": "/aba-therapy/texas/aubrey/",
+    "title": "Aubrey",
+    "content": "",
+    "featuredImage": null
+  },
+  {
+    "id": "cG9zdDoxNjQ1",
+    "databaseId": 1645,
+    "slug": "melissa",
+    "uri": "/aba-therapy/texas/melissa/",
+    "title": "Melissa",
+    "content": "",
+    "featuredImage": null
+  },
+  {
+    "id": "cG9zdDoxNjQz",
+    "databaseId": 1643,
+    "slug": "little-elm",
+    "uri": "/aba-therapy/texas/little-elm/",
+    "title": "Little Elm",
+    "content": "",
+    "featuredImage": {
+      "node": {
+        "sourceUrl": "https://ehosyjg2p9u.exactdn.com/wp-content/uploads/2024/09/Texas-Autism-Insurance-Law-.jpeg?strip=all",
+        "altText": "Texas Autism Insurance Law"
+      }
+    }
+  },
+  {
+    "id": "cG9zdDoxNjQx",
+    "databaseId": 1641,
+    "slug": "watauga",
+    "uri": "/aba-therapy/texas/watauga/",
+    "title": "Watauga",
+    "content": "",
+    "featuredImage": null
+  },
+  {
+    "id": "cG9zdDoxNjM5",
+    "databaseId": 1639,
+    "slug": "desoto",
+    "uri": "/aba-therapy/texas/desoto/",
+    "title": "DeSoto",
+    "content": "",
+    "featuredImage": null
+  },
+  {
+    "id": "cG9zdDoxNjM3",
+    "databaseId": 1637,
+    "slug": "grand-prairie",
+    "uri": "/aba-therapy/texas/grand-prairie/",
+    "title": "Grand Prairie",
+    "content": "",
+    "featuredImage": null
+  },
+  {
+    "id": "cG9zdDoxNjM1",
+    "databaseId": 1635,
+    "slug": "duncanville",
+    "uri": "/aba-therapy/texas/duncanville/",
+    "title": "Duncanville",
+    "content": "",
+    "featuredImage": null
+  },
+  {
+    "id": "cG9zdDoxNjMz",
+    "databaseId": 1633,
+    "slug": "celina",
+    "uri": "/aba-therapy/texas/celina/",
+    "title": "Celina",
+    "content": "",
+    "featuredImage": null
+  },
+  {
+    "id": "cG9zdDoxNjI2",
+    "databaseId": 1626,
+    "slug": "the-colony",
+    "uri": "/aba-therapy/texas/the-colony/",
+    "title": "The Colony",
+    "content": "",
+    "featuredImage": null
+  },
+  {
+    "id": "cG9zdDoxNjI4",
+    "databaseId": 1628,
+    "slug": "van-alstyne",
+    "uri": "/aba-therapy/texas/van-alstyne/",
+    "title": "Van Alstyne",
+    "content": "",
+    "featuredImage": null
+  },
+  {
+    "id": "cG9zdDoxNjMw",
+    "databaseId": 1630,
+    "slug": "richardson",
+    "uri": "/aba-therapy/texas/richardson/",
+    "title": "Richardson",
+    "content": "",
+    "featuredImage": null
+  },
+  {
+    "id": "cG9zdDoxNTk0",
+    "databaseId": 1594,
+    "slug": "mesquite",
+    "uri": "/aba-therapy/texas/mesquite/",
+    "title": "Mesquite",
+    "content": "",
+    "featuredImage": null
+  },
+  {
+    "id": "cG9zdDoxNTky",
+    "databaseId": 1592,
+    "slug": "corinth",
+    "uri": "/aba-therapy/texas/corinth/",
+    "title": "Corinth",
+    "content": "",
+    "featuredImage": null
+  },
+  {
+    "id": "cG9zdDoxNTkw",
+    "databaseId": 1590,
+    "slug": "irving",
+    "uri": "/aba-therapy/texas/irving/",
+    "title": "Irving",
+    "content": "",
+    "featuredImage": null
+  },
+  {
+    "id": "cG9zdDoxNTg2",
+    "databaseId": 1586,
+    "slug": "rockwall",
+    "uri": "/aba-therapy/texas/rockwall/",
+    "title": "Rockwall",
+    "content": "",
+    "featuredImage": null
+  },
+  {
+    "id": "cG9zdDoxNTg0",
+    "databaseId": 1584,
+    "slug": "prosper",
+    "uri": "/aba-therapy/texas/prosper/",
+    "title": "Prosper",
+    "content": "",
+    "featuredImage": null
+  },
+  {
+    "id": "cG9zdDoxNTc4",
+    "databaseId": 1578,
+    "slug": "lewisville",
+    "uri": "/aba-therapy/texas/lewisville/",
+    "title": "Lewisville",
+    "content": "",
+    "featuredImage": null
+  },
+  {
+    "id": "cG9zdDoxNTgy",
+    "databaseId": 1582,
+    "slug": "garland",
+    "uri": "/aba-therapy/texas/garland/",
+    "title": "Garland",
+    "content": "",
+    "featuredImage": null
+  },
+  {
+    "id": "cG9zdDoxNTc2",
+    "databaseId": 1576,
+    "slug": "denton",
+    "uri": "/aba-therapy/texas/denton/",
+    "title": "Denton",
+    "content": "",
+    "featuredImage": null
+  },
+  {
+    "id": "cG9zdDoxNTgw",
+    "databaseId": 1580,
+    "slug": "carrollton",
+    "uri": "/aba-therapy/texas/carrollton/",
+    "title": "Carrollton",
+    "content": "",
+    "featuredImage": null
+  },
+  {
+    "id": "cG9zdDoxNTg4",
+    "databaseId": 1588,
+    "slug": "frisco",
+    "uri": "/aba-therapy/texas/frisco/",
+    "title": "Frisco",
+    "content": "",
+    "featuredImage": null
+  },
+  {
+    "id": "cG9zdDoxNTcx",
+    "databaseId": 1571,
+    "slug": "coppell",
+    "uri": "/aba-therapy/texas/coppell/",
+    "title": "Coppell",
+    "content": "",
+    "featuredImage": null
+  },
+  {
+    "id": "cG9zdDoxNTcw",
+    "databaseId": 1570,
+    "slug": "grapevine",
+    "uri": "/aba-therapy/texas/grapevine/",
+    "title": "Grapevine",
+    "content": "",
+    "featuredImage": null
+  },
+  {
+    "id": "cG9zdDoxNTU4",
+    "databaseId": 1558,
+    "slug": "north-richland-hills",
+    "uri": "/aba-therapy/texas/north-richland-hills/",
+    "title": "North Richland Hills",
+    "content": "",
+    "featuredImage": null
+  },
+  {
+    "id": "cG9zdDoxNTYw",
+    "databaseId": 1560,
+    "slug": "keller",
+    "uri": "/aba-therapy/texas/keller/",
+    "title": "Keller",
+    "content": "",
+    "featuredImage": null
+  },
+  {
+    "id": "cG9zdDoxNTYy",
+    "databaseId": 1562,
+    "slug": "haslet",
+    "uri": "/aba-therapy/texas/haslet/",
+    "title": "Haslet",
+    "content": "",
+    "featuredImage": null
+  },
+  {
+    "id": "cG9zdDoxNTY0",
+    "databaseId": 1564,
+    "slug": "westlake",
+    "uri": "/aba-therapy/texas/westlake/",
+    "title": "Westlake",
+    "content": "",
+    "featuredImage": null
+  },
+  {
+    "id": "cG9zdDoxNTU0",
+    "databaseId": 1554,
+    "slug": "hurst",
+    "uri": "/aba-therapy/texas/hurst/",
+    "title": "Hurst",
+    "content": "",
+    "featuredImage": null
+  },
+  {
+    "id": "cG9zdDoxNTU2",
+    "databaseId": 1556,
+    "slug": "euless",
+    "uri": "/aba-therapy/texas/euless/",
+    "title": "Euless",
+    "content": "",
+    "featuredImage": null
+  },
+  {
+    "id": "cG9zdDoxNTUy",
+    "databaseId": 1552,
+    "slug": "bedford",
+    "uri": "/aba-therapy/texas/bedford/",
+    "title": "Bedford",
+    "content": "",
+    "featuredImage": null
+  },
+  {
+    "id": "cG9zdDoxNTQx",
+    "databaseId": 1541,
+    "slug": "addison",
+    "uri": "/aba-therapy/texas/addison/",
+    "title": "Addison",
+    "content": "",
+    "featuredImage": {
+      "node": {
+        "sourceUrl": "https://ehosyjg2p9u.exactdn.com/wp-content/uploads/2024/09/Texas-Autism-Insurance-Law-.jpeg?strip=all",
+        "altText": "Texas Autism Insurance Law"
+      }
+    }
+  },
+  {
+    "id": "cG9zdDoyOTQ=",
+    "databaseId": 294,
+    "slug": "dallas",
+    "uri": "/aba-therapy/texas/dallas/",
+    "title": "Dallas",
+    "content": "",
+    "featuredImage": null
+  },
+  {
+    "id": "cG9zdDoxNDg3",
+    "databaseId": 1487,
+    "slug": "arlington",
+    "uri": "/aba-therapy/texas/arlington/",
+    "title": "Arlington",
+    "content": "",
+    "featuredImage": null
+  },
+  {
+    "id": "cG9zdDoxNDU2",
+    "databaseId": 1456,
+    "slug": "allen",
+    "uri": "/aba-therapy/texas/allen/",
+    "title": "Allen",
+    "content": "",
+    "featuredImage": {
+      "node": {
+        "sourceUrl": "https://ehosyjg2p9u.exactdn.com/wp-content/uploads/2024/09/Texas-Autism-Insurance-Law-.jpeg?strip=all",
+        "altText": "Texas Autism Insurance Law"
+      }
+    }
+  },
+  {
+    "id": "cG9zdDoyOTI=",
+    "databaseId": 292,
+    "slug": "texas",
+    "uri": "/aba-therapy/texas/texas/",
+    "title": "Texas",
+    "content": "",
+    "featuredImage": {
+      "node": {
+        "sourceUrl": "https://ehosyjg2p9u.exactdn.com/wp-content/uploads/2024/09/Texas-Autism-Insurance-Law-.jpeg?strip=all",
+        "altText": "Texas Autism Insurance Law"
+      }
+    }
+  },
+  {
+    "id": "cG9zdDoxNDU4",
+    "databaseId": 1458,
+    "slug": "wichita-falls",
+    "uri": "/aba-therapy/texas/wichita-falls/",
+    "title": "Wichita Falls",
+    "content": "",
+    "featuredImage": null
+  },
+  {
+    "id": "cG9zdDoxNDQw",
+    "databaseId": 1440,
+    "slug": "southlake",
+    "uri": "/aba-therapy/texas/southlake/",
+    "title": "Southlake",
+    "content": "",
+    "featuredImage": null
+  },
+  {
+    "id": "cG9zdDoxNDIx",
+    "databaseId": 1421,
+    "slug": "mckinney",
+    "uri": "/aba-therapy/texas/mckinney/",
+    "title": "McKinney",
+    "content": "",
+    "featuredImage": null
+  },
+  {
+    "id": "cG9zdDoxNDIw",
+    "databaseId": 1420,
+    "slug": "granbury",
+    "uri": "/aba-therapy/texas/granbury/",
+    "title": "Granbury",
+    "content": "",
+    "featuredImage": null
+  },
+  {
+    "id": "cG9zdDozNDc=",
+    "databaseId": 347,
+    "slug": "san-antonio",
+    "uri": "/aba-therapy/texas/san-antonio/",
+    "title": "San Antonio",
+    "content": "",
+    "featuredImage": {
+      "node": {
+        "sourceUrl": "https://ehosyjg2p9u.exactdn.com/wp-content/uploads/2024/07/ABA-Therapy-Prospera-Healthcare_2-1.jpeg?strip=all",
+        "altText": "ABA Therapy Prospera Healthcare"
+      }
+    }
+  },
+  {
+    "id": "cG9zdDozNDk=",
+    "databaseId": 349,
+    "slug": "el-paso",
+    "uri": "/aba-therapy/texas/el-paso/",
+    "title": "El Paso",
+    "content": "",
+    "featuredImage": null
+  },
+  {
+    "id": "cG9zdDozNDQ=",
+    "databaseId": 344,
+    "slug": "fort-worth",
+    "uri": "/aba-therapy/texas/fort-worth/",
+    "title": "Fort Worth",
+    "content": "",
+    "featuredImage": null
+  },
+  {
+    "id": "cG9zdDoyOTc=",
+    "databaseId": 297,
+    "slug": "plano",
+    "uri": "/aba-therapy/texas/plano/",
+    "title": "Plano",
+    "content": "",
+    "featuredImage": null
+  }
+]

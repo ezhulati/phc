@@ -1,0 +1,67 @@
+---
+/**
+ * Page Layout
+ * Standard page wrapper with breadcrumbs and content area
+ */
+
+import BaseLayout from './BaseLayout.astro';
+import Breadcrumbs from '@/components/common/Breadcrumbs.astro';
+import { getLangFromUrl, t } from '@/i18n/ui';
+
+interface BreadcrumbItem {
+  name: string;
+  href: string;
+}
+
+interface Props {
+  title: string;
+  description: string;
+  canonical?: string;
+  ogImage?: string;
+  noindex?: boolean;
+  schema?: object | object[];
+  breadcrumbs?: BreadcrumbItem[];
+  showBreadcrumbs?: boolean;
+}
+
+const {
+  title,
+  description,
+  canonical,
+  ogImage,
+  noindex,
+  schema,
+  breadcrumbs,
+  showBreadcrumbs = true,
+} = Astro.props;
+
+const lang = getLangFromUrl(Astro.url);
+const homeLabel = t(lang, 'nav.home');
+const homeHref = lang === 'es' ? '/es/' : '/';
+
+// Default breadcrumbs if not provided
+const defaultBreadcrumbs: BreadcrumbItem[] = [
+  { name: homeLabel, href: homeHref },
+];
+
+const displayBreadcrumbs = breadcrumbs || defaultBreadcrumbs;
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  canonical={canonical}
+  ogImage={ogImage}
+  noindex={noindex}
+  schema={schema}
+>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    {showBreadcrumbs && displayBreadcrumbs.length > 1 && (
+      <div class="mb-6">
+        <Breadcrumbs items={displayBreadcrumbs} />
+      </div>
+    )}
+
+    <slot />
+  </div>
+</BaseLayout>

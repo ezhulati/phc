@@ -1,0 +1,36 @@
+---
+/**
+ * Editorial Process and Standards page - loads from pre-fetched JSON data
+ */
+import PageLayout from '@/layouts/PageLayout.astro';
+import { generateWebPageSchema } from '@/lib/utils/schema';
+import { getPageBySlug, decodeHtmlEntities } from '@/lib/utils/get-page-data';
+
+const pageData = getPageBySlug('editorial-process-standards');
+
+const title = decodeHtmlEntities(pageData?.title || 'Our Editorial Process and Standards');
+const content = pageData?.content || '';
+const canonical = 'https://prosperahealthcare.com/about/editorial-process-standards/';
+
+const schema = generateWebPageSchema(
+  { title, content, uri: '/about/editorial-process-standards/', date: pageData?.date || '', modified: pageData?.modified || '' },
+  canonical
+);
+---
+
+<PageLayout
+  title={title}
+  description="Learn about Prospera Healthcare's editorial process and standards for our health and autism-related content."
+  canonical={canonical}
+  schema={schema}
+  breadcrumbs={[
+    { name: 'Home', href: '/' },
+    { name: 'About Us', href: '/about/' },
+    { name: 'Editorial Process', href: '/about/editorial-process-standards/' },
+  ]}
+>
+  <article class="prose prose-lg max-w-none">
+    <h1>{title}</h1>
+    <div set:html={content} />
+  </article>
+</PageLayout>

@@ -1,0 +1,56 @@
+[
+  {
+    "id": "in-home-aba",
+    "title": "In-Home 1:1 ABA Therapy",
+    "titleEs": "Terapia ABA 1:1 en el Hogar",
+    "description": "Customized one-on-one sessions in the comfort of your home to enhance communication, social skills, and daily living abilities.",
+    "descriptionEs": "Sesiones personalizadas uno a uno en la comodidad de su hogar para mejorar la comunicacion, habilidades sociales y destrezas de la vida diaria.",
+    "image": "/images/wp/AdobeStock_569313061.jpeg",
+    "href": "/services/#in-home-aba"
+  },
+  {
+    "id": "behavioral-intervention",
+    "title": "Behavioral Intervention",
+    "titleEs": "Intervencion Conductual",
+    "description": "Intensive early childhood therapy designed to address challenging behaviors and promote positive development.",
+    "descriptionEs": "Terapia intensiva de primera infancia disenada para abordar comportamientos desafiantes y promover el desarrollo positivo.",
+    "image": "/images/wp/Behavior-Intervention.jpeg",
+    "href": "/services/#behavioral-intervention"
+  },
+  {
+    "id": "behavior-assessment",
+    "title": "Behavior Assessment",
+    "titleEs": "Evaluacion de Comportamiento",
+    "description": "Comprehensive evaluations using data-driven strategies to develop effective treatment plans.",
+    "descriptionEs": "Evaluaciones integrales utilizando estrategias basadas en datos para desarrollar planes de tratamiento efectivos.",
+    "image": "/images/wp/Behavior-Assessment.jpeg",
+    "href": "/services/#behavior-assessment"
+  },
+  {
+    "id": "skills-assessment",
+    "title": "Skills Assessment",
+    "titleEs": "Evaluacion de Habilidades",
+    "description": "Progress tracking tools and assessments to measure growth and adjust therapy goals.",
+    "descriptionEs": "Herramientas de seguimiento de progreso y evaluaciones para medir el crecimiento y ajustar los objetivos de terapia.",
+    "image": "/images/wp/Skills-Assessment.jpeg",
+    "href": "/services/#skills-assessment"
+  },
+  {
+    "id": "parent-training",
+    "title": "Parent Training",
+    "titleEs": "Capacitacion para Padres",
+    "description": "Equipping families with ABA strategies and techniques to support their child's development at home.",
+    "descriptionEs": "Equipando a las familias con estrategias y tecnicas de ABA para apoyar el desarrollo de su hijo en casa.",
+    "image": "/images/wp/Family-Centered.jpeg",
+    "href": "/services/#parent-training"
+  },
+  {
+    "id": "remote-assessments",
+    "title": "Remote Assessments",
+    "titleEs": "Evaluaciones Remotas",
+    "description": "Flexible evaluation options for families who need remote support and guidance.",
+    "descriptionEs": "Opciones de evaluacion flexibles para familias que necesitan apoyo y orientacion remota.",
+    "image": "/images/wp/Remote-Assessments.jpeg",
+    "href": "/services/#remote-assessments"
+  }
+]

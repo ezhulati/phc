@@ -1,0 +1,74 @@
+---
+/**
+ * Breadcrumbs Component
+ * Navigation breadcrumbs with Schema.org markup
+ */
+
+import { generateBreadcrumbSchema } from '@/lib/utils/schema';
+
+interface BreadcrumbItem {
+  name: string;
+  href: string;
+}
+
+interface Props {
+  items: BreadcrumbItem[];
+}
+
+const { items } = Astro.props;
+
+// Generate full URLs for schema
+const schemaItems = items.map((item) => ({
+  name: item.name,
+  url: item.href.startsWith('http')
+    ? item.href
+    : `https://prosperahealthcare.com${item.href}`,
+}));
+
+const schema = generateBreadcrumbSchema(schemaItems);
+---
+
+<nav aria-label="Breadcrumb" class="text-sm">
+  <ol class="flex items-center gap-2 flex-wrap" itemscope itemtype="https://schema.org/BreadcrumbList">
+    {items.map((item, index) => {
+      const isLast = index === items.length - 1;
+      return (
+        <li
+          class="flex items-center gap-2"
+          itemprop="itemListElement"
+          itemscope
+          itemtype="https://schema.org/ListItem"
+        >
+          {index > 0 && (
+            <span class="text-neutral-400" aria-hidden="true">
+              <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+              </svg>
+            </span>
+          )}
+          {isLast ? (
+            <span
+              class="text-neutral-600"
+              itemprop="name"
+              aria-current="page"
+            >
+              {item.name}
+            </span>
+          ) : (
+            <a
+              href={item.href}
+              class="text-primary-600 hover:text-primary-700 no-underline hover:underline"
+              itemprop="item"
+            >
+              <span itemprop="name">{item.name}</span>
+            </a>
+          )}
+          <meta itemprop="position" content={String(index + 1)} />
+        </li>
+      );
+    })}
+  </ol>
+</nav>
+
+<!-- Schema.org JSON-LD -->
+<script type="application/ld+json" set:html={JSON.stringify(schema)} />
