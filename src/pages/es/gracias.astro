@@ -6,7 +6,7 @@ import PageLayout from '@/layouts/PageLayout.astro';
 import { generateWebPageSchema } from '@/lib/utils/schema';
 
 const title = 'Gracias';
-const content = '<p>Gracias por contactar a Prospera Healthcare. Nuestro equipo revisará su consulta y le responderá dentro de 24-48 horas hábiles.</p><p>Mientras tanto, siéntase libre de explorar nuestros recursos para aprender más sobre la terapia ABA y cómo puede ayudar a su hijo.</p>';
+const content = '<p>Recibimos su mensaje y responderemos dentro de 24-48 horas.</p>';
 const canonical = 'https://prosperahealthcare.com/es/gracias/';
 
 const schema = generateWebPageSchema(
@@ -31,7 +31,7 @@ const schema = generateWebPageSchema(
     <div set:html={content} />
     <div class="mt-8">
       <a href="/es/" class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-primary-500 hover:bg-primary-600">
-        Volver al Inicio
+        Volver al inicio
       </a>
     </div>
   </article>

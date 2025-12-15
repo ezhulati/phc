@@ -14,7 +14,7 @@ const currentYear = new Date().getFullYear();
 // Footer navigation sections
 const footerSections = [
   {
-    title: lang === 'es' ? 'Acerca de' : 'About Us',
+    title: lang === 'es' ? 'Acerca de' : 'About',
     links: [
       { label: t(lang, 'nav.about'), href: lang === 'es' ? '/es/acerca-de/' : '/about/' },
       { label: lang === 'es' ? 'Servicios' : 'Services', href: lang === 'es' ? '/es/servicios/' : '/services/' },
@@ -23,12 +23,12 @@ const footerSections = [
     ],
   },
   {
-    title: lang === 'es' ? 'Enlaces Rápidos' : 'Quick Links',
+    title: lang === 'es' ? 'Recursos' : 'Resources',
     links: [
-      { label: lang === 'es' ? '¿Qué es la Terapia ABA?' : 'What is ABA Therapy?', href: '/what-is-aba-therapy/' },
+      { label: lang === 'es' ? '¿Qué es la terapia ABA?' : 'What is ABA therapy?', href: '/what-is-aba-therapy/' },
       { label: lang === 'es' ? 'Beneficios de ABA' : 'Benefits of ABA', href: '/benefits-of-aba-therapy/' },
-      { label: lang === 'es' ? 'Costos y Seguros' : 'Costs & Insurance', href: '/aba-therapy/costs-insurance/' },
-      { label: lang === 'es' ? 'Consejos para Padres' : 'Parenting Tips', href: '/aba-therapy/parenting-tips/' },
+      { label: lang === 'es' ? 'Costos y seguros' : 'Costs & insurance', href: '/aba-therapy/costs-insurance/' },
+      { label: lang === 'es' ? 'Consejos para padres' : 'Parenting tips', href: '/aba-therapy/parenting-tips/' },
     ],
   },
 ];
@@ -143,7 +143,7 @@ const socialLinks = [
     <!-- ABA Therapy Locations Section -->
     <div class="mt-12 pt-8 border-t border-neutral-800">
       <h3 class="text-white font-bold text-sm uppercase tracking-widest mb-6">
-        {lang === 'es' ? 'Ubicaciones de Terapia ABA' : 'ABA Therapy Locations'}
+        {lang === 'es' ? 'Ubicaciones' : 'Locations'}
       </h3>
 
       <!-- Region Groups -->

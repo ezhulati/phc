@@ -239,6 +239,7 @@
 
   /* Form Styles per Practical UI */
   /* All inputs meet 48px minimum touch target */
+  /* Border uses neutral-400 for 3:1 contrast per WCAG 2.1 AA */
   input[type="text"],
   input[type="email"],
   input[type="tel"],
@@ -251,7 +252,7 @@
     min-height: 48px;
     padding: 0.75rem 1rem;
     font-size: var(--font-size-base);
-    border: 1px solid var(--color-neutral-300);
+    border: 1px solid var(--color-neutral-400);
     border-radius: var(--radius-lg);
     background-color: white;
     transition: border-color var(--transition-fast), box-shadow var(--transition-fast);

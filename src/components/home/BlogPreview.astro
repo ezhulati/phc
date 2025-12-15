@@ -19,14 +19,14 @@ const allPosts = postsData as WPPost[];
 const recentPosts = allPosts.slice(0, limit);
 
 const sectionTitle = lang === 'es'
-  ? 'Articulos y Recursos'
-  : 'Articles & Resources';
+  ? 'Artículos'
+  : 'Articles';
 
 const sectionSubtitle = lang === 'es'
-  ? 'Informacion experta sobre terapia ABA, apoyo para el autismo y desarrollo infantil'
-  : 'Expert insights on ABA therapy, autism support, and child development';
+  ? 'Recursos sobre terapia ABA y desarrollo infantil'
+  : 'Resources on ABA therapy and child development';
 
-const viewAllText = lang === 'es' ? 'Ver Todo' : 'View All';
+const viewAllText = lang === 'es' ? 'Ver todos los artículos' : 'View all articles';
 ---
 
 {recentPosts.length > 0 && (
@@ -43,7 +43,7 @@ const viewAllText = lang === 'es' ? 'Ver Todo' : 'View All';
         </div>
         <a
           href="/aba-therapy/"
-          class="mt-4 md:mt-0 inline-flex items-center text-primary-600 font-semibold hover:text-primary-700 no-underline"
+          class="mt-4 md:mt-0 inline-flex items-center text-primary-600 font-bold hover:text-primary-700 no-underline"
         >
           {viewAllText}
           <svg class="ml-2 w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">

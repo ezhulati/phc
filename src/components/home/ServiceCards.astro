@@ -13,8 +13,8 @@ interface Props {
 const { lang = 'en' } = Astro.props;
 
 const sectionTitle = lang === 'es'
-  ? 'Nuestros Servicios'
-  : 'Our Services';
+  ? 'Nuestros servicios'
+  : 'Our services';
 
 const sectionSubtitle = lang === 'es'
   ? 'Terapia ABA integral disenada para las necesidades unicas de su hijo'
@@ -54,8 +54,8 @@ const sectionSubtitle = lang === 'es'
             <p class="text-neutral-600 leading-relaxed">
               {lang === 'es' ? service.descriptionEs : service.description}
             </p>
-            <span class="inline-flex items-center mt-4 text-primary-600 font-semibold group-hover:text-primary-700">
-              {lang === 'es' ? 'Más información' : 'Learn more'}
+            <span class="inline-flex items-center mt-4 text-primary-600 font-bold group-hover:text-primary-700">
+              {lang === 'es' ? `Conocer ${service.titleEs.toLowerCase()}` : `Learn about ${service.title.toLowerCase()}`}
               <svg class="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
               </svg>

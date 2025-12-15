@@ -20,36 +20,36 @@ export const ui = {
     'nav.contact': 'Contact',
     'nav.schedule': 'Schedule a Consultation',
 
-    // Common
-    'common.readMore': 'Read More',
-    'common.learnMore': 'Learn More',
-    'common.viewAll': 'View All',
+    // Common - sentence case per Practical UI
+    'common.readMore': 'Read more',
+    'common.learnMore': 'Learn more',
+    'common.viewAll': 'View all',
     'common.backTo': 'Back to',
     'common.close': 'Close',
     'common.menu': 'Menu',
     'common.search': 'Search',
 
-    // Blog
+    // Blog - sentence case per Practical UI
     'blog.author': 'By',
     'blog.published': 'Published',
     'blog.updated': 'Updated',
     'blog.minRead': 'min read',
-    'blog.relatedPosts': 'Related Articles',
+    'blog.relatedPosts': 'Related articles',
     'blog.categories': 'Categories',
     'blog.tags': 'Tags',
     'blog.shareArticle': 'Share this article',
-    'blog.tableOfContents': 'Table of Contents',
+    'blog.tableOfContents': 'Table of contents',
 
-    // Locations
-    'location.servicesIn': 'ABA Therapy Services in',
-    'location.nearbyAreas': 'Nearby Service Areas',
-    'location.insuranceAccepted': 'Insurance Accepted',
-    'location.faqs': 'Frequently Asked Questions',
-    'location.getStarted': 'Get Started Today',
+    // Locations - sentence case per Practical UI
+    'location.servicesIn': 'ABA therapy services in',
+    'location.nearbyAreas': 'Nearby service areas',
+    'location.insuranceAccepted': 'Insurance accepted',
+    'location.faqs': 'Frequently asked questions',
+    'location.getStarted': 'Get started today',
 
-    // Forms
-    'form.firstName': 'First Name',
-    'form.lastName': 'Last Name',
+    // Forms - sentence case per Practical UI
+    'form.firstName': 'First name',
+    'form.lastName': 'Last name',
     'form.email': 'Email',
     'form.phone': 'Phone',
     'form.message': 'Message',
@@ -60,15 +60,15 @@ export const ui = {
     'form.required': 'Required',
     'form.invalidEmail': 'Please enter a valid email address',
 
-    // Footer
+    // Footer - sentence case per Practical UI
     'footer.copyright': '© {year} Prospera Healthcare. All rights reserved.',
-    'footer.privacy': 'Privacy Policy',
-    'footer.terms': 'Terms & Conditions',
+    'footer.privacy': 'Privacy policy',
+    'footer.terms': 'Terms & conditions',
 
-    // 404
-    '404.title': 'Page Not Found',
+    // 404 - sentence case per Practical UI
+    '404.title': 'Page not found',
     '404.message': 'The page you are looking for does not exist.',
-    '404.backHome': 'Back to Home',
+    '404.backHome': 'Back to home',
 
     // Accessibility
     'a11y.skipToContent': 'Skip to content',
@@ -84,34 +84,34 @@ export const ui = {
     'nav.services': 'Servicios',
     'nav.careers': 'Carreras',
     'nav.contact': 'Contacto',
-    'nav.schedule': 'Programar una Consulta',
+    'nav.schedule': 'Programar una consulta',
 
-    // Common
-    'common.readMore': 'Leer Más',
-    'common.learnMore': 'Más Información',
-    'common.viewAll': 'Ver Todo',
+    // Common - sentence case per Practical UI
+    'common.readMore': 'Leer más',
+    'common.learnMore': 'Más información',
+    'common.viewAll': 'Ver todo',
     'common.backTo': 'Volver a',
     'common.close': 'Cerrar',
     'common.menu': 'Menú',
     'common.search': 'Buscar',
 
-    // Blog
+    // Blog - sentence case per Practical UI
     'blog.author': 'Por',
     'blog.published': 'Publicado',
     'blog.updated': 'Actualizado',
     'blog.minRead': 'min de lectura',
-    'blog.relatedPosts': 'Artículos Relacionados',
+    'blog.relatedPosts': 'Artículos relacionados',
     'blog.categories': 'Categorías',
     'blog.tags': 'Etiquetas',
     'blog.shareArticle': 'Compartir este artículo',
-    'blog.tableOfContents': 'Tabla de Contenidos',
+    'blog.tableOfContents': 'Tabla de contenidos',
 
-    // Locations
-    'location.servicesIn': 'Servicios de Terapia ABA en',
-    'location.nearbyAreas': 'Áreas de Servicio Cercanas',
-    'location.insuranceAccepted': 'Seguros Aceptados',
-    'location.faqs': 'Preguntas Frecuentes',
-    'location.getStarted': 'Comience Hoy',
+    // Locations - sentence case per Practical UI
+    'location.servicesIn': 'Servicios de terapia ABA en',
+    'location.nearbyAreas': 'Áreas de servicio cercanas',
+    'location.insuranceAccepted': 'Seguros aceptados',
+    'location.faqs': 'Preguntas frecuentes',
+    'location.getStarted': 'Comience hoy',
 
     // Forms
     'form.firstName': 'Nombre',
@@ -126,15 +126,15 @@ export const ui = {
     'form.required': 'Requerido',
     'form.invalidEmail': 'Por favor ingrese un correo electrónico válido',
 
-    // Footer
+    // Footer - sentence case per Practical UI
     'footer.copyright': '© {year} Prospera Healthcare. Todos los derechos reservados.',
-    'footer.privacy': 'Política de Privacidad',
-    'footer.terms': 'Términos y Condiciones',
+    'footer.privacy': 'Política de privacidad',
+    'footer.terms': 'Términos y condiciones',
 
-    // 404
-    '404.title': 'Página No Encontrada',
+    // 404 - sentence case per Practical UI
+    '404.title': 'Página no encontrada',
     '404.message': 'La página que busca no existe.',
-    '404.backHome': 'Volver al Inicio',
+    '404.backHome': 'Volver al inicio',
 
     // Accessibility
     'a11y.skipToContent': 'Saltar al contenido',

@@ -28,12 +28,12 @@ interface FormErrors {
 
 const translations = {
   en: {
-    firstName: 'First Name',
-    lastName: 'Last Name',
+    firstName: 'First name',
+    lastName: 'Last name',
     email: 'Email',
     phone: 'Phone',
     message: 'Message',
-    submit: 'Send Message',
+    submit: 'Send message',
     sending: 'Sending...',
     success: 'Thank you! We will be in touch soon.',
     error: 'Something went wrong. Please try again.',
@@ -49,10 +49,10 @@ const translations = {
   es: {
     firstName: 'Nombre',
     lastName: 'Apellido',
-    email: 'Correo Electrónico',
+    email: 'Correo electrónico',
     phone: 'Teléfono',
     message: 'Mensaje',
-    submit: 'Enviar Mensaje',
+    submit: 'Enviar mensaje',
     sending: 'Enviando...',
     success: '¡Gracias! Nos pondremos en contacto pronto.',
     error: 'Algo salió mal. Por favor, inténtelo de nuevo.',
@@ -204,7 +204,7 @@ export default function ContactForm({
             aria-invalid={!!errors.firstName}
             aria-describedby={errors.firstName ? 'firstName-error' : undefined}
             className={`w-full px-4 min-h-[48px] border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 ${
-              errors.firstName ? 'border-red-500' : 'border-neutral-300'
+              errors.firstName ? 'border-red-500' : 'border-neutral-400'
             }`}
           />
           {errors.firstName && (
@@ -230,7 +230,7 @@ export default function ContactForm({
             aria-invalid={!!errors.lastName}
             aria-describedby={errors.lastName ? 'lastName-error' : undefined}
             className={`w-full px-4 min-h-[48px] border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 ${
-              errors.lastName ? 'border-red-500' : 'border-neutral-300'
+              errors.lastName ? 'border-red-500' : 'border-neutral-400'
             }`}
           />
           {errors.lastName && (
@@ -258,7 +258,7 @@ export default function ContactForm({
           aria-invalid={!!errors.email}
           aria-describedby={errors.email ? 'email-error' : undefined}
           className={`w-full px-4 min-h-[48px] border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 ${
-            errors.email ? 'border-red-500' : 'border-neutral-300'
+            errors.email ? 'border-red-500' : 'border-neutral-400'
           }`}
         />
         {errors.email && (
@@ -268,8 +268,8 @@ export default function ContactForm({
         )}
       </div>
 
-      {/* Phone - Optional field marked per Practical UI */}
-      <div>
+      {/* Phone - Optional field, narrower width per Practical UI (match expected input) */}
+      <div className="md:w-1/2">
         <label
           htmlFor="phone"
           className="block text-base font-bold text-neutral-700 mb-2"
@@ -282,10 +282,11 @@ export default function ContactForm({
           name="phone"
           value={formData.phone}
           onChange={handleChange}
+          placeholder={lang === 'es' ? 'ej: 555-123-4567' : 'e.g., 555-123-4567'}
           aria-invalid={!!errors.phone}
           aria-describedby={errors.phone ? 'phone-error' : undefined}
           className={`w-full px-4 min-h-[48px] border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 ${
-            errors.phone ? 'border-red-500' : 'border-neutral-300'
+            errors.phone ? 'border-red-500' : 'border-neutral-400'
           }`}
         />
         {errors.phone && (
@@ -312,7 +313,7 @@ export default function ContactForm({
           aria-invalid={!!errors.message}
           aria-describedby={errors.message ? 'message-error' : undefined}
           className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 resize-y ${
-            errors.message ? 'border-red-500' : 'border-neutral-300'
+            errors.message ? 'border-red-500' : 'border-neutral-400'
           }`}
         />
         {errors.message && (

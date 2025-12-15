@@ -15,12 +15,12 @@ const { lang = 'en' } = Astro.props;
 const faqs = faqData[lang] || faqData.en;
 
 const sectionTitle = lang === 'es'
-  ? 'Preguntas Frecuentes'
-  : 'Frequently Asked Questions';
+  ? 'Preguntas frecuentes'
+  : 'Common questions';
 
 const sectionSubtitle = lang === 'es'
-  ? 'Obtenga respuestas a preguntas comunes sobre la terapia ABA'
-  : 'Get answers to common questions about ABA therapy';
+  ? 'Lo que las familias preguntan sobre la terapia ABA'
+  : 'What families ask about ABA therapy';
 ---
 
 <section class="py-16 lg:py-24 bg-white">

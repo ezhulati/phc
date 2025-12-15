@@ -5,8 +5,8 @@
 import PageLayout from '@/layouts/PageLayout.astro';
 import { generateWebPageSchema } from '@/lib/utils/schema';
 
-const title = 'Thank You';
-const content = '<p>Thank you for contacting Prospera Healthcare. Our team will review your inquiry and get back to you within 24-48 business hours.</p><p>In the meantime, feel free to explore our resources to learn more about ABA therapy and how it can help your child.</p>';
+const title = 'Thank you';
+const content = '<p>We received your message and will respond within 24-48 hours.</p>';
 const canonical = 'https://prosperahealthcare.com/thank-you/';
 
 const schema = generateWebPageSchema(
@@ -23,7 +23,7 @@ const schema = generateWebPageSchema(
   noindex={true}
   breadcrumbs={[
     { name: 'Home', href: '/' },
-    { name: 'Thank You', href: '/thank-you/' },
+    { name: 'Thank you', href: '/thank-you/' },
   ]}
 >
   <article class="prose prose-lg max-w-none text-center py-16">
@@ -31,7 +31,7 @@ const schema = generateWebPageSchema(
     <div set:html={content} />
     <div class="mt-8">
       <a href="/" class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-primary-500 hover:bg-primary-600">
-        Return to Home
+        Back to home
       </a>
     </div>
   </article>

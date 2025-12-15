@@ -102,8 +102,8 @@ const t = content[lang];
     <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
       {t.features.map((feature) => (
         <div class="group bg-gradient-to-br from-primary-50 to-white rounded-2xl p-8 border border-primary-100 hover:border-primary-300 hover:shadow-xl transition-all duration-300">
-          <div class="w-14 h-14 mb-6 bg-primary-500 rounded-xl flex items-center justify-center shadow-lg shadow-primary-500/25">
-            <img src={feature.icon} alt={feature.title} class="w-8 h-8 object-contain brightness-0 invert" />
+          <div class="w-20 h-20 mb-6 bg-white rounded-xl flex items-center justify-center shadow-md border border-neutral-100 p-2">
+            <img src={feature.icon} alt={feature.title} class="max-w-full max-h-full object-contain" />
           </div>
           <h3 class="text-xl font-bold text-neutral-900 mb-3">
             {feature.title}
