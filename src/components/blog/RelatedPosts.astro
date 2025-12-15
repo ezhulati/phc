@@ -1,0 +1,87 @@
+---
+/**
+ * Related Posts Component
+ * Displays a grid of related blog posts
+ */
+
+import { formatDate } from '@/lib/utils/dates';
+import type { WPPost } from '@/lib/graphql/types';
+
+interface Props {
+  posts: WPPost[];
+  lang?: 'en' | 'es';
+  limit?: number;
+  class?: string;
+}
+
+const { posts, lang = 'en', limit = 3, class: className = '' } = Astro.props;
+
+const displayPosts = posts.slice(0, limit);
+const title = lang === 'es' ? 'Artículos relacionados' : 'Related articles';
+---
+
+{displayPosts.length > 0 && (
+  <section class:list={['related-posts bg-neutral-50 py-12 lg:py-16', className]}>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-2xl font-bold text-neutral-900 mb-8">
+        {title}
+      </h2>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+        {displayPosts.map((post) => (
+          <a
+            href={`/${post.slug}/`}
+            class="group bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 no-underline border border-neutral-200 hover:border-primary-200"
+          >
+            {post.featuredImage?.node ? (
+              <div class="relative h-48 overflow-hidden">
+                <img
+                  src={post.featuredImage.node.sourceUrl}
+                  alt={post.featuredImage.node.altText || post.title}
+                  class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  loading="lazy"
+                />
+                {post.categories?.nodes?.[0] && (
+                  <span class="absolute top-3 left-3 px-2.5 py-1 text-xs font-medium text-white bg-primary-500 rounded-full">
+                    {post.categories.nodes[0].name}
+                  </span>
+                )}
+              </div>
+            ) : (
+              <div class="h-48 bg-gradient-to-br from-primary-100 to-primary-200 flex items-center justify-center">
+                <svg class="w-12 h-12 text-primary-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z" />
+                </svg>
+              </div>
+            )}
+
+            <div class="p-5 lg:p-6">
+              <h3 class="text-lg font-bold text-neutral-900 line-clamp-2 group-hover:text-primary-600 transition-colors mb-2">
+                {post.title}
+              </h3>
+
+              {post.excerpt && (
+                <p
+                  class="text-sm text-neutral-600 line-clamp-2 mb-3"
+                  set:html={post.excerpt.replace(/<[^>]*>/g, '').slice(0, 100) + '...'}
+                />
+              )}
+
+              <div class="flex items-center justify-between text-sm text-neutral-500">
+                <time datetime={post.date}>
+                  {formatDate(post.date, lang)}
+                </time>
+                <span class="inline-flex items-center text-primary-600 font-medium group-hover:translate-x-1 transition-transform">
+                  {lang === 'es' ? 'Leer' : 'Read'}
+                  <svg class="w-4 h-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                  </svg>
+                </span>
+              </div>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+)}

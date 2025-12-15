@@ -1,0 +1,50 @@
+---
+/**
+ * Author Card Component
+ * Displays author information at the end of blog posts
+ */
+
+interface Props {
+  name: string;
+  bio?: string;
+  avatar?: string;
+  role?: string;
+  class?: string;
+}
+
+const {
+  name,
+  bio = '',
+  avatar = '/images/wp/prospera-logo.png',
+  role = 'Prospera Healthcare Team',
+  class: className = ''
+} = Astro.props;
+---
+
+<div class:list={['author-card bg-neutral-50 rounded-xl p-6 lg:p-8 border border-neutral-200', className]}>
+  <div class="flex flex-col sm:flex-row gap-4 sm:gap-6">
+    <div class="flex-shrink-0">
+      <img
+        src={avatar}
+        alt={name}
+        class="w-16 h-16 sm:w-20 sm:h-20 rounded-full object-cover border-4 border-white shadow-md"
+        width="80"
+        height="80"
+      />
+    </div>
+    <div class="flex-1">
+      <div class="mb-2">
+        <h3 class="text-lg font-bold text-neutral-900">{name}</h3>
+        <p class="text-sm text-primary-600 font-medium">{role}</p>
+      </div>
+      {bio ? (
+        <p class="text-neutral-600 leading-relaxed">{bio}</p>
+      ) : (
+        <p class="text-neutral-600 leading-relaxed">
+          The Prospera Healthcare team is dedicated to providing evidence-based ABA therapy
+          and resources to support families on their journey.
+        </p>
+      )}
+    </div>
+  </div>
+</div>

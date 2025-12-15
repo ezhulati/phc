@@ -1,0 +1,60 @@
+---
+/**
+ * Reading Progress Indicator
+ * Shows article reading progress as a bar at the top of the viewport
+ */
+---
+
+<div
+  id="reading-progress"
+  class="fixed top-0 left-0 w-full h-1 bg-neutral-200/50 z-50"
+  aria-hidden="true"
+>
+  <div
+    id="reading-progress-bar"
+    class="h-full bg-primary-500 transition-[width] duration-100 ease-out"
+    style="width: 0%"
+  ></div>
+</div>
+
+<script>
+  const progressBar = document.getElementById('reading-progress-bar');
+  const article = document.getElementById('article-content');
+
+  if (progressBar && article) {
+    function updateProgress() {
+      const articleRect = article.getBoundingClientRect();
+      const articleTop = articleRect.top + window.scrollY;
+      const articleHeight = articleRect.height;
+      const windowHeight = window.innerHeight;
+      const scrollY = window.scrollY;
+
+      // Calculate progress based on article position
+      const startReading = articleTop - windowHeight * 0.2;
+      const endReading = articleTop + articleHeight - windowHeight * 0.8;
+      const readingRange = endReading - startReading;
+
+      let progress = 0;
+      if (scrollY > startReading) {
+        progress = Math.min(100, ((scrollY - startReading) / readingRange) * 100);
+      }
+
+      progressBar.style.width = `${progress}%`;
+    }
+
+    // Throttle scroll handler for performance
+    let ticking = false;
+    window.addEventListener('scroll', () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          updateProgress();
+          ticking = false;
+        });
+        ticking = true;
+      }
+    });
+
+    // Initial calculation
+    updateProgress();
+  }
+</script>

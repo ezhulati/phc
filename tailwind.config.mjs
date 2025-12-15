@@ -62,27 +62,28 @@ export default {
           'sans-serif',
         ],
       },
-      /* Typography Scale - 1.25 Major Third per Practical UI */
+      /* Fluid Typography - clamp(min, preferred, max) for smooth scaling */
       fontSize: {
-        /* Fine print - use sparingly */
-        tiny: ['0.75rem', { lineHeight: '1rem', letterSpacing: '0.025em' }],           // 12px
-        /* Captions, meta info */
-        small: ['0.9375rem', { lineHeight: '1.5', letterSpacing: '0.025em' }],         // 15px
-        /* Short UI text (buttons, labels, nav) */
-        sm: ['1rem', { lineHeight: '1.5' }],                                            // 16px
-        /* Body text - minimum for accessibility */
-        base: ['1.125rem', { lineHeight: '1.5' }],                                      // 18px
-        /* H4, Card titles */
-        lg: ['1.375rem', { lineHeight: '1.3' }],                                        // 22px
-        /* H3, Subsection headings */
-        xl: ['1.75rem', { lineHeight: '1.2', letterSpacing: '-0.02em' }],               // 28px
-        /* H2, Section headings */
-        '2xl': ['2.1875rem', { lineHeight: '1.2', letterSpacing: '-0.02em' }],          // 35px
-        /* H1, Page titles */
-        '3xl': ['2.75rem', { lineHeight: '1.1', letterSpacing: '-0.03em' }],            // 44px
-        /* Display text - hero sections */
-        '4xl': ['3.4375rem', { lineHeight: '1.1', letterSpacing: '-0.03em' }],          // 55px
-        '5xl': ['4.25rem', { lineHeight: '1.05', letterSpacing: '-0.03em' }],           // 68px
+        /* Fine print - use sparingly (11-12px) */
+        tiny: ['clamp(0.6875rem, 0.65rem + 0.15vw, 0.75rem)', { lineHeight: '1.4', letterSpacing: '0.025em' }],
+        /* Captions, meta info (13-15px) */
+        small: ['clamp(0.8125rem, 0.75rem + 0.25vw, 0.9375rem)', { lineHeight: '1.5', letterSpacing: '0.025em' }],
+        /* Short UI text: buttons, labels, nav (14-16px) */
+        sm: ['clamp(0.875rem, 0.825rem + 0.2vw, 1rem)', { lineHeight: '1.5' }],
+        /* Body text (16-18px) */
+        base: ['clamp(1rem, 0.95rem + 0.2vw, 1.125rem)', { lineHeight: '1.5' }],
+        /* H4, Card titles (18-22px) */
+        lg: ['clamp(1.125rem, 1rem + 0.5vw, 1.375rem)', { lineHeight: '1.35' }],
+        /* H3, Subsection headings (20-26px) */
+        xl: ['clamp(1.25rem, 1.1rem + 0.75vw, 1.625rem)', { lineHeight: '1.3', letterSpacing: '-0.01em' }],
+        /* H2, Section headings (24-32px) */
+        '2xl': ['clamp(1.5rem, 1.25rem + 1vw, 2rem)', { lineHeight: '1.25', letterSpacing: '-0.02em' }],
+        /* H1, Page titles (30-40px) */
+        '3xl': ['clamp(1.875rem, 1.5rem + 1.5vw, 2.5rem)', { lineHeight: '1.15', letterSpacing: '-0.02em' }],
+        /* Display text - hero sections (36-48px) */
+        '4xl': ['clamp(2.25rem, 1.75rem + 2vw, 3rem)', { lineHeight: '1.1', letterSpacing: '-0.03em' }],
+        /* Large display (40-56px) */
+        '5xl': ['clamp(2.5rem, 2rem + 2.5vw, 3.5rem)', { lineHeight: '1.05', letterSpacing: '-0.03em' }],
       },
       /* Letter Spacing per Practical UI */
       letterSpacing: {

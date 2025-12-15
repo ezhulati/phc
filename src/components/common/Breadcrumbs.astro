@@ -13,9 +13,11 @@ interface BreadcrumbItem {
 
 interface Props {
   items: BreadcrumbItem[];
+  variant?: 'default' | 'light';
 }
 
-const { items } = Astro.props;
+const { items, variant = 'default' } = Astro.props;
+const isLight = variant === 'light';
 
 // Generate full URLs for schema
 const schemaItems = items.map((item) => ({
@@ -40,7 +42,7 @@ const schema = generateBreadcrumbSchema(schemaItems);
           itemtype="https://schema.org/ListItem"
         >
           {index > 0 && (
-            <span class="text-neutral-400" aria-hidden="true">
+            <span class:list={[isLight ? 'text-white/50' : 'text-neutral-400']} aria-hidden="true">
               <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
               </svg>
@@ -48,7 +50,7 @@ const schema = generateBreadcrumbSchema(schemaItems);
           )}
           {isLast ? (
             <span
-              class="text-neutral-600"
+              class:list={[isLight ? 'text-white/80' : 'text-neutral-600']}
               itemprop="name"
               aria-current="page"
             >
@@ -57,7 +59,10 @@ const schema = generateBreadcrumbSchema(schemaItems);
           ) : (
             <a
               href={item.href}
-              class="text-primary-600 hover:text-primary-700 no-underline hover:underline"
+              class:list={[
+                'no-underline hover:underline',
+                isLight ? 'text-white hover:text-white' : 'text-primary-600 hover:text-primary-700'
+              ]}
               itemprop="item"
             >
               <span itemprop="name">{item.name}</span>

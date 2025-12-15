@@ -1,0 +1,110 @@
+---
+/**
+ * Table of Contents Component
+ * Auto-generates TOC from article headings with active state tracking
+ */
+
+interface Props {
+  content: string;
+  lang?: 'en' | 'es';
+  class?: string;
+}
+
+const { content, lang = 'en', class: className = '' } = Astro.props;
+
+// Extract headings from HTML content
+function extractHeadings(html: string) {
+  const headings: Array<{ id: string; text: string; level: number }> = [];
+  const headingRegex = /<h([2-4])[^>]*(?:id="([^"]*)")?[^>]*>([^<]+)<\/h\1>/gi;
+
+  let match;
+  while ((match = headingRegex.exec(html)) !== null) {
+    const level = parseInt(match[1]);
+    const id = match[2] || match[3].toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+    const text = match[3].trim();
+
+    if (text) {
+      headings.push({ id, text, level });
+    }
+  }
+
+  return headings;
+}
+
+const headings = extractHeadings(content);
+const title = lang === 'es' ? 'En este artículo' : 'In this article';
+---
+
+{headings.length > 2 && (
+  <nav
+    class:list={['toc bg-white rounded-xl border border-neutral-200 p-5', className]}
+    aria-labelledby="toc-heading"
+  >
+    <h2
+      id="toc-heading"
+      class="text-sm font-bold text-neutral-500 uppercase tracking-wider mb-4"
+    >
+      {title}
+    </h2>
+    <ul class="space-y-2">
+      {headings.map((heading) => (
+        <li
+          class:list={[
+            'toc-item',
+            { 'pl-4': heading.level === 3 },
+            { 'pl-8': heading.level === 4 }
+          ]}
+        >
+          <a
+            href={`#${heading.id}`}
+            class="toc-link block text-sm text-neutral-600 hover:text-primary-600 transition-colors py-1 no-underline border-l-2 border-transparent pl-3 -ml-3 hover:border-primary-500"
+            data-toc-link={heading.id}
+          >
+            {heading.text}
+          </a>
+        </li>
+      ))}
+    </ul>
+  </nav>
+)}
+
+<script>
+  // Active heading tracking
+  const tocLinks = document.querySelectorAll('[data-toc-link]');
+  const headings = Array.from(tocLinks).map(link => {
+    const id = link.getAttribute('data-toc-link');
+    return document.getElementById(id || '');
+  }).filter(Boolean);
+
+  if (headings.length > 0) {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          const id = entry.target.id;
+          const link = document.querySelector(`[data-toc-link="${id}"]`);
+
+          if (entry.isIntersecting) {
+            // Remove active from all
+            tocLinks.forEach(l => {
+              l.classList.remove('text-primary-600', 'border-primary-500', 'font-medium');
+              l.classList.add('text-neutral-600', 'border-transparent');
+            });
+            // Add active to current
+            if (link) {
+              link.classList.add('text-primary-600', 'border-primary-500', 'font-medium');
+              link.classList.remove('text-neutral-600', 'border-transparent');
+            }
+          }
+        });
+      },
+      {
+        rootMargin: '-20% 0px -70% 0px',
+        threshold: 0
+      }
+    );
+
+    headings.forEach((heading) => {
+      if (heading) observer.observe(heading);
+    });
+  }
+</script>

@@ -5,7 +5,7 @@
  */
 
 import PageLayout from '@/layouts/PageLayout.astro';
-import PostLayout from '@/layouts/PostLayout.astro';
+import BlogLayout from '@/layouts/BlogLayout.astro';
 import type { WPPage, WPPost } from '@/lib/graphql/types';
 
 export async function getStaticPaths() {
@@ -17,7 +17,7 @@ export async function getStaticPaths() {
 
   const paths: Array<{
     params: { slug: string | undefined };
-    props: { type: 'page' | 'post'; data: WPPage | WPPost };
+    props: { type: 'page' | 'post'; data: WPPage | WPPost; relatedPosts?: WPPost[] };
   }> = [];
 
   // Add pages
@@ -41,9 +41,18 @@ export async function getStaticPaths() {
   // Add blog posts (at root URLs for SEO)
   console.log(`Loading ${posts.length} posts from JSON...`);
   for (const post of posts) {
+    // Find related posts by matching categories
+    const postCategories = post.categories?.nodes?.map(c => c.slug) || [];
+    const relatedPosts = posts
+      .filter(p =>
+        p.slug !== post.slug &&
+        p.categories?.nodes?.some(c => postCategories.includes(c.slug))
+      )
+      .slice(0, 3);
+
     paths.push({
       params: { slug: post.slug },
-      props: { type: 'post', data: post },
+      props: { type: 'post', data: post, relatedPosts },
     });
   }
 
@@ -54,9 +63,10 @@ export async function getStaticPaths() {
 interface Props {
   type: 'page' | 'post';
   data: WPPage | WPPost;
+  relatedPosts?: WPPost[];
 }
 
-const { type, data } = Astro.props;
+const { type, data, relatedPosts = [] } = Astro.props;
 
 // Helper to decode HTML entities
 function decodeHtmlEntities(str: string): string {
@@ -76,7 +86,7 @@ const description = decodeHtmlEntities(rawDescription).slice(0, 160);
 ---
 
 {type === 'post' ? (
-  <PostLayout post={data as WPPost} />
+  <BlogLayout post={data as WPPost} relatedPosts={relatedPosts} showToc={true} heroStyle="default" />
 ) : (
   <PageLayout
     title={title}

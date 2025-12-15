@@ -203,11 +203,11 @@ const schemas = [localBusinessSchema, faqSchema];
           <Breadcrumbs items={breadcrumbs} />
         </div>
 
-        <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6 drop-shadow-lg text-white">
+        <h1 class="text-4xl font-bold leading-tight mb-6 drop-shadow-lg text-white">
           {lang === 'es' ? `Terapia ABA en ${cityName}` : `ABA Therapy in ${cityName}`}
         </h1>
 
-        <p class="text-lg md:text-xl text-white/90 max-w-xl mb-8 drop-shadow">
+        <p class="text-lg text-white/90 max-w-xl mb-8 drop-shadow">
           {lang === 'es'
             ? `Terapia ABA personalizada a domicilio para apoyar el crecimiento y desarrollo de su hijo en ${cityName}.`
             : `Personalized in-home ABA therapy to support your child's growth and development in ${cityName}.`}
@@ -240,7 +240,7 @@ const schemas = [localBusinessSchema, faqSchema];
     <!-- Intro Section -->
     <section class="mb-16">
       <div class="max-w-3xl">
-        <h2 class="text-2xl md:text-3xl font-bold text-neutral-900 mb-6">
+        <h2 class="text-2xl font-bold text-neutral-900 mb-6">
           {lang === 'es' ? 'Su Socio en el Viaje de Su Hijo' : 'Your Partner in Your Child\'s Journey'}
         </h2>
         <div class="prose prose-lg text-neutral-600">
@@ -260,7 +260,7 @@ const schemas = [localBusinessSchema, faqSchema];
 
     <!-- Services Section -->
     <section class="mb-16">
-      <h2 class="text-2xl md:text-3xl font-bold text-neutral-900 mb-8">
+      <h2 class="text-2xl font-bold text-neutral-900 mb-8">
         {lang === 'es' ? `Servicios de Terapia ABA en ${cityName}` : `ABA Therapy Services in ${cityName}`}
       </h2>
       <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -289,7 +289,7 @@ const schemas = [localBusinessSchema, faqSchema];
 
     <!-- How It Works Section -->
     <section class="mb-16 bg-neutral-50 rounded-2xl p-8 lg:p-12">
-      <h2 class="text-2xl md:text-3xl font-bold text-neutral-900 mb-8 text-center">
+      <h2 class="text-2xl font-bold text-neutral-900 mb-8 text-center">
         {lang === 'es' ? 'Cómo Funciona' : 'How It Works'}
       </h2>
       <div class="grid md:grid-cols-3 gap-8">
@@ -337,7 +337,7 @@ const schemas = [localBusinessSchema, faqSchema];
 
     <!-- FAQs Section -->
     <section class="mb-16">
-      <h2 class="text-2xl md:text-3xl font-bold text-neutral-900 mb-8">
+      <h2 class="text-2xl font-bold text-neutral-900 mb-8">
         {lang === 'es' ? `Preguntas Frecuentes` : `Frequently Asked Questions`}
       </h2>
       <FAQAccordion client:visible faqs={faqs} lang={lang} />
@@ -346,7 +346,7 @@ const schemas = [localBusinessSchema, faqSchema];
     <!-- Nearby Locations -->
     {nearbyLocations.length > 0 && (
       <section class="mb-16">
-        <h2 class="text-2xl md:text-3xl font-bold text-neutral-900 mb-8">
+        <h2 class="text-2xl font-bold text-neutral-900 mb-8">
           {lang === 'es' ? 'También Servimos Áreas Cercanas' : 'We Also Serve Nearby Areas'}
         </h2>
         <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
@@ -372,7 +372,7 @@ const schemas = [localBusinessSchema, faqSchema];
 
     <!-- CTA Section -->
     <section class="bg-primary-600 rounded-2xl p-8 lg:p-12 text-center text-white">
-      <h2 class="text-2xl md:text-3xl font-bold mb-4">
+      <h2 class="text-2xl font-bold mb-4">
         {lang === 'es' ? `Comience la Terapia ABA en ${cityName} Hoy` : `Start ABA Therapy in ${cityName} Today`}
       </h2>
       <p class="text-lg text-primary-100 max-w-2xl mx-auto mb-8">
