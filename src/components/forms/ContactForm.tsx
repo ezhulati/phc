@@ -37,9 +37,14 @@ const translations = {
     sending: 'Sending...',
     success: 'Thank you! We will be in touch soon.',
     error: 'Something went wrong. Please try again.',
-    required: 'Required',
-    invalidEmail: 'Please enter a valid email address',
-    invalidPhone: 'Please enter a valid phone number',
+    requiredLegend: '* Required fields',
+    // Error messages follow Practical UI: What's wrong + How to fix
+    requiredFirstName: 'Please enter your first name',
+    requiredLastName: 'Please enter your last name',
+    requiredEmail: 'Please enter your email address',
+    requiredMessage: 'Please enter a message',
+    invalidEmail: 'Please enter a valid email (e.g., name@example.com)',
+    invalidPhone: 'Please enter a valid phone number (e.g., 555-123-4567)',
   },
   es: {
     firstName: 'Nombre',
@@ -51,9 +56,13 @@ const translations = {
     sending: 'Enviando...',
     success: '¡Gracias! Nos pondremos en contacto pronto.',
     error: 'Algo salió mal. Por favor, inténtelo de nuevo.',
-    required: 'Requerido',
-    invalidEmail: 'Por favor ingrese un correo electrónico válido',
-    invalidPhone: 'Por favor ingrese un número de teléfono válido',
+    requiredLegend: '* Campos requeridos',
+    requiredFirstName: 'Por favor ingrese su nombre',
+    requiredLastName: 'Por favor ingrese su apellido',
+    requiredEmail: 'Por favor ingrese su correo electrónico',
+    requiredMessage: 'Por favor ingrese un mensaje',
+    invalidEmail: 'Por favor ingrese un correo válido (ej: nombre@ejemplo.com)',
+    invalidPhone: 'Por favor ingrese un teléfono válido (ej: 555-123-4567)',
   },
 };
 
@@ -78,16 +87,17 @@ export default function ContactForm({
   const validateForm = (): boolean => {
     const newErrors: FormErrors = {};
 
+    // Per Practical UI: Error messages explain what's wrong + how to fix
     if (!formData.firstName.trim()) {
-      newErrors.firstName = t.required;
+      newErrors.firstName = t.requiredFirstName;
     }
 
     if (!formData.lastName.trim()) {
-      newErrors.lastName = t.required;
+      newErrors.lastName = t.requiredLastName;
     }
 
     if (!formData.email.trim()) {
-      newErrors.email = t.required;
+      newErrors.email = t.requiredEmail;
     } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
       newErrors.email = t.invalidEmail;
     }
@@ -97,7 +107,7 @@ export default function ContactForm({
     }
 
     if (!formData.message.trim()) {
-      newErrors.message = t.required;
+      newErrors.message = t.requiredMessage;
     }
 
     setErrors(newErrors);
@@ -152,6 +162,9 @@ export default function ContactForm({
 
   return (
     <form onSubmit={handleSubmit} className="space-y-6" noValidate>
+      {/* Required fields legend per Practical UI */}
+      <p className="text-sm text-neutral-600">{t.requiredLegend}</p>
+
       {/* Success Message */}
       {submitStatus === 'success' && (
         <div
@@ -172,7 +185,7 @@ export default function ContactForm({
         </div>
       )}
 
-      {/* Name Fields */}
+      {/* Name Fields - Related short fields can be multi-column per Practical UI */}
       <div className="grid md:grid-cols-2 gap-4">
         <div>
           <label
