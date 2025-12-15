@@ -1,20 +1,18 @@
 ---
 /**
- * Spanish Services page - with hero section
+ * Spanish Services page - ABA therapy services overview
+ * Rebuilt with proper Astro components
  */
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import Breadcrumbs from '@/components/common/Breadcrumbs.astro';
+import Button from '@/components/ui/Button.astro';
 import { generateWebPageSchema } from '@/lib/utils/schema';
-import { getPageBySlug } from '@/lib/utils/get-page-data';
 
-const pageData = getPageBySlug('services');
-
-const title = 'Servicios';
-const content = pageData?.content || '';
+const title = 'Servicios de Terapia ABA';
 const canonical = 'https://prosperahealthcare.com/es/servicios/';
 
 const schema = generateWebPageSchema(
-  { title, content, uri: '/es/servicios/', date: pageData?.date || '', modified: pageData?.modified || '' },
+  { title, content: '', uri: '/es/servicios/', date: '', modified: '' },
   canonical
 );
 
@@ -22,16 +20,73 @@ const breadcrumbs = [
   { name: 'Inicio', href: '/es/' },
   { name: 'Servicios', href: '/es/servicios/' },
 ];
+
+// Services overview
+const services = [
+  { id: 'in-home-aba', title: 'Terapia ABA 1:1 a Domicilio', description: 'Terapia personalizada en la comodidad de su hogar.' },
+  { id: 'behavioral-intervention', title: 'Intervencion Conductual', description: 'Intervencion temprana intensiva para el desarrollo.' },
+  { id: 'behavior-assessment', title: 'Evaluacion de Comportamiento', description: 'Evaluaciones funcionales para entender las conductas.' },
+  { id: 'skills-assessment', title: 'Evaluacion de Habilidades', description: 'Medicion y seguimiento del desarrollo de habilidades.' },
+  { id: 'parent-training', title: 'Capacitacion para Padres', description: 'Tecnicas ABA que puede usar en casa.' },
+  { id: 'remote-assessments', title: 'Evaluaciones Remotas', description: 'Consultaciones virtuales desde cualquier lugar.' },
+];
+
+// Service details
+const serviceDetails = [
+  {
+    id: 'in-home-aba',
+    title: 'Terapia ABA 1:1 a Domicilio',
+    description: 'Terapia en su hogar, donde su hijo aprende mejor. Las sesiones se enfocan en comunicacion, habilidades sociales y vida diaria, adaptadas a los objetivos de su hijo.',
+    features: ['Sesiones 1:1 con RBTs certificados', 'Planes de tratamiento disenados por BCBAs', 'Aprendizaje en entornos naturales', 'Padres involucrados en cada sesion', 'Horarios flexibles de manana o tarde'],
+    image: '/images/wp/AdobeStock_569313061.jpeg'
+  },
+  {
+    id: 'behavioral-intervention',
+    title: 'Intervencion Conductual',
+    description: 'Terapia intensiva temprana que aborda comportamientos desafiantes y construye habilidades fundamentales. Mejor para ninos menores de 6 anos durante ventanas criticas de desarrollo.',
+    features: ['Reducir comportamientos desafiantes', 'Construir alternativas positivas', 'Seguimiento con datos', 'Enfoque centrado en la familia', 'Prevenir crisis futuras'],
+    image: '/images/wp/Behavior-Intervention.jpeg'
+  },
+  {
+    id: 'behavior-assessment',
+    title: 'Evaluacion de Comportamiento',
+    description: 'Los BCBAs realizan evaluaciones funcionales del comportamiento (FBAs) para descubrir por que ocurren los comportamientos. Luego creamos un plan para abordarlos.',
+    features: ['Evaluacion funcional del comportamiento', 'Plan de intervencion escrito', 'Analisis ambiental', 'Identificacion de disparadores', 'Ajustes continuos'],
+    image: '/images/wp/Behavior-Assessment.jpeg'
+  },
+  {
+    id: 'skills-assessment',
+    title: 'Evaluacion de Habilidades',
+    description: 'Medimos las habilidades de su hijo usando herramientas VB-MAPP, ABLLS-R y AFLS. Estas evaluaciones muestran donde esta ahora y rastrean el crecimiento con el tiempo.',
+    features: ['Evaluacion VB-MAPP', 'Evaluacion ABLLS-R', 'Seguimiento de habilidades AFLS', 'Informes de progreso mensuales', 'Metas ajustadas segun crecen las habilidades'],
+    image: '/images/wp/Skills-Assessment.jpeg'
+  },
+  {
+    id: 'parent-training',
+    title: 'Capacitacion para Padres',
+    description: 'Aprenda tecnicas ABA que puede usar en casa. Cuando los padres refuerzan los objetivos de terapia entre sesiones, los ninos progresan mas rapido.',
+    features: ['Tecnicas ABA para el hogar', 'Manejar comportamientos dificiles', 'Mejorar la comunicacion', 'Apoyar la generalizacion de habilidades', 'Coaching continuo'],
+    image: '/images/wp/Family-Centered.jpeg'
+  },
+  {
+    id: 'remote-assessments',
+    title: 'Evaluaciones Remotas',
+    description: 'No puede asistir en persona? Ofrecemos evaluaciones y consultas virtuales para que reciba orientacion experta desde cualquier lugar de Texas.',
+    features: ['Consultas por video', 'Evaluaciones de habilidades remotas', 'Capacitacion virtual para padres', 'Horarios flexibles', 'Plataforma segura'],
+    image: '/images/wp/Remote-Assessments.jpeg'
+  }
+];
 ---
 
 <BaseLayout
   title={title}
-  description="Explore los servicios de terapia ABA de Prospera Healthcare, incluyendo terapia en el hogar, programas en centros y capacitación para padres."
+  description="Explore los servicios de terapia ABA de Prospera Healthcare, incluyendo terapia a domicilio, evaluaciones y capacitacion para padres."
   canonical={canonical}
   schema={schema}
+  alternateLanguages={[{ hreflang: 'en', href: 'https://prosperahealthcare.com/services/' }]}
 >
   <!-- Hero Section -->
-  <section class="relative min-h-[400px] lg:min-h-[450px] text-white overflow-hidden">
+  <section class="relative min-h-[50vh] text-white overflow-hidden">
     <div class="absolute inset-0">
       <img
         src="/images/wp/Texas-ABA-Therapy-scaled.jpeg"
@@ -40,25 +95,79 @@ const breadcrumbs = [
       />
       <div class="absolute inset-0 bg-gradient-to-r from-primary-900/90 via-primary-800/80 to-primary-700/60"></div>
     </div>
-    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-20 flex items-center min-h-[400px] lg:min-h-[450px]">
-      <div>
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-28 flex items-center min-h-[50vh]">
+      <div class="max-w-3xl">
         <div class="mb-6">
           <Breadcrumbs items={breadcrumbs} />
         </div>
-        <h1 class="text-4xl md:text-5xl font-bold leading-tight mb-4 drop-shadow-lg text-white">
+        <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6 drop-shadow-lg text-white">
           {title}
         </h1>
-        <p class="text-lg md:text-xl text-white/90 max-w-2xl drop-shadow">
-          Servicios integrales de terapia ABA adaptados a las necesidades únicas de su hijo.
+        <p class="text-xl text-white/90 max-w-2xl drop-shadow">
+          Terapia adaptada a su hijo. Apoyamos el desarrollo en cada etapa.
         </p>
       </div>
     </div>
   </section>
 
-  <!-- Content Section -->
-  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
-    <article class="prose prose-lg max-w-none">
-      <div set:html={content} />
-    </article>
-  </div>
+  <!-- Services Overview -->
+  <section class="py-16 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {services.map((service) => (
+          <a href={`#${service.id}`} class="group bg-neutral-50 rounded-xl p-6 hover:bg-primary-50 transition-colors no-underline border border-neutral-200 hover:border-primary-300">
+            <h3 class="text-lg font-bold text-neutral-900 group-hover:text-primary-700 mb-2">{service.title}</h3>
+            <p class="text-neutral-600 text-sm">{service.description}</p>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Detailed Service Sections -->
+  {serviceDetails.map((service, index) => (
+    <section id={service.id} class={`py-20 ${index % 2 === 0 ? 'bg-neutral-50' : 'bg-white'}`}>
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class={`grid lg:grid-cols-2 gap-12 items-center ${index % 2 === 1 ? 'lg:flex-row-reverse' : ''}`}>
+          <div class={index % 2 === 1 ? 'lg:order-2' : ''}>
+            <div class="rounded-2xl overflow-hidden shadow-xl">
+              <img
+                src={service.image}
+                alt={service.title}
+                class="w-full h-80 object-cover"
+              />
+            </div>
+          </div>
+          <div class={index % 2 === 1 ? 'lg:order-1' : ''}>
+            <h2 class="text-3xl md:text-4xl font-bold text-neutral-900 mb-6">{service.title}</h2>
+            <p class="text-lg text-neutral-600 mb-8 leading-relaxed">{service.description}</p>
+            <ul class="space-y-3 mb-8">
+              {service.features.map((feature) => (
+                <li class="flex items-start gap-3">
+                  <svg class="w-6 h-6 text-primary-500 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                  </svg>
+                  <span class="text-neutral-700">{feature}</span>
+                </li>
+              ))}
+            </ul>
+            <Button href="/es/contacto/">Comenzar Aqui</Button>
+          </div>
+        </div>
+      </div>
+    </section>
+  ))}
+
+  <!-- CTA Section -->
+  <section class="py-20 bg-primary-600 text-white">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="text-3xl md:text-4xl font-bold mb-6">Comience con una Consulta Gratuita</h2>
+      <p class="text-xl text-primary-100 mb-8 max-w-2xl mx-auto">
+        Hable con nuestro equipo sobre las necesidades de su hijo. Le ayudaremos a encontrar los servicios adecuados.
+      </p>
+      <Button href="/es/contacto/" variant="secondary" size="lg" class="!text-white !border-white hover:!bg-white hover:!text-primary-600">
+        Programar Consulta
+      </Button>
+    </div>
+  </section>
 </BaseLayout>

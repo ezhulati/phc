@@ -1,20 +1,17 @@
 ---
 /**
- * Spanish Contact page - with hero section
+ * Spanish Contact page - rebuilt with proper Astro components
  */
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import Breadcrumbs from '@/components/common/Breadcrumbs.astro';
+import ContactForm from '@/components/forms/ContactForm';
 import { generateWebPageSchema } from '@/lib/utils/schema';
-import { getPageBySlug } from '@/lib/utils/get-page-data';
-
-const pageData = getPageBySlug('contact');
 
 const title = 'Contacto';
-const content = pageData?.content || '';
 const canonical = 'https://prosperahealthcare.com/es/contacto/';
 
 const schema = generateWebPageSchema(
-  { title, content, uri: '/es/contacto/', date: pageData?.date || '', modified: pageData?.modified || '' },
+  { title, content: '', uri: '/es/contacto/', date: '', modified: '' },
   canonical
 );
 
@@ -22,13 +19,48 @@ const breadcrumbs = [
   { name: 'Inicio', href: '/es/' },
   { name: 'Contacto', href: '/es/contacto/' },
 ];
+
+// Regional offices
+const offices = [
+  {
+    region: 'North Texas',
+    address: '4351 Cross Timbers Rd, Suite 400',
+    city: 'Flower Mound, TX 75028',
+    phone: '(972) 900-2488',
+    href: '/es/contacto/north-texas/',
+  },
+  {
+    region: 'San Antonio',
+    address: '8000 IH-10 West, Suite 600',
+    city: 'San Antonio, TX 78230',
+    phone: '(210) 944-4449',
+    href: '/es/contacto/san-antonio/',
+  },
+  {
+    region: 'El Paso',
+    address: '221 N Kansas St, Suite 700',
+    city: 'El Paso, TX 79901',
+    phone: '(915) 201-0085',
+    href: '/es/contacto/el-paso/',
+  },
+];
+
+// Quick links
+const quickLinks = [
+  { label: 'Terapia ABA en North Texas', href: '/es/terapia-aba/texas/dallas/' },
+  { label: 'Terapia ABA en San Antonio', href: '/es/terapia-aba/texas/san-antonio/' },
+  { label: 'Terapia ABA en El Paso', href: '/es/terapia-aba/texas/el-paso/' },
+  { label: 'Nuestros Servicios', href: '/es/servicios/' },
+  { label: 'Carreras', href: '/es/carreras/' },
+];
 ---
 
 <BaseLayout
   title={title}
-  description="¿Preguntas sobre terapia ABA? Estamos aquí para ayudar."
+  description="Contacte a Prospera Healthcare para terapia ABA en Texas. Llame hoy para una consulta gratuita."
   canonical={canonical}
   schema={schema}
+  alternateLanguages={[{ hreflang: 'en', href: 'https://prosperahealthcare.com/contact/' }]}
 >
   <!-- Hero Section -->
   <section class="relative min-h-[400px] lg:min-h-[450px] text-white overflow-hidden">
@@ -41,24 +73,204 @@ const breadcrumbs = [
       <div class="absolute inset-0 bg-gradient-to-r from-primary-900/90 via-primary-800/80 to-primary-700/60"></div>
     </div>
     <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-20 flex items-center min-h-[400px] lg:min-h-[450px]">
-      <div>
+      <div class="max-w-2xl">
         <div class="mb-6">
           <Breadcrumbs items={breadcrumbs} />
         </div>
-        <h1 class="text-4xl md:text-5xl font-bold leading-tight mb-4 drop-shadow-lg text-white">
-          {title}
+        <span class="text-primary-300 font-semibold text-sm uppercase tracking-wider">Hablemos</span>
+        <h1 class="text-4xl md:text-5xl font-bold leading-tight mt-2 mb-4 drop-shadow-lg">
+          Estamos Aqui para Ayudar
         </h1>
-        <p class="text-lg md:text-xl text-white/90 max-w-2xl drop-shadow">
-          ¿Preguntas sobre terapia ABA? Estamos aquí para ayudar.
+        <p class="text-lg text-white/90 max-w-xl drop-shadow">
+          Preguntas sobre terapia ABA? Nuestro equipo esta listo para ayudarle a comenzar el camino hacia el exito de su hijo.
         </p>
       </div>
     </div>
   </section>
 
-  <!-- Content Section -->
-  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
-    <article class="prose prose-lg max-w-none">
-      <div set:html={content} />
-    </article>
-  </div>
+  <!-- Contact Form & Info Section -->
+  <section class="py-16 lg:py-24 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid lg:grid-cols-2 gap-12">
+        <!-- Contact Form -->
+        <div>
+          <h2 class="text-2xl md:text-3xl font-bold text-neutral-900 mb-6">
+            Enviar un Mensaje
+          </h2>
+          <p class="text-neutral-600 mb-8">
+            Complete el formulario y nos comunicaremos dentro de 24-48 horas.
+          </p>
+          <div class="bg-neutral-50 rounded-xl p-6 lg:p-8">
+            <ContactForm client:load lang="es" />
+          </div>
+        </div>
+
+        <!-- Contact Info -->
+        <div>
+          <h2 class="text-2xl md:text-3xl font-bold text-neutral-900 mb-6">
+            Informacion de Contacto
+          </h2>
+          <p class="text-neutral-600 mb-8">
+            Prefiere llamar o enviar un correo? Contactenos directamente.
+          </p>
+
+          <div class="space-y-6">
+            <!-- Phone -->
+            <div class="flex items-start gap-4">
+              <div class="w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                <svg class="w-6 h-6 text-primary-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                </svg>
+              </div>
+              <div>
+                <h3 class="font-semibold text-neutral-900">Telefono</h3>
+                <a href="tel:+19729002488" class="text-primary-600 hover:text-primary-700 font-medium">
+                  (972) 900-2488
+                </a>
+                <p class="text-sm text-neutral-500 mt-1">Lun-Vie 8am-6pm CST</p>
+              </div>
+            </div>
+
+            <!-- Email -->
+            <div class="flex items-start gap-4">
+              <div class="w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                <svg class="w-6 h-6 text-primary-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                </svg>
+              </div>
+              <div>
+                <h3 class="font-semibold text-neutral-900">Correo Electronico</h3>
+                <a href="mailto:hello@prosperahealthcare.com" class="text-primary-600 hover:text-primary-700 font-medium">
+                  hello@prosperahealthcare.com
+                </a>
+                <p class="text-sm text-neutral-500 mt-1">Respuesta en 24-48 horas</p>
+              </div>
+            </div>
+
+            <!-- Address -->
+            <div class="flex items-start gap-4">
+              <div class="w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                <svg class="w-6 h-6 text-primary-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                </svg>
+              </div>
+              <div>
+                <h3 class="font-semibold text-neutral-900">Oficina Principal</h3>
+                <p class="text-neutral-600">4351 Cross Timbers Rd, Suite 400</p>
+                <p class="text-neutral-600">Flower Mound, TX 75028</p>
+              </div>
+            </div>
+
+            <!-- Hours -->
+            <div class="flex items-start gap-4">
+              <div class="w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                <svg class="w-6 h-6 text-primary-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+              </div>
+              <div>
+                <h3 class="font-semibold text-neutral-900">Horario de Oficina</h3>
+                <p class="text-neutral-600">Lunes - Viernes: 8:00am - 6:00pm</p>
+                <p class="text-neutral-600">Sabado - Domingo: Cerrado</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Regional Offices Section -->
+  <section class="py-16 lg:py-24 bg-neutral-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <span class="text-primary-600 font-semibold text-sm uppercase tracking-wider">Ubicaciones</span>
+        <h2 class="text-3xl md:text-4xl font-bold text-neutral-900 mt-2">
+          Nuestras Oficinas Regionales
+        </h2>
+        <p class="text-lg text-neutral-600 mt-4 max-w-2xl mx-auto">
+          Sirviendo familias en todo Texas con tres oficinas regionales.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-8">
+        {offices.map((office) => (
+          <a
+            href={office.href}
+            class="bg-white rounded-xl p-6 shadow-sm border border-neutral-200 hover:border-primary-300 hover:shadow-md transition-all no-underline group"
+          >
+            <div class="w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center mb-4 group-hover:bg-primary-200 transition-colors">
+              <svg class="w-6 h-6 text-primary-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold text-neutral-900 mb-2 group-hover:text-primary-600 transition-colors">
+              {office.region}
+            </h3>
+            <p class="text-neutral-600 text-sm mb-1">{office.address}</p>
+            <p class="text-neutral-600 text-sm mb-3">{office.city}</p>
+            <p class="text-primary-600 font-semibold">{office.phone}</p>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Quick Links Section -->
+  <section class="py-16 lg:py-24 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl md:text-4xl font-bold text-neutral-900">
+          Enlaces Rapidos
+        </h2>
+        <p class="text-lg text-neutral-600 mt-4">
+          Encuentre rapidamente lo que esta buscando.
+        </p>
+      </div>
+
+      <div class="flex flex-wrap justify-center gap-4">
+        {quickLinks.map((link) => (
+          <a
+            href={link.href}
+            class="bg-neutral-100 hover:bg-primary-100 text-neutral-700 hover:text-primary-700 px-6 py-3 rounded-full font-medium transition-colors no-underline"
+          >
+            {link.label}
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="py-16 lg:py-24 bg-primary-600 text-white">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="text-3xl md:text-4xl font-bold mb-4">
+        Listo para Comenzar?
+      </h2>
+      <p class="text-lg text-primary-100 mb-8 max-w-2xl mx-auto">
+        Llame hoy para una consulta gratuita. Estamos aqui para responder sus preguntas.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a
+          href="tel:+19729002488"
+          class="inline-flex items-center justify-center gap-2 bg-white text-primary-600 px-8 py-4 rounded-lg font-semibold hover:bg-primary-50 transition-colors no-underline"
+        >
+          <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+          </svg>
+          Llamar Ahora
+        </a>
+        <a
+          href="mailto:hello@prosperahealthcare.com"
+          class="inline-flex items-center justify-center gap-2 bg-transparent border-2 border-white text-white px-8 py-4 rounded-lg font-semibold hover:bg-white/10 transition-colors no-underline"
+        >
+          <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+          </svg>
+          Enviar Correo
+        </a>
+      </div>
+    </div>
+  </section>
 </BaseLayout>

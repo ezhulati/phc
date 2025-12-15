@@ -1,20 +1,17 @@
 ---
 /**
- * Spanish Careers page - with hero section
+ * Spanish Careers page - rebuilt with proper Astro components
  */
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import Breadcrumbs from '@/components/common/Breadcrumbs.astro';
+import Button from '@/components/ui/Button.astro';
 import { generateWebPageSchema } from '@/lib/utils/schema';
-import { getPageBySlug } from '@/lib/utils/get-page-data';
-
-const pageData = getPageBySlug('careers');
 
 const title = 'Carreras';
-const content = pageData?.content || '';
 const canonical = 'https://prosperahealthcare.com/es/carreras/';
 
 const schema = generateWebPageSchema(
-  { title, content, uri: '/es/carreras/', date: pageData?.date || '', modified: pageData?.modified || '' },
+  { title, content: '', uri: '/es/carreras/', date: '', modified: '' },
   canonical
 );
 
@@ -22,16 +19,79 @@ const breadcrumbs = [
   { name: 'Inicio', href: '/es/' },
   { name: 'Carreras', href: '/es/carreras/' },
 ];
+
+// Benefits data
+const benefits = [
+  {
+    icon: 'clock',
+    title: 'Trabajo Flexible',
+    description: 'Establezca su propio horario y trabaje en el area que prefiera. Ofrecemos horarios de dia, tarde y fin de semana.',
+  },
+  {
+    icon: 'heart',
+    title: 'Salud y Bienestar',
+    description: 'Seguro de salud, dental y vision integral para empleados de tiempo completo y sus familias.',
+  },
+  {
+    icon: 'book',
+    title: 'Aprendizaje Continuo',
+    description: 'Supervision pagada, desarrollo profesional y oportunidades para obtener nuevas certificaciones.',
+  },
+  {
+    icon: 'dollar',
+    title: 'Compensacion Competitiva',
+    description: 'Salarios competitivos con bonos por rendimiento, reembolso de millaje y PTO pagado.',
+  },
+];
+
+// Job openings
+const jobs = [
+  {
+    title: 'Analista de Comportamiento Certificado (BCBA)',
+    location: 'Texas (Remoto + En Persona)',
+    type: 'Tiempo Completo / Medio Tiempo',
+    description: 'Unase a nuestro equipo clinico para supervisar programas de terapia ABA, realizar evaluaciones y guiar a los RBTs en la entrega de intervencion de calidad.',
+    requirements: [
+      'Certificacion BCBA activa',
+      'Licencia de Texas LBA o elegibilidad',
+      'Experiencia con poblacion pediatrica de autismo',
+      'Fuertes habilidades de comunicacion',
+    ],
+    link: 'https://www.indeed.com/cmp/Prospera-Healthcare/jobs',
+  },
+  {
+    title: 'Tecnico de Comportamiento Registrado (RBT)',
+    location: 'North Texas, San Antonio, El Paso',
+    type: 'Tiempo Completo / Medio Tiempo',
+    description: 'Proporcione terapia ABA 1:1 a ninos con autismo en sus hogares. Entrene a familias e implemente planes de tratamiento bajo supervision de BCBA.',
+    requirements: [
+      'Diploma de preparatoria o equivalente',
+      'Certificacion RBT o disposicion para obtenerla',
+      'Transporte confiable',
+      'Pasion por trabajar con ninos',
+    ],
+    link: 'https://www.indeed.com/cmp/Prospera-Healthcare/jobs',
+  },
+];
+
+// Company values
+const values = [
+  { title: 'Alianza', description: 'Colaboramos con familias para lograr los mejores resultados.' },
+  { title: 'Progreso', description: 'Celebramos cada paso adelante, por pequeno que sea.' },
+  { title: 'Perseverancia', description: 'Nunca nos rendimos ante los desafios.' },
+  { title: 'Juego', description: 'El aprendizaje debe ser divertido y atractivo.' },
+];
 ---
 
 <BaseLayout
   title={title}
-  description="Únase a nuestro equipo en Prospera Healthcare. Estamos contratando BCBAs, RBTs y técnicos de comportamiento en todo Texas."
+  description="Unase a Prospera Healthcare. Estamos contratando BCBAs, RBTs y tecnicos de comportamiento en todo Texas."
   canonical={canonical}
   schema={schema}
+  alternateLanguages={[{ hreflang: 'en', href: 'https://prosperahealthcare.com/careers/' }]}
 >
   <!-- Hero Section -->
-  <section class="relative min-h-[400px] lg:min-h-[450px] text-white overflow-hidden">
+  <section class="relative min-h-[500px] lg:min-h-[550px] text-white overflow-hidden">
     <div class="absolute inset-0">
       <img
         src="/images/wp/AdobeStock_799881079.jpeg"
@@ -40,25 +100,177 @@ const breadcrumbs = [
       />
       <div class="absolute inset-0 bg-gradient-to-r from-primary-900/90 via-primary-800/80 to-primary-700/60"></div>
     </div>
-    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-20 flex items-center min-h-[400px] lg:min-h-[450px]">
-      <div>
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24 flex items-center min-h-[500px] lg:min-h-[550px]">
+      <div class="max-w-2xl">
         <div class="mb-6">
           <Breadcrumbs items={breadcrumbs} />
         </div>
-        <h1 class="text-4xl md:text-5xl font-bold leading-tight mb-4 drop-shadow-lg text-white">
-          {title}
+        <span class="text-primary-300 font-semibold text-sm uppercase tracking-wider">Unase a Nuestro Equipo</span>
+        <h1 class="text-4xl md:text-5xl font-bold leading-tight mt-2 mb-4 drop-shadow-lg">
+          Transforme Vidas a Traves de Terapia ABA Innovadora
         </h1>
-        <p class="text-lg md:text-xl text-white/90 max-w-2xl drop-shadow">
-          Únase a nuestra misión de ayudar a los niños con autismo a prosperar. Estamos contratando en todo Texas.
+        <p class="text-lg text-white/90 max-w-xl drop-shadow mb-8">
+          Construya una carrera significativa ayudando a ninos con autismo a alcanzar su maximo potencial. Estamos creciendo en todo Texas.
         </p>
+        <Button href="#openings" variant="secondary" size="lg" class="!bg-white !text-primary-600 hover:!bg-primary-50">
+          Ver Posiciones Abiertas
+        </Button>
       </div>
     </div>
   </section>
 
-  <!-- Content Section -->
-  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
-    <article class="prose prose-lg max-w-none">
-      <div set:html={content} />
-    </article>
-  </div>
+  <!-- Benefits Section -->
+  <section class="py-16 lg:py-24 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <span class="text-primary-600 font-semibold text-sm uppercase tracking-wider">Por Que Prospera</span>
+        <h2 class="text-3xl md:text-4xl font-bold text-neutral-900 mt-2">
+          Beneficios y Ventajas
+        </h2>
+        <p class="text-lg text-neutral-600 mt-4 max-w-2xl mx-auto">
+          Invertimos en nuestro equipo porque ellos hacen posible nuestra mision.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+        {benefits.map((benefit) => (
+          <div class="bg-neutral-50 rounded-xl p-6 text-center">
+            <div class="w-14 h-14 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-4">
+              {benefit.icon === 'clock' && (
+                <svg class="w-7 h-7 text-primary-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+              )}
+              {benefit.icon === 'heart' && (
+                <svg class="w-7 h-7 text-primary-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                </svg>
+              )}
+              {benefit.icon === 'book' && (
+                <svg class="w-7 h-7 text-primary-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                </svg>
+              )}
+              {benefit.icon === 'dollar' && (
+                <svg class="w-7 h-7 text-primary-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+              )}
+            </div>
+            <h3 class="text-lg font-bold text-neutral-900 mb-2">{benefit.title}</h3>
+            <p class="text-neutral-600 text-sm">{benefit.description}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Job Openings Section -->
+  <section id="openings" class="py-16 lg:py-24 bg-neutral-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <span class="text-primary-600 font-semibold text-sm uppercase tracking-wider">Posiciones Abiertas</span>
+        <h2 class="text-3xl md:text-4xl font-bold text-neutral-900 mt-2">
+          Unase a Nuestro Equipo
+        </h2>
+        <p class="text-lg text-neutral-600 mt-4 max-w-2xl mx-auto">
+          Estamos buscando profesionales apasionados para unirse a nuestra creciente familia.
+        </p>
+      </div>
+
+      <div class="grid lg:grid-cols-2 gap-8">
+        {jobs.map((job) => (
+          <div class="bg-white rounded-xl p-8 shadow-sm border border-neutral-200">
+            <div class="flex flex-wrap gap-2 mb-4">
+              <span class="bg-primary-100 text-primary-700 text-xs font-semibold px-3 py-1 rounded-full">
+                {job.type}
+              </span>
+              <span class="bg-neutral-100 text-neutral-700 text-xs font-semibold px-3 py-1 rounded-full">
+                {job.location}
+              </span>
+            </div>
+            <h3 class="text-xl font-bold text-neutral-900 mb-3">{job.title}</h3>
+            <p class="text-neutral-600 mb-4">{job.description}</p>
+            <div class="mb-6">
+              <h4 class="font-semibold text-neutral-900 mb-2">Requisitos:</h4>
+              <ul class="space-y-1">
+                {job.requirements.map((req) => (
+                  <li class="flex items-start gap-2 text-sm text-neutral-600">
+                    <svg class="w-5 h-5 text-primary-500 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                    {req}
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <a
+              href={job.link}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex items-center gap-2 bg-primary-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-primary-700 transition-colors no-underline"
+            >
+              Aplicar en Indeed
+              <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+              </svg>
+            </a>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Values Section -->
+  <section class="py-16 lg:py-24 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid lg:grid-cols-2 gap-12 items-center">
+        <div>
+          <span class="text-primary-600 font-semibold text-sm uppercase tracking-wider">Nuestra Cultura</span>
+          <h2 class="text-3xl md:text-4xl font-bold text-neutral-900 mt-2 mb-6">
+            Valores Que Nos Guian
+          </h2>
+          <p class="text-lg text-neutral-600 mb-8">
+            En Prospera, vivimos nuestros valores cada dia. Creemos que cuando cuidamos a nuestro equipo, ellos pueden cuidar mejor a las familias que servimos.
+          </p>
+          <div class="grid sm:grid-cols-2 gap-4">
+            {values.map((value) => (
+              <div class="bg-neutral-50 rounded-lg p-4">
+                <h3 class="font-bold text-neutral-900 mb-1">{value.title}</h3>
+                <p class="text-sm text-neutral-600">{value.description}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+        <div>
+          <img
+            src="/images/wp/ABA-Therapy-Prospera-Healthcare_2-1.jpeg"
+            alt="Equipo de Prospera Healthcare"
+            class="rounded-xl shadow-lg w-full"
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="py-16 lg:py-24 bg-primary-600 text-white">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="text-3xl md:text-4xl font-bold mb-4">
+        No Ve una Posicion Adecuada?
+      </h2>
+      <p class="text-lg text-primary-100 mb-8 max-w-2xl mx-auto">
+        Siempre estamos buscando personas talentosas. Envie su curriculum y nos pondremos en contacto cuando tengamos una oportunidad adecuada.
+      </p>
+      <a
+        href="mailto:hr@prosperahealthcare.com"
+        class="inline-flex items-center gap-2 bg-white text-primary-600 px-8 py-4 rounded-lg font-semibold hover:bg-primary-50 transition-colors no-underline"
+      >
+        Enviar Curriculum
+        <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+        </svg>
+      </a>
+    </div>
+  </section>
 </BaseLayout>

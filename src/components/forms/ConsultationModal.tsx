@@ -21,9 +21,9 @@ export default function ConsultationModal({
   const modalRef = useRef<HTMLDivElement>(null);
   const triggerRef = useRef<HTMLButtonElement>(null);
 
-  const defaultTrigger = lang === 'es' ? 'Programar una Consulta' : 'Schedule a Consultation';
+  const defaultTrigger = lang === 'es' ? 'Programar una consulta' : 'Schedule a consultation';
   const closeLabel = lang === 'es' ? 'Cerrar' : 'Close';
-  const modalTitle = lang === 'es' ? 'Programe su Consulta Gratuita' : 'Schedule Your Free Consultation';
+  const modalTitle = lang === 'es' ? 'Programe su consulta gratuita' : 'Schedule your free consultation';
 
   // Close on escape key
   useEffect(() => {

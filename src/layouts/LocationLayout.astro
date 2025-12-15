@@ -1,15 +1,13 @@
 ---
 /**
- * Location Layout - Best-in-Class
- * ABA therapy location page with trust signals, testimonials, stats, and inline form
- * Based on top competitor analysis (Kyo, Behavior Frontiers)
+ * Location Layout - Clean Design
+ * Matches WordPress style with simple hero and clear sections
  */
 
 import BaseLayout from './BaseLayout.astro';
 import Breadcrumbs from '@/components/common/Breadcrumbs.astro';
 import Button from '@/components/ui/Button.astro';
 import FAQAccordion from '@/components/locations/FAQAccordion';
-import ContactForm from '@/components/forms/ContactForm';
 import InsuranceLogos from '@/components/home/InsuranceLogos.astro';
 import { getLangFromUrl, t } from '@/i18n/ui';
 import { generateLocalBusinessSchema, generateFAQSchema } from '@/lib/utils/schema';
@@ -58,72 +56,7 @@ const breadcrumbs = [
   { name: cityName, href: canonicalUrl },
 ];
 
-// Trust stats
-const trustStats = lang === 'es' ? [
-  { value: '500+', label: 'Familias Atendidas' },
-  { value: '50+', label: 'BCBAs y RBTs Certificados' },
-  { value: '98%', label: 'Satisfacción Familiar' },
-  { value: '24-48h', label: 'Tiempo de Respuesta' },
-] : [
-  { value: '500+', label: 'Families Served' },
-  { value: '50+', label: 'Certified BCBAs & RBTs' },
-  { value: '98%', label: 'Family Satisfaction' },
-  { value: '24-48h', label: 'Response Time' },
-];
-
-// Parent testimonials (localized)
-const testimonials = lang === 'es' ? [
-  {
-    quote: 'Prospera ha sido una bendición para nuestra familia. El progreso de nuestro hijo en solo 6 meses ha sido increíble.',
-    author: 'María G.',
-    location: 'Dallas, TX',
-    rating: 5
-  },
-  {
-    quote: 'El equipo es profesional, cariñoso y realmente se preocupa por cada niño. Altamente recomendado.',
-    author: 'Carlos R.',
-    location: 'Fort Worth, TX',
-    rating: 5
-  },
-  {
-    quote: 'La terapia a domicilio hizo toda la diferencia. Mi hijo se siente cómodo y ha progresado mucho.',
-    author: 'Ana L.',
-    location: 'Arlington, TX',
-    rating: 5
-  }
-] : [
-  {
-    quote: 'Prospera has been a blessing for our family. Our son\'s progress in just 6 months has been incredible.',
-    author: 'Maria G.',
-    location: 'Dallas, TX',
-    rating: 5
-  },
-  {
-    quote: 'The team is professional, caring, and truly invested in each child. Highly recommended.',
-    author: 'Carlos R.',
-    location: 'Fort Worth, TX',
-    rating: 5
-  },
-  {
-    quote: 'In-home therapy made all the difference. My son feels comfortable and has made tremendous progress.',
-    author: 'Ana L.',
-    location: 'Arlington, TX',
-    rating: 5
-  }
-];
-
-// Outcome statistics
-const outcomes = lang === 'es' ? [
-  { stat: '85%', description: 'de los niños muestran mejoras significativas en comunicación dentro de los primeros 3 meses' },
-  { stat: '90%', description: 'de las familias reportan reducción en comportamientos desafiantes' },
-  { stat: '78%', description: 'de los niños logran objetivos de habilidades de vida diaria' },
-] : [
-  { stat: '85%', description: 'of children show significant improvement in communication within first 3 months' },
-  { stat: '90%', description: 'of families report reduction in challenging behaviors' },
-  { stat: '78%', description: 'of children achieve daily living skills goals' },
-];
-
-// Default services (matching WordPress)
+// Services
 const defaultServices = lang === 'es' ? [
   {
     title: 'Terapia ABA 1:1 a Domicilio',
@@ -132,27 +65,27 @@ const defaultServices = lang === 'es' ? [
   },
   {
     title: 'Intervención Conductual Temprana',
-    description: 'Terapia intensiva para niños pequeños que construye bases de desarrollo cruciales para el éxito a largo plazo.',
+    description: 'Terapia intensiva para niños pequeños que construye bases de desarrollo cruciales.',
     image: '/images/wp/Behavior-Intervention.jpeg'
   },
   {
-    title: 'Evaluación Funcional del Comportamiento',
-    description: 'Análisis profundo de los disparadores de comportamiento para crear estrategias de intervención efectivas.',
+    title: 'Evaluación de Comportamiento',
+    description: 'Análisis profundo de los disparadores de comportamiento para crear estrategias efectivas.',
     image: '/images/wp/Behavior-Assessment.jpeg'
   },
   {
-    title: 'Evaluación de Habilidades (ABLLS/VB-MAPP)',
-    description: 'Seguimiento del progreso usando herramientas validadas para medir el crecimiento y ajustar objetivos.',
+    title: 'Evaluación de Habilidades',
+    description: 'Seguimiento del progreso usando herramientas ABLLS, AFLS y VB-MAPP.',
     image: '/images/wp/Skills-Assessment.jpeg'
   },
   {
-    title: 'Capacitación para Padres y Cuidadores',
-    description: 'Enseñamos a las familias técnicas de ABA para apoyar el progreso en casa entre sesiones.',
+    title: 'Capacitación para Padres',
+    description: 'Enseñamos a las familias técnicas de ABA para apoyar el progreso en casa.',
     image: '/images/wp/Family-Centered.jpeg'
   },
   {
-    title: 'Consultas y Evaluaciones Remotas',
-    description: 'Evaluaciones flexibles que brindan atención experta y apoyo consistente desde cualquier ubicación.',
+    title: 'Evaluaciones Remotas',
+    description: 'Evaluaciones flexibles que brindan atención experta desde cualquier ubicación.',
     image: '/images/wp/Remote-Assessments.jpeg'
   }
 ] : [
@@ -163,81 +96,73 @@ const defaultServices = lang === 'es' ? [
   },
   {
     title: 'Early Intervention Services',
-    description: 'Intensive therapy for young children that builds crucial developmental foundations for long-term success.',
+    description: 'Intensive therapy for young children that builds crucial developmental foundations.',
     image: '/images/wp/Behavior-Intervention.jpeg'
   },
   {
-    title: 'Functional Behavior Assessment',
-    description: 'In-depth analysis of behavior triggers to create effective, data-driven intervention strategies.',
+    title: 'Behavior Assessment',
+    description: 'In-depth analysis of behavior triggers to create effective intervention strategies.',
     image: '/images/wp/Behavior-Assessment.jpeg'
   },
   {
-    title: 'Skills Assessment (ABLLS/VB-MAPP)',
-    description: 'Track progress using validated tools to measure growth and adjust therapy goals.',
+    title: 'Skills Assessment',
+    description: 'Track progress using ABLLS, AFLS, and VB-MAPP tools to measure growth.',
     image: '/images/wp/Skills-Assessment.jpeg'
   },
   {
-    title: 'Parent & Caregiver Training',
-    description: 'We teach families ABA techniques to support progress at home between sessions.',
+    title: 'Parent Training',
+    description: 'We teach families ABA techniques to support progress at home.',
     image: '/images/wp/Family-Centered.jpeg'
   },
   {
-    title: 'Remote Consultations & Assessments',
-    description: 'Flexible assessments providing expert care and consistent support from any location.',
+    title: 'Remote Assessments',
+    description: 'Flexible assessments providing expert care from any location.',
     image: '/images/wp/Remote-Assessments.jpeg'
   }
 ];
 
-// Default FAQs
+// FAQs
 const defaultFaqs = lang === 'es' ? [
   {
     question: '¿Cómo es una sesión típica de terapia ABA?',
-    answer: `Las sesiones combinan enseñanza estructurada con aprendizaje en entorno natural. Típicamente duran de 2-6 horas e incluyen actividades basadas en el juego, práctica de rutinas diarias, desarrollo de habilidades sociales y ejercicios de comunicación. Nuestros terapeutas trabajan individualmente con su hijo en ${cityName} para abordar sus objetivos específicos.`
+    answer: `Las sesiones combinan enseñanza estructurada con aprendizaje en entorno natural. Típicamente duran de 2-6 horas e incluyen actividades basadas en el juego, práctica de rutinas diarias y ejercicios de comunicación. Nuestros terapeutas trabajan individualmente con su hijo en ${cityName}.`
   },
   {
-    question: '¿Cuánto cuesta la terapia ABA y qué cubre el seguro?',
-    answer: `La mayoría de los seguros en Texas cubren la terapia ABA para el autismo bajo la Ley de Seguros de Autismo de Texas (HB 1919). Aceptamos Aetna, United Healthcare, BCBS, Cigna, Superior Healthplan y más. Verificamos sus beneficios y le proporcionamos estimaciones de costos antes de comenzar.`
+    question: '¿Qué seguros aceptan?',
+    answer: `Aceptamos la mayoría de los seguros principales incluyendo Aetna, United Healthcare, Superior Healthplan, Cigna y Blue Cross Blue Shield. Verificamos beneficios y proporcionamos estimaciones de costos para las familias de ${cityName}.`
   },
   {
     question: '¿Cómo participan los padres en la terapia?',
-    answer: 'La participación de los padres impacta significativamente el éxito. Ofrecemos reuniones semanales del equipo, capacitación práctica en técnicas, actualizaciones regulares de logros y estrategias para apoyo entre sesiones.'
+    answer: 'Ofrecemos reuniones semanales del equipo, capacitación práctica en técnicas, actualizaciones regulares de logros y estrategias para apoyo entre sesiones.'
   },
   {
-    question: '¿Qué progreso podemos esperar y en cuánto tiempo?',
-    answer: 'Muchas familias reportan mejoras en comunicación dentro de los primeros 3 meses. El progreso varía según las necesidades de cada niño, pero típicamente vemos mejoras en habilidades de vida diaria, reducción de comportamientos desafiantes y mejor preparación escolar dentro de 6-12 meses.'
+    question: '¿Qué progreso podemos esperar?',
+    answer: 'Muchas familias reportan mejoras en comunicación dentro de los primeros meses, junto con progreso en habilidades de vida diaria y reducción de comportamientos desafiantes.'
   },
   {
-    question: '¿Por qué elegir terapia ABA a domicilio en lugar de en una clínica?',
-    answer: `La terapia a domicilio en ${cityName} permite que su hijo aprenda en su entorno natural, lo que mejora la generalización de habilidades. Los padres pueden observar y participar activamente, y eliminamos el estrés y tiempo del transporte.`
-  },
-  {
-    question: '¿Cómo sé si mi hijo califica para terapia ABA?',
-    answer: 'La terapia ABA es más efectiva para niños con un diagnóstico de Trastorno del Espectro Autista (TEA). Si su hijo tiene un diagnóstico o sospecha de autismo, contáctenos para una consulta gratuita donde evaluaremos si ABA es apropiado para sus necesidades.'
+    question: '¿Por qué elegir terapia ABA a domicilio?',
+    answer: `La terapia a domicilio en ${cityName} permite que su hijo aprenda en su entorno natural, reduciendo el estrés y promoviendo mejor generalización de habilidades.`
   }
 ] : [
   {
     question: 'What does a typical ABA therapy session look like?',
-    answer: `Sessions combine structured teaching with natural environment learning. They typically last 2-6 hours and include play-based activities, daily routine practice, social skill development, and communication exercises. Our therapists work one-on-one with your child in ${cityName} to address their specific goals.`
+    answer: `Sessions combine structured teaching with natural environment learning. They typically last 2-6 hours and include play-based activities, daily routine practice, and communication exercises. Our therapists work one-on-one with your child in ${cityName}.`
   },
   {
-    question: 'How much does ABA therapy cost and what does insurance cover?',
-    answer: `Most insurance plans in Texas cover ABA therapy for autism under the Texas Autism Insurance Act (HB 1919). We accept Aetna, United Healthcare, BCBS, Cigna, Superior Healthplan, and more. We verify your benefits and provide cost estimates before starting treatment.`
+    question: 'What insurance do you accept?',
+    answer: `We accept most major insurance including Aetna, United Healthcare, Superior Healthplan, Cigna, and Blue Cross Blue Shield. We verify benefits and provide cost estimates for ${cityName} families.`
   },
   {
     question: 'How are parents involved in the therapy?',
-    answer: 'Parent involvement significantly impacts success. We offer weekly team meetings, hands-on technique training, regular achievement updates, and strategies for between-session support.'
+    answer: 'We offer weekly team meetings, hands-on technique training, regular achievement updates, and strategies for between-session support.'
   },
   {
-    question: 'What progress can we expect and how soon?',
-    answer: 'Many families report improvements in communication within the first 3 months. Progress varies based on each child\'s needs, but we typically see improvements in daily living skills, reduction in challenging behaviors, and better school readiness within 6-12 months.'
+    question: 'What progress can we expect?',
+    answer: 'Many families report improvements in communication within the first few months, along with progress in daily living abilities and reduction in behavioral challenges.'
   },
   {
-    question: 'Why choose in-home ABA therapy over a clinic?',
-    answer: `In-home therapy in ${cityName} allows your child to learn in their natural environment, which improves skill generalization. Parents can observe and actively participate, and we eliminate travel time and stress.`
-  },
-  {
-    question: 'How do I know if my child qualifies for ABA therapy?',
-    answer: 'ABA therapy is most effective for children with an Autism Spectrum Disorder (ASD) diagnosis. If your child has a diagnosis or suspected autism, contact us for a free consultation where we\'ll assess whether ABA is appropriate for their needs.'
+    question: 'Why choose in-home ABA therapy?',
+    answer: `In-home therapy in ${cityName} allows your child to learn in their natural environment, reducing stress and promoting better skill generalization.`
   }
 ];
 
@@ -253,20 +178,6 @@ const faqs = location.locationFields?.faqs?.length > 0
 const localBusinessSchema = generateLocalBusinessSchema(location, canonicalUrl);
 const faqSchema = generateFAQSchema(faqs);
 const schemas = [localBusinessSchema, faqSchema];
-
-// Larger nearby locations pool (alphabetically sorted Texas cities we serve)
-const allTexasCities = [
-  'Abilene', 'Allen', 'Amarillo', 'Arlington', 'Austin', 'Baytown', 'Beaumont',
-  'Bedford', 'Brownsville', 'Bryan', 'Carrollton', 'Cedar Park', 'College Station',
-  'Conroe', 'Corpus Christi', 'Dallas', 'Denton', 'Edinburg', 'El Paso', 'Euless',
-  'Flower Mound', 'Fort Worth', 'Frisco', 'Galveston', 'Garland', 'Georgetown',
-  'Grand Prairie', 'Grapevine', 'Houston', 'Irving', 'Keller', 'Killeen', 'Laredo',
-  'League City', 'Lewisville', 'Lubbock', 'Mansfield', 'McAllen', 'McKinney',
-  'Mesquite', 'Midland', 'Mission', 'New Braunfels', 'North Richland Hills', 'Odessa',
-  'Pasadena', 'Pearland', 'Pflugerville', 'Plano', 'Port Arthur', 'Richardson',
-  'Round Rock', 'Rowlett', 'San Angelo', 'San Antonio', 'San Marcos', 'Southlake',
-  'Sugar Land', 'Temple', 'The Woodlands', 'Tyler', 'Waco', 'Wichita Falls'
-];
 ---
 
 <BaseLayout
@@ -276,97 +187,46 @@ const allTexasCities = [
   ogImage={ogImage}
   schema={schemas}
 >
-  <!-- Hero Section with Phone CTA -->
-  <section class="relative min-h-[500px] lg:min-h-[550px] text-white overflow-hidden">
+  <!-- Hero Section - Clean, like WordPress -->
+  <section class="relative min-h-[450px] lg:min-h-[500px] text-white overflow-hidden">
     <div class="absolute inset-0">
       <img
-        src="/images/wp/ABA-Therapy-Texas.jpeg"
+        src="/images/wp/ProsperaHealthcare.jpg"
         alt={`ABA Therapy in ${cityName}, Texas`}
         class="w-full h-full object-cover"
       />
-      <div class="absolute inset-0 bg-gradient-to-r from-primary-900/95 via-primary-800/85 to-primary-700/70"></div>
+      <div class="absolute inset-0 bg-gradient-to-r from-primary-900/90 via-primary-800/80 to-primary-700/60"></div>
     </div>
-    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16 flex items-center min-h-[500px] lg:min-h-[550px]">
-      <div class="w-full grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
-        <!-- Left: Content -->
-        <div>
-          <div class="mb-4">
-            <Breadcrumbs items={breadcrumbs} />
-          </div>
-
-          <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold leading-tight mb-4 drop-shadow-lg text-white">
-            {lang === 'es' ? `Terapia ABA a Domicilio en ${cityName}` : `In-Home ABA Therapy in ${cityName}`}
-          </h1>
-
-          <p class="text-lg text-white/90 max-w-xl mb-6 drop-shadow">
-            {lang === 'es'
-              ? `Terapia ABA personalizada basada en evidencia, llevada directamente a su hogar en ${cityName}. Ayudamos a niños con autismo a alcanzar su máximo potencial.`
-              : `Evidence-based, personalized ABA therapy delivered directly to your home in ${cityName}. We help children with autism reach their full potential.`}
-          </p>
-
-          <!-- Phone CTA (prominent per best practices) -->
-          <div class="flex flex-wrap items-center gap-4 mb-6">
-            <a
-              href="tel:9729002488"
-              class="inline-flex items-center px-5 py-3 bg-white text-primary-600 rounded-lg font-bold hover:bg-primary-50 transition-colors"
-            >
-              <svg class="w-5 h-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-              </svg>
-              (972) 900-2488
-            </a>
-            <span class="text-white/80 text-sm">
-              {lang === 'es' ? 'Llamada gratuita • Respuesta en 24h' : 'Free call • 24h response'}
-            </span>
-          </div>
-
-          <!-- Trust badges (inline) -->
-          <div class="flex flex-wrap gap-4 text-sm">
-            <span class="inline-flex items-center px-3 py-1 bg-white/20 rounded-full">
-              <svg class="w-4 h-4 mr-1.5 text-green-300" fill="currentColor" viewBox="0 0 20 20">
-                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
-              </svg>
-              {lang === 'es' ? 'Licenciado en Texas' : 'Texas Licensed'}
-            </span>
-            <span class="inline-flex items-center px-3 py-1 bg-white/20 rounded-full">
-              <svg class="w-4 h-4 mr-1.5 text-green-300" fill="currentColor" viewBox="0 0 20 20">
-                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
-              </svg>
-              {lang === 'es' ? 'BCBAs Certificados' : 'Board Certified BCBAs'}
-            </span>
-            <span class="inline-flex items-center px-3 py-1 bg-white/20 rounded-full">
-              <svg class="w-4 h-4 mr-1.5 text-green-300" fill="currentColor" viewBox="0 0 20 20">
-                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
-              </svg>
-              {lang === 'es' ? 'Seguro Aceptado' : 'Insurance Accepted'}
-            </span>
-          </div>
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-20 flex items-center min-h-[450px] lg:min-h-[500px]">
+      <div class="max-w-2xl">
+        <div class="mb-6">
+          <Breadcrumbs items={breadcrumbs} />
         </div>
 
-        <!-- Right: Quick Contact Form Card -->
-        <div class="bg-white rounded-2xl shadow-2xl p-6 lg:p-8">
-          <h2 class="text-xl font-bold text-neutral-900 mb-2">
-            {lang === 'es' ? 'Solicite una Consulta Gratuita' : 'Request a Free Consultation'}
-          </h2>
-          <p class="text-neutral-600 text-sm mb-4">
-            {lang === 'es' ? 'Complete el formulario y le contactaremos en 24 horas.' : 'Fill out the form and we\'ll contact you within 24 hours.'}
-          </p>
-          <ContactForm client:visible lang={lang} />
-        </div>
-      </div>
-    </div>
-  </section>
+        <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6 drop-shadow-lg text-white">
+          {lang === 'es' ? `Terapia ABA en ${cityName}` : `ABA Therapy in ${cityName}`}
+        </h1>
 
-  <!-- Trust Stats Bar -->
-  <section class="bg-primary-600 py-6">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
-        {trustStats.map((stat) => (
-          <div>
-            <div class="text-3xl md:text-4xl font-bold text-white">{stat.value}</div>
-            <div class="text-primary-100 text-sm">{stat.label}</div>
-          </div>
-        ))}
+        <p class="text-lg md:text-xl text-white/90 max-w-xl mb-8 drop-shadow">
+          {lang === 'es'
+            ? `Terapia ABA personalizada a domicilio para apoyar el crecimiento y desarrollo de su hijo en ${cityName}.`
+            : `Personalized in-home ABA therapy to support your child's growth and development in ${cityName}.`}
+        </p>
+
+        <div class="flex flex-wrap gap-4">
+          <Button href={lang === 'es' ? '/es/contacto/' : '/contact/'} size="lg">
+            {lang === 'es' ? 'Programar Consulta' : 'Schedule Consultation'}
+          </Button>
+          <a
+            href="tel:9729002488"
+            class="inline-flex items-center justify-center px-6 py-3 text-lg font-semibold text-white border-2 border-white rounded-lg hover:bg-white hover:text-primary-600 transition-colors"
+          >
+            <svg class="w-5 h-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+            </svg>
+            (972) 900-2488
+          </a>
+        </div>
       </div>
     </div>
   </section>
@@ -377,87 +237,24 @@ const allTexasCities = [
   <!-- Main Content -->
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
 
-    <!-- Intro Section with Credentials -->
+    <!-- Intro Section -->
     <section class="mb-16">
-      <div class="grid lg:grid-cols-3 gap-8">
-        <div class="lg:col-span-2">
-          <h2 class="text-2xl md:text-3xl font-bold text-neutral-900 mb-6">
-            {lang === 'es' ? `Su Socio de Confianza para Terapia ABA en ${cityName}` : `Your Trusted Partner for ABA Therapy in ${cityName}`}
-          </h2>
-          <div class="prose prose-lg text-neutral-600">
-            <p>
-              {lang === 'es'
-                ? `Prospera Healthcare ofrece terapia ABA clínicamente comprobada directamente en su hogar en ${cityName}. Nuestro enfoque basado en evidencia ayuda a niños con autismo a desarrollar habilidades de comunicación, sociales y de vida diaria en su entorno natural.`
-                : `Prospera Healthcare delivers clinically-proven ABA therapy directly to your home in ${cityName}. Our evidence-based approach helps children with autism develop communication, social, and daily living skills in their natural environment.`}
-            </p>
-            <p>
-              {lang === 'es'
-                ? 'Cumplimos con todos los requisitos de licenciatura de Texas bajo la Junta de Examinadores de Analistas de Comportamiento (TBAE). Nuestro equipo incluye Analistas de Comportamiento Certificados (BCBAs) que diseñan y supervisan todos los programas, y Técnicos de Comportamiento Registrados (RBTs) que proporcionan terapia directa.'
-                : 'We comply with all Texas licensing requirements under the Texas Behavioral Health Executive Council. Our team includes Board Certified Behavior Analysts (BCBAs) who design and supervise all programs, and Registered Behavior Technicians (RBTs) providing direct therapy.'}
-            </p>
-          </div>
+      <div class="max-w-3xl">
+        <h2 class="text-2xl md:text-3xl font-bold text-neutral-900 mb-6">
+          {lang === 'es' ? 'Su Socio en el Viaje de Su Hijo' : 'Your Partner in Your Child\'s Journey'}
+        </h2>
+        <div class="prose prose-lg text-neutral-600">
+          <p>
+            {lang === 'es'
+              ? `Prospera Healthcare ofrece terapia ABA clínicamente comprobada directamente en su hogar en ${cityName}. Nuestro equipo incluye Analistas de Comportamiento Certificados (BCBAs) que diseñan y supervisan todos los programas, y Técnicos de Comportamiento Registrados (RBTs) que proporcionan terapia directa.`
+              : `Prospera Healthcare offers clinically-proven ABA therapy directly to your home in ${cityName}. Our team includes Board Certified Behavior Analysts (BCBAs) who design and supervise all programs, and Registered Behavior Technicians (RBTs) providing direct therapy.`}
+          </p>
+          <p>
+            {lang === 'es'
+              ? 'La investigación indica que los niños progresan más con 20-40 horas de terapia por semana. Trabajamos con su familia para determinar la intensidad óptima para las necesidades únicas de su hijo.'
+              : 'Research indicates children make the most progress with 20-40 hours of therapy per week. We work with your family to determine the optimal intensity for your child\'s unique needs.'}
+          </p>
         </div>
-
-        <!-- Credentials Card -->
-        <div class="bg-primary-50 rounded-2xl p-6 border border-primary-100">
-          <h3 class="font-bold text-neutral-900 mb-4">
-            {lang === 'es' ? 'Nuestras Credenciales' : 'Our Credentials'}
-          </h3>
-          <ul class="space-y-3">
-            <li class="flex items-start">
-              <svg class="w-5 h-5 text-primary-500 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
-              </svg>
-              <span class="text-neutral-700">
-                {lang === 'es' ? 'BCBAs con Licencia Estatal de Texas' : 'Texas State Licensed BCBAs'}
-              </span>
-            </li>
-            <li class="flex items-start">
-              <svg class="w-5 h-5 text-primary-500 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
-              </svg>
-              <span class="text-neutral-700">
-                {lang === 'es' ? 'RBTs Capacitados y Supervisados' : 'Trained & Supervised RBTs'}
-              </span>
-            </li>
-            <li class="flex items-start">
-              <svg class="w-5 h-5 text-primary-500 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
-              </svg>
-              <span class="text-neutral-700">
-                {lang === 'es' ? 'Cumple con Ley de Seguros HB 1919' : 'TX Autism Insurance Act Compliant'}
-              </span>
-            </li>
-            <li class="flex items-start">
-              <svg class="w-5 h-5 text-primary-500 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
-              </svg>
-              <span class="text-neutral-700">
-                {lang === 'es' ? 'Verificación de Antecedentes Completa' : 'Full Background Checks'}
-              </span>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </section>
-
-    <!-- Outcome Statistics -->
-    <section class="mb-16 bg-neutral-50 rounded-2xl p-8 lg:p-12">
-      <h2 class="text-2xl md:text-3xl font-bold text-neutral-900 mb-2 text-center">
-        {lang === 'es' ? 'Resultados que Hablan por Sí Mismos' : 'Results That Speak for Themselves'}
-      </h2>
-      <p class="text-neutral-600 text-center mb-8 max-w-2xl mx-auto">
-        {lang === 'es'
-          ? 'Basado en datos de progreso de familias en nuestros programas de terapia ABA.'
-          : 'Based on progress data from families in our ABA therapy programs.'}
-      </p>
-      <div class="grid md:grid-cols-3 gap-8">
-        {outcomes.map((outcome) => (
-          <div class="text-center">
-            <div class="text-4xl md:text-5xl font-bold text-primary-500 mb-2">{outcome.stat}</div>
-            <p class="text-neutral-600">{outcome.description}</p>
-          </div>
-        ))}
       </div>
     </section>
 
@@ -483,35 +280,7 @@ const allTexasCities = [
               <h3 class="text-lg font-semibold text-neutral-900 mb-2">
                 {service.title}
               </h3>
-              <p class="text-neutral-600 text-sm">{service.description}</p>
-            </div>
-          </div>
-        ))}
-      </div>
-    </section>
-
-    <!-- Testimonials Section -->
-    <section class="mb-16">
-      <h2 class="text-2xl md:text-3xl font-bold text-neutral-900 mb-8 text-center">
-        {lang === 'es' ? 'Lo que Dicen las Familias' : 'What Families Are Saying'}
-      </h2>
-      <div class="grid md:grid-cols-3 gap-6">
-        {testimonials.map((testimonial) => (
-          <div class="bg-white border border-neutral-200 rounded-xl p-6 hover:shadow-lg transition-shadow">
-            <!-- Stars -->
-            <div class="flex mb-3">
-              {[...Array(testimonial.rating)].map(() => (
-                <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
-                  <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                </svg>
-              ))}
-            </div>
-            <blockquote class="text-neutral-700 mb-4 italic">
-              "{testimonial.quote}"
-            </blockquote>
-            <div class="text-sm">
-              <span class="font-semibold text-neutral-900">{testimonial.author}</span>
-              <span class="text-neutral-500"> • {testimonial.location}</span>
+              <p class="text-neutral-600">{service.description}</p>
             </div>
           </div>
         ))}
@@ -519,53 +288,48 @@ const allTexasCities = [
     </section>
 
     <!-- How It Works Section -->
-    <section class="mb-16 bg-primary-50 rounded-2xl p-8 lg:p-12">
+    <section class="mb-16 bg-neutral-50 rounded-2xl p-8 lg:p-12">
       <h2 class="text-2xl md:text-3xl font-bold text-neutral-900 mb-8 text-center">
-        {lang === 'es' ? 'Cómo Comenzar' : 'How to Get Started'}
+        {lang === 'es' ? 'Cómo Funciona' : 'How It Works'}
       </h2>
-      <div class="grid md:grid-cols-4 gap-6">
+      <div class="grid md:grid-cols-3 gap-8">
         <div class="text-center">
-          <div class="w-14 h-14 mx-auto mb-4 bg-primary-500 rounded-full flex items-center justify-center">
-            <span class="text-xl font-bold text-white">1</span>
+          <div class="w-16 h-16 mx-auto mb-4 bg-primary-500 rounded-full flex items-center justify-center">
+            <span class="text-2xl font-bold text-white">1</span>
           </div>
-          <h3 class="font-semibold text-neutral-900 mb-2">
-            {lang === 'es' ? 'Contacto Inicial' : 'Initial Contact'}
+          <h3 class="text-lg font-semibold text-neutral-900 mb-2">
+            {lang === 'es' ? 'Consulta Gratuita' : 'Free Consultation'}
           </h3>
-          <p class="text-neutral-600 text-sm">
-            {lang === 'es' ? 'Llame o envíe un formulario para una consulta gratuita.' : 'Call or submit a form for a free consultation.'}
+          <p class="text-neutral-600">
+            {lang === 'es'
+              ? 'Contáctenos para discutir las necesidades de su hijo y conocer cómo podemos ayudar.'
+              : 'Contact us to discuss your child\'s needs and learn how we can help.'}
           </p>
         </div>
         <div class="text-center">
-          <div class="w-14 h-14 mx-auto mb-4 bg-primary-500 rounded-full flex items-center justify-center">
-            <span class="text-xl font-bold text-white">2</span>
+          <div class="w-16 h-16 mx-auto mb-4 bg-primary-500 rounded-full flex items-center justify-center">
+            <span class="text-2xl font-bold text-white">2</span>
           </div>
-          <h3 class="font-semibold text-neutral-900 mb-2">
-            {lang === 'es' ? 'Verificación de Seguro' : 'Insurance Verification'}
+          <h3 class="text-lg font-semibold text-neutral-900 mb-2">
+            {lang === 'es' ? 'Evaluación Integral' : 'Comprehensive Assessment'}
           </h3>
-          <p class="text-neutral-600 text-sm">
-            {lang === 'es' ? 'Verificamos su cobertura y explicamos los beneficios.' : 'We verify your coverage and explain your benefits.'}
+          <p class="text-neutral-600">
+            {lang === 'es'
+              ? 'Nuestros BCBAs evalúan las fortalezas y necesidades únicas de su hijo.'
+              : 'Our BCBAs assess your child\'s unique strengths and needs.'}
           </p>
         </div>
         <div class="text-center">
-          <div class="w-14 h-14 mx-auto mb-4 bg-primary-500 rounded-full flex items-center justify-center">
-            <span class="text-xl font-bold text-white">3</span>
+          <div class="w-16 h-16 mx-auto mb-4 bg-primary-500 rounded-full flex items-center justify-center">
+            <span class="text-2xl font-bold text-white">3</span>
           </div>
-          <h3 class="font-semibold text-neutral-900 mb-2">
-            {lang === 'es' ? 'Evaluación' : 'Assessment'}
+          <h3 class="text-lg font-semibold text-neutral-900 mb-2">
+            {lang === 'es' ? 'Plan Personalizado' : 'Personalized Plan'}
           </h3>
-          <p class="text-neutral-600 text-sm">
-            {lang === 'es' ? 'Nuestros BCBAs evalúan las necesidades de su hijo.' : 'Our BCBAs assess your child\'s unique needs.'}
-          </p>
-        </div>
-        <div class="text-center">
-          <div class="w-14 h-14 mx-auto mb-4 bg-primary-500 rounded-full flex items-center justify-center">
-            <span class="text-xl font-bold text-white">4</span>
-          </div>
-          <h3 class="font-semibold text-neutral-900 mb-2">
-            {lang === 'es' ? 'Comienza Terapia' : 'Therapy Begins'}
-          </h3>
-          <p class="text-neutral-600 text-sm">
-            {lang === 'es' ? 'Iniciamos terapia personalizada en su hogar.' : 'We start personalized therapy in your home.'}
+          <p class="text-neutral-600">
+            {lang === 'es'
+              ? 'Comenzamos la terapia ABA basada en evidencia adaptada a los objetivos de su hijo.'
+              : 'We begin evidence-based ABA therapy tailored to your child\'s goals.'}
           </p>
         </div>
       </div>
@@ -574,88 +338,61 @@ const allTexasCities = [
     <!-- FAQs Section -->
     <section class="mb-16">
       <h2 class="text-2xl md:text-3xl font-bold text-neutral-900 mb-8">
-        {lang === 'es' ? `Preguntas Frecuentes sobre Terapia ABA en ${cityName}` : `Frequently Asked Questions About ABA Therapy in ${cityName}`}
+        {lang === 'es' ? `Preguntas Frecuentes` : `Frequently Asked Questions`}
       </h2>
       <FAQAccordion client:visible faqs={faqs} lang={lang} />
     </section>
 
-    <!-- Nearby Locations (Extended) -->
-    <section class="mb-16">
-      <h2 class="text-2xl md:text-3xl font-bold text-neutral-900 mb-4">
-        {lang === 'es' ? 'Servimos Todo Texas' : 'We Serve All of Texas'}
-      </h2>
-      <p class="text-neutral-600 mb-8">
-        {lang === 'es'
-          ? `Además de ${cityName}, proporcionamos terapia ABA a domicilio en estas áreas:`
-          : `In addition to ${cityName}, we provide in-home ABA therapy in these areas:`}
-      </p>
-      <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3">
-        {allTexasCities.filter(city => city.toLowerCase() !== cityName.toLowerCase()).slice(0, 24).map((city) => {
-          const citySlug = city.toLowerCase().replace(/\s+/g, '-');
-          const cityHref = lang === 'es'
-            ? `/es/terapia-aba/texas/${citySlug}/`
-            : `/aba-therapy/texas/${citySlug}/`;
+    <!-- Nearby Locations -->
+    {nearbyLocations.length > 0 && (
+      <section class="mb-16">
+        <h2 class="text-2xl md:text-3xl font-bold text-neutral-900 mb-8">
+          {lang === 'es' ? 'También Servimos Áreas Cercanas' : 'We Also Serve Nearby Areas'}
+        </h2>
+        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+          {nearbyLocations.map((nearby) => {
+            const nearbyCity = nearby.locationFields?.cityName ||
+              nearby.slug.split('-').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
+            const nearbyHref = lang === 'es'
+              ? `/es/terapia-aba/texas/${nearby.slug}/`
+              : `/aba-therapy/texas/${nearby.slug}/`;
 
-          return (
-            <a
-              href={cityHref}
-              class="px-3 py-2 bg-neutral-50 rounded-lg text-neutral-700 hover:bg-primary-50 hover:text-primary-700 transition-colors no-underline text-center text-sm font-medium"
-            >
-              {city}
-            </a>
-          );
-        })}
-      </div>
-      <div class="mt-6 text-center">
-        <Button href={texasHref} variant="secondary">
-          {lang === 'es' ? 'Ver Todas las Ubicaciones en Texas' : 'View All Texas Locations'}
-        </Button>
-      </div>
-    </section>
+            return (
+              <a
+                href={nearbyHref}
+                class="px-4 py-3 bg-neutral-50 rounded-lg text-neutral-700 hover:bg-primary-50 hover:text-primary-700 transition-colors no-underline text-center font-medium"
+              >
+                {nearbyCity}
+              </a>
+            );
+          })}
+        </div>
+      </section>
+    )}
 
     <!-- CTA Section -->
-    <section class="bg-primary-600 rounded-2xl p-8 lg:p-12 text-white">
-      <div class="grid lg:grid-cols-2 gap-8 items-center">
-        <div>
-          <h2 class="text-2xl md:text-3xl font-bold mb-4">
-            {lang === 'es' ? `Comience la Terapia ABA en ${cityName} Hoy` : `Start ABA Therapy in ${cityName} Today`}
-          </h2>
-          <p class="text-primary-100 mb-6">
-            {lang === 'es'
-              ? 'Dé el primer paso hacia el éxito de su hijo. Programe una consulta gratuita y sin compromiso.'
-              : 'Take the first step toward your child\'s success. Schedule a free, no-obligation consultation.'}
-          </p>
-          <div class="flex flex-wrap gap-4">
-            <a
-              href="tel:9729002488"
-              class="inline-flex items-center px-6 py-3 bg-white text-primary-600 rounded-lg font-bold hover:bg-primary-50 transition-colors"
-            >
-              <svg class="w-5 h-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-              </svg>
-              (972) 900-2488
-            </a>
-            <Button href={lang === 'es' ? '/es/contacto/' : '/contact/'} variant="secondary" class="!text-white !border-white hover:!bg-white hover:!text-primary-600">
-              {lang === 'es' ? 'Enviar Mensaje' : 'Send Message'}
-            </Button>
-          </div>
-        </div>
-        <div class="text-center lg:text-right">
-          <div class="inline-block bg-white/10 rounded-xl p-6">
-            <p class="text-sm text-primary-100 mb-2">
-              {lang === 'es' ? 'Horario de atención' : 'Office Hours'}
-            </p>
-            <p class="font-semibold">
-              {lang === 'es' ? 'Lunes - Viernes: 8am - 6pm' : 'Monday - Friday: 8am - 6pm'}
-            </p>
-            <p class="text-sm text-primary-100 mt-4 mb-2">
-              {lang === 'es' ? '¿Prefiere email?' : 'Prefer email?'}
-            </p>
-            <a href="mailto:info@prosperahealthcare.com" class="font-semibold hover:text-primary-200 transition-colors">
-              info@prosperahealthcare.com
-            </a>
-          </div>
-        </div>
+    <section class="bg-primary-600 rounded-2xl p-8 lg:p-12 text-center text-white">
+      <h2 class="text-2xl md:text-3xl font-bold mb-4">
+        {lang === 'es' ? `Comience la Terapia ABA en ${cityName} Hoy` : `Start ABA Therapy in ${cityName} Today`}
+      </h2>
+      <p class="text-lg text-primary-100 max-w-2xl mx-auto mb-8">
+        {lang === 'es'
+          ? 'Contáctenos hoy para programar una consulta gratuita y conocer cómo podemos ayudar a su familia.'
+          : 'Contact us today to schedule a free consultation and learn how we can help your family.'}
+      </p>
+      <div class="flex flex-wrap justify-center gap-4">
+        <Button href={lang === 'es' ? '/es/contacto/' : '/contact/'} variant="secondary" size="lg" class="!text-white !border-white hover:!bg-white hover:!text-primary-600">
+          {lang === 'es' ? 'Programar Consulta' : 'Schedule Consultation'}
+        </Button>
+        <a
+          href="tel:9729002488"
+          class="inline-flex items-center justify-center px-6 py-3 text-lg font-semibold text-white hover:text-primary-100 transition-colors no-underline"
+        >
+          <svg class="w-5 h-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+          </svg>
+          (972) 900-2488
+        </a>
       </div>
     </section>
   </div>

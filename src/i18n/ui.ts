@@ -18,7 +18,7 @@ export const ui = {
     'nav.services': 'Services',
     'nav.careers': 'Careers',
     'nav.contact': 'Contact',
-    'nav.schedule': 'Schedule a Consultation',
+    'nav.schedule': 'Schedule a consultation',
 
     // Common - sentence case per Practical UI
     'common.readMore': 'Read more',
