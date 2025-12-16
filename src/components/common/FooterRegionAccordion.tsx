@@ -44,7 +44,7 @@ export default function FooterRegionAccordion({ region, cities, lang }: Props) {
         </a>
         {/* Chevron - only visible on mobile */}
         <svg
-          className={`w-4 h-4 text-neutral-400 transition-transform sm:hidden ${isOpen ? 'rotate-180' : ''}`}
+          className={`w-5 h-5 text-white transition-transform sm:hidden ${isOpen ? 'rotate-180' : ''}`}
           fill="none"
           viewBox="0 0 24 24"
           stroke="currentColor"
@@ -64,12 +64,12 @@ export default function FooterRegionAccordion({ region, cities, lang }: Props) {
           <li key={city.slug} className="flex items-center">
             <a
               href={`/aba-therapy/texas/${city.slug}/`}
-              className="py-1 px-0.5 text-xs text-neutral-400 hover:text-white transition-colors no-underline whitespace-nowrap"
+              className="py-1 px-1 text-xs text-neutral-300 hover:text-white transition-colors no-underline whitespace-nowrap"
             >
               {city.name}
             </a>
             {index < regionCities.length - 1 && (
-              <span className="text-neutral-600 select-none text-xs" aria-hidden="true">·</span>
+              <span className="text-neutral-500 select-none text-xs" aria-hidden="true">·</span>
             )}
           </li>
         ))}
