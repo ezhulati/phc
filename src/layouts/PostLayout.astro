@@ -75,20 +75,16 @@ const primaryCategory = post.categories?.nodes?.[0];
 
       <!-- Meta Info -->
       <div class="flex flex-wrap items-center gap-4 text-sm text-neutral-600">
-        {authorName && (
-          <div class="flex items-center gap-2">
-            {post.author?.node?.avatar?.url && (
-              <img
-                src={post.author.node.avatar.url}
-                alt={authorName}
-                class="w-8 h-8 rounded-full"
-                width="32"
-                height="32"
-              />
-            )}
-            <span>{t(lang, 'blog.author')} {authorName}</span>
-          </div>
-        )}
+        <div class="flex items-center gap-2">
+          <img
+            src={authorAvatar}
+            alt={authorName}
+            class="w-8 h-8 rounded-full object-cover"
+            width="32"
+            height="32"
+          />
+          <span>{t(lang, 'blog.author')} {authorName}</span>
+        </div>
 
         <time datetime={post.date} class="flex items-center gap-1">
           <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -140,25 +136,23 @@ const primaryCategory = post.categories?.nodes?.[0];
     )}
 
     <!-- Author Bio -->
-    {post.author?.node?.description && (
-      <div class="mt-8 p-6 bg-neutral-50 rounded-xl">
-        <div class="flex items-start gap-4">
-          {post.author.node.avatar?.url && (
-            <img
-              src={post.author.node.avatar.url}
-              alt={authorName}
-              class="w-16 h-16 rounded-full"
-              width="64"
-              height="64"
-            />
-          )}
-          <div>
-            <h3 class="font-semibold text-neutral-900">{authorName}</h3>
-            <p class="mt-1 text-sm text-neutral-600">{post.author.node.description}</p>
-          </div>
+    <div class="mt-8 p-6 bg-neutral-50 rounded-xl">
+      <div class="flex items-start gap-4">
+        <img
+          src={authorAvatar}
+          alt={authorName}
+          class="w-16 h-16 rounded-full object-cover"
+          width="64"
+          height="64"
+        />
+        <div>
+          <h3 class="font-semibold text-neutral-900">{authorName}</h3>
+          <p class="mt-1 text-sm text-neutral-600">
+            {post.author?.node?.description || 'Kyle Coddington is the founder of Prospera Healthcare, dedicated to providing quality ABA therapy services for children with autism.'}
+          </p>
         </div>
       </div>
-    )}
+    </div>
   </article>
 
   <!-- Related Posts -->
