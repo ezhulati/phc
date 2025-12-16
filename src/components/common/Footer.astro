@@ -12,6 +12,7 @@
 
 import { getLangFromUrl, t } from '@/i18n/ui';
 import cities from '@/data/cities.json';
+import FooterRegionAccordion from './FooterRegionAccordion';
 
 const lang = getLangFromUrl(Astro.url);
 const currentYear = new Date().getFullYear();
@@ -21,7 +22,7 @@ const footerSections = [
   {
     title: lang === 'es' ? 'Acerca de' : 'About',
     links: [
-      { label: t(lang, 'nav.about'), href: lang === 'es' ? '/es/acerca-de/' : '/about/' },
+      { label: t(lang, 'nav.about'), href: lang === 'es' ? '/es/about/' : '/about/' },
       { label: lang === 'es' ? 'Servicios' : 'Services', href: lang === 'es' ? '/es/servicios/' : '/services/' },
       { label: t(lang, 'nav.careers'), href: lang === 'es' ? '/es/carreras/' : '/careers/' },
       { label: t(lang, 'nav.contact'), href: lang === 'es' ? '/es/contacto/' : '/contact/' },
@@ -30,10 +31,10 @@ const footerSections = [
   {
     title: lang === 'es' ? 'Recursos' : 'Resources',
     links: [
-      { label: lang === 'es' ? '¿Qué es la terapia ABA?' : 'What is ABA therapy?', href: '/what-is-aba-therapy/' },
-      { label: lang === 'es' ? 'Beneficios de ABA' : 'Benefits of ABA', href: '/benefits-of-aba-therapy/' },
-      { label: lang === 'es' ? 'Costos y seguros' : 'Costs & insurance', href: '/aba-therapy/costs-insurance/' },
-      { label: lang === 'es' ? 'Consejos para padres' : 'Parenting tips', href: '/aba-therapy/parenting-tips/' },
+      { label: lang === 'es' ? '¿Qué es la terapia ABA?' : 'What is ABA therapy?', href: lang === 'es' ? '/es/what-is-aba-therapy/' : '/what-is-aba-therapy/' },
+      { label: lang === 'es' ? 'Beneficios de ABA' : 'Benefits of ABA', href: lang === 'es' ? '/es/benefits-of-aba-therapy/' : '/benefits-of-aba-therapy/' },
+      { label: lang === 'es' ? 'Costos y seguros' : 'Costs & insurance', href: lang === 'es' ? '/es/terapia-aba/costs-insurance/' : '/aba-therapy/costs-insurance/' },
+      { label: lang === 'es' ? 'Consejos para padres' : 'Parenting tips', href: lang === 'es' ? '/es/terapia-aba/parenting-tips/' : '/aba-therapy/parenting-tips/' },
     ],
   },
 ];
@@ -113,7 +114,7 @@ const socialLinks = [
               <li>
                 <a
                   href={link.href}
-                  class="flex items-center min-h-[40px] text-sm text-neutral-300 hover:text-white transition-colors no-underline"
+                  class="flex items-center min-h-[44px] text-sm text-neutral-300 hover:text-white transition-colors no-underline"
                 >
                   {link.label}
                 </a>
@@ -129,14 +130,14 @@ const socialLinks = [
           {lang === 'es' ? 'Contacto' : 'Contact'}
         </p>
         <address class="not-italic space-y-0">
-          <p class="min-h-[36px] flex items-center text-sm text-neutral-300">{cities.contact.address}</p>
-          <a href={`tel:${cities.contact.phone.replace(/[^0-9]/g, '')}`} class="flex items-center min-h-[40px] text-sm text-neutral-300 hover:text-white transition-colors no-underline">
+          <p class="min-h-[44px] flex items-center text-sm text-neutral-300">{cities.contact.address}</p>
+          <a href={`tel:${cities.contact.phone.replace(/[^0-9]/g, '')}`} class="flex items-center min-h-[44px] text-sm text-neutral-300 hover:text-white transition-colors no-underline">
             {cities.contact.phone}
           </a>
-          <a href={`mailto:${cities.contact.email}`} class="flex items-center min-h-[40px] text-sm text-neutral-300 hover:text-white transition-colors no-underline">
+          <a href={`mailto:${cities.contact.email}`} class="flex items-center min-h-[44px] text-sm text-neutral-300 hover:text-white transition-colors no-underline">
             {cities.contact.email}
           </a>
-          <p class="min-h-[36px] flex items-center text-sm text-neutral-400">{cities.contact.hours}</p>
+          <p class="min-h-[44px] flex items-center text-sm text-neutral-400">{cities.contact.hours}</p>
         </address>
       </div>
     </div>
@@ -147,36 +148,15 @@ const socialLinks = [
         {lang === 'es' ? 'Terapia ABA en Texas' : 'ABA Therapy in Texas'}
       </p>
 
-      <!-- Region Groups - responsive grid -->
-      <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      <!-- Region Groups - accordion on mobile, grid on desktop -->
+      <div class="sm:grid sm:grid-cols-2 lg:grid-cols-3 sm:gap-4">
         {cities.regions.map((region) => (
-          <div>
-            <p class="font-medium text-sm mb-2">
-              <a href={`/${region.slug}/`} class="text-primary-400 hover:text-primary-300 transition-colors no-underline inline-flex items-center gap-1">
-                {lang === 'es' ? region.nameEs : region.name}
-                <svg class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-                </svg>
-              </a>
-            </p>
-            <ul class="flex flex-wrap items-center gap-x-1 gap-y-0">
-              {cities.cities
-                .filter(city => city.region === region.slug)
-                .map((city, index, arr) => (
-                  <li class="flex items-center">
-                    <a
-                      href={`/aba-therapy/texas/${city.slug}/`}
-                      class="py-1 px-0.5 text-xs text-neutral-400 hover:text-white transition-colors no-underline whitespace-nowrap"
-                    >
-                      {city.name}
-                    </a>
-                    {index < arr.length - 1 && (
-                      <span class="text-neutral-600 select-none text-xs" aria-hidden="true">·</span>
-                    )}
-                  </li>
-                ))}
-            </ul>
-          </div>
+          <FooterRegionAccordion
+            client:visible
+            region={region}
+            cities={cities.cities}
+            lang={lang}
+          />
         ))}
       </div>
     </section>
@@ -195,7 +175,7 @@ const socialLinks = [
             <>
               <a
                 href={link.href}
-                class="py-2 px-2 text-xs text-neutral-400 hover:text-white transition-colors no-underline"
+                class="min-h-[44px] flex items-center px-2 text-xs text-neutral-400 hover:text-white transition-colors no-underline"
               >
                 {link.label}
               </a>
