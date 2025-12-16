@@ -36,7 +36,8 @@ const schema = generateArticleSchema(post, canonicalUrl);
 const readingTime = calculateReadingTime(post.content, lang === 'es' ? 'es' : 'en');
 const publishedDate = formatDate(post.date, lang === 'es' ? 'es' : 'en');
 const modifiedDate = post.modified ? formatDate(post.modified, lang === 'es' ? 'es' : 'en') : null;
-const authorName = post.author?.node?.name || 'Prospera Healthcare';
+const authorName = post.author?.node?.name || 'Kyle Coddington';
+const authorAvatar = post.author?.node?.avatar?.url || '/images/wp/Kyle-Coddington-Prospera-Healthcare.png';
 const primaryCategory = post.categories?.nodes?.[0];
 ---
 
