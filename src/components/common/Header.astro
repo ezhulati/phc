@@ -37,13 +37,13 @@ const ctaLabel = t(lang, 'nav.schedule');
         />
       </a>
 
-      <!-- Desktop Navigation -->
-      <nav class="hidden lg:flex items-center gap-8" aria-label="Main navigation">
+      <!-- Desktop Navigation (44px min touch targets per WCAG 2.1) -->
+      <nav class="hidden lg:flex items-center gap-6" aria-label="Main navigation">
         {navItems.map((item) => (
           <a
             href={item.href}
             class:list={[
-              'text-base font-medium no-underline transition-colors',
+              'text-base font-medium no-underline transition-colors min-h-[44px] flex items-center px-2',
               currentPath === item.href || currentPath.startsWith(item.href)
                 ? 'text-primary-600'
                 : 'text-neutral-700 hover:text-primary-600',
