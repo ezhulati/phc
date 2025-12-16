@@ -41,11 +41,11 @@ const { contact, regions } = cities;
 
         <div class="mb-8">
           <h3 class="text-lg font-bold text-primary-400 mb-4">{serviceAreasTitle}</h3>
-          <div class="flex flex-wrap gap-4">
+          <div class="flex flex-wrap gap-3">
             {regions.map((region) => (
               <a
                 href={`/${region.slug}/`}
-                class="px-4 py-2 bg-neutral-800 rounded-lg text-white hover:bg-primary-600 transition-colors no-underline"
+                class="px-4 min-h-[44px] flex items-center bg-neutral-800 rounded-lg text-white hover:bg-primary-600 transition-colors no-underline"
               >
                 {lang === 'es' ? region.nameEs : region.name}
               </a>

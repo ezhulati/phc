@@ -72,18 +72,18 @@ export default {
         sm: ['clamp(0.875rem, 0.825rem + 0.2vw, 1rem)', { lineHeight: '1.5' }],
         /* Body text (16-18px) */
         base: ['clamp(1rem, 0.95rem + 0.2vw, 1.125rem)', { lineHeight: '1.5' }],
-        /* H4, Card titles (18-22px) */
-        lg: ['clamp(1.125rem, 1rem + 0.5vw, 1.375rem)', { lineHeight: '1.35' }],
-        /* H3, Subsection headings (20-26px) */
-        xl: ['clamp(1.25rem, 1.1rem + 0.75vw, 1.625rem)', { lineHeight: '1.3', letterSpacing: '-0.01em' }],
-        /* H2, Section headings (24-32px) */
-        '2xl': ['clamp(1.5rem, 1.25rem + 1vw, 2rem)', { lineHeight: '1.25', letterSpacing: '-0.02em' }],
-        /* H1, Page titles (30-40px) */
-        '3xl': ['clamp(1.875rem, 1.5rem + 1.5vw, 2.5rem)', { lineHeight: '1.15', letterSpacing: '-0.02em' }],
-        /* Display text - hero sections (36-48px) */
-        '4xl': ['clamp(2.25rem, 1.75rem + 2vw, 3rem)', { lineHeight: '1.1', letterSpacing: '-0.03em' }],
-        /* Large display (40-56px) */
-        '5xl': ['clamp(2.5rem, 2rem + 2.5vw, 3.5rem)', { lineHeight: '1.05', letterSpacing: '-0.03em' }],
+        /* H4, Card titles (18-24px) */
+        lg: ['clamp(1.125rem, 1rem + 0.6vw, 1.5rem)', { lineHeight: '1.35' }],
+        /* H3, Subsection headings (22-30px) */
+        xl: ['clamp(1.375rem, 1.15rem + 1vw, 1.875rem)', { lineHeight: '1.3', letterSpacing: '-0.01em' }],
+        /* H2, Section headings (28-40px) */
+        '2xl': ['clamp(1.75rem, 1.4rem + 1.5vw, 2.5rem)', { lineHeight: '1.2', letterSpacing: '-0.02em' }],
+        /* H1, Page titles (32-48px) */
+        '3xl': ['clamp(2rem, 1.6rem + 2vw, 3rem)', { lineHeight: '1.15', letterSpacing: '-0.02em' }],
+        /* Page hero H1 (36-56px) */
+        '4xl': ['clamp(2.25rem, 1.8rem + 2.5vw, 3.5rem)', { lineHeight: '1.1', letterSpacing: '-0.03em' }],
+        /* Hero display (44-72px) */
+        '5xl': ['clamp(2.75rem, 2rem + 4vw, 4.5rem)', { lineHeight: '1.05', letterSpacing: '-0.03em' }],
       },
       /* Letter Spacing per Practical UI */
       letterSpacing: {
