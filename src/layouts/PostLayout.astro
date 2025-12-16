@@ -116,8 +116,20 @@ const primaryCategory = post.categories?.nodes?.[0];
       </figure>
     )}
 
-    <!-- Article Content -->
-    <div class="prose prose-lg max-w-4xl" set:html={post.content} />
+    <!-- Article Content - Practical UI Typography -->
+    <div class="prose prose-lg max-w-4xl
+      prose-headings:text-neutral-900 prose-headings:font-bold
+      prose-h2:text-2xl prose-h2:md:text-3xl prose-h2:mt-14 prose-h2:mb-6
+      prose-h3:text-xl prose-h3:md:text-2xl prose-h3:mt-10 prose-h3:mb-4
+      prose-h4:text-lg prose-h4:md:text-xl prose-h4:mt-8 prose-h4:mb-3
+      prose-p:text-neutral-700 prose-p:leading-relaxed prose-p:mb-5
+      prose-a:text-primary-600 prose-a:underline prose-a:underline-offset-2
+      prose-strong:text-neutral-900
+      prose-ul:my-5 prose-ol:my-5
+      prose-li:text-neutral-700 prose-li:mb-2 prose-li:marker:text-primary-500
+      prose-blockquote:border-l-4 prose-blockquote:border-primary-400 prose-blockquote:bg-neutral-50 prose-blockquote:py-4 prose-blockquote:px-6 prose-blockquote:rounded-r-lg
+      prose-img:rounded-xl
+    " set:html={post.content} />
 
     <!-- Tags -->
     {post.tags?.nodes && post.tags.nodes.length > 0 && (

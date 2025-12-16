@@ -35,7 +35,7 @@ const pages = [
   // ABA Therapy section
   { name: 'aba-therapy-index', path: '/aba-therapy/' },
   { name: 'aba-therapy-texas', path: '/aba-therapy/texas/' },
-  { name: 'aba-therapy-north-texas', path: '/aba-therapy/texas/north-texas/' },
+  { name: 'aba-therapy-flower-mound', path: '/aba-therapy/texas/flower-mound/' },
   { name: 'aba-therapy-san-antonio', path: '/aba-therapy/texas/san-antonio/' },
   { name: 'aba-therapy-el-paso', path: '/aba-therapy/texas/el-paso/' },
   { name: 'aba-therapy-dallas', path: '/aba-therapy/texas/dallas/' },

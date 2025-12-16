@@ -46,7 +46,7 @@ const title = lang === 'es' ? 'En este artículo' : 'In this article';
     >
       {title}
     </h2>
-    <ul class="space-y-2">
+    <ul class="space-y-0">
       {headings.map((heading) => (
         <li
           class:list={[
@@ -57,7 +57,7 @@ const title = lang === 'es' ? 'En este artículo' : 'In this article';
         >
           <a
             href={`#${heading.id}`}
-            class="toc-link block text-sm text-neutral-600 hover:text-primary-600 transition-colors py-1 no-underline border-l-2 border-transparent pl-3 -ml-3 hover:border-primary-500"
+            class="toc-link flex items-center min-h-[44px] text-sm text-neutral-600 hover:text-primary-600 transition-colors no-underline border-l-2 border-transparent pl-3 -ml-3 hover:border-primary-500"
             data-toc-link={heading.id}
           >
             {heading.text}

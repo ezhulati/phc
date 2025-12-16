@@ -62,7 +62,9 @@ const publishedDate = formatDate(post.date, lang === 'es' ? 'es' : 'en');
 const modifiedDate = post.modified ? formatDate(post.modified, lang === 'es' ? 'es' : 'en') : null;
 const authorName = post.author?.node?.name || 'Kyle Coddington';
 const authorBio = post.author?.node?.description || 'Kyle Coddington is the founder of Prospera Healthcare, dedicated to providing quality ABA therapy services for children with autism.';
-const authorAvatar = post.author?.node?.avatar?.url || '/images/wp/Kyle-Coddington-Prospera-Healthcare.png';
+// Always use local Kyle image for Kyle Coddington, or as fallback
+const kyleImage = '/images/wp/Kyle-Coddington-Prospera-Healthcare.png';
+const authorAvatar = (authorName === 'Kyle Coddington') ? kyleImage : (post.author?.node?.avatar?.url || kyleImage);
 const primaryCategory = post.categories?.nodes?.[0];
 ---
 
@@ -127,35 +129,53 @@ const primaryCategory = post.categories?.nodes?.[0];
     </header>
   ) : (
     <header class="bg-neutral-50 border-b border-neutral-200">
-      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-12">
-        <div class="mb-4">
-          <Breadcrumbs items={breadcrumbs} />
-        </div>
-        {primaryCategory && (
-          <a
-            href={`${lang === 'es' ? '/es/terapia-aba' : '/aba-therapy'}/${primaryCategory.slug}/`}
-            class="inline-flex items-center min-h-[44px] px-4 text-sm font-medium text-primary-700 bg-primary-100 rounded-full no-underline hover:bg-primary-200 transition-colors mb-4"
-          >
-            {primaryCategory.name}
-          </a>
-        )}
-        <h1 class="text-5xl font-bold text-neutral-900 leading-tight mb-6 text-balance">
-          {post.title}
-        </h1>
-        <div class="flex flex-wrap items-center gap-4 text-sm text-neutral-600">
-          <div class="flex items-center gap-3">
-            <img
-              src={authorAvatar}
-              alt={authorName}
-              class="w-10 h-10 rounded-full"
-              width="40"
-              height="40"
-            />
-            <div>
-              <div class="font-medium text-neutral-900">{authorName}</div>
-              <div class="text-neutral-500">{publishedDate} · {readingTime}</div>
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-12">
+        <div class="grid lg:grid-cols-[1fr,400px] gap-8 items-center">
+          <!-- Left: Content -->
+          <div>
+            <div class="mb-4">
+              <Breadcrumbs items={breadcrumbs} />
+            </div>
+            {primaryCategory && (
+              <a
+                href={`${lang === 'es' ? '/es/terapia-aba' : '/aba-therapy'}/${primaryCategory.slug}/`}
+                class="inline-flex items-center min-h-[44px] px-4 text-sm font-medium text-primary-700 bg-primary-100 rounded-full no-underline hover:bg-primary-200 transition-colors mb-4"
+              >
+                {primaryCategory.name}
+              </a>
+            )}
+            <h1 class="text-4xl lg:text-5xl font-bold text-neutral-900 leading-tight mb-6 text-balance">
+              {post.title}
+            </h1>
+            <div class="flex flex-wrap items-center gap-4 text-sm text-neutral-600">
+              <div class="flex items-center gap-3">
+                <img
+                  src={authorAvatar}
+                  alt={authorName}
+                  class="w-10 h-10 rounded-full"
+                  width="40"
+                  height="40"
+                />
+                <div>
+                  <div class="font-medium text-neutral-900">{authorName}</div>
+                  <div class="text-neutral-500">{publishedDate} · {readingTime}</div>
+                </div>
+              </div>
             </div>
           </div>
+          <!-- Right: Featured Image (desktop only) -->
+          {post.featuredImage?.node && (
+            <div class="hidden lg:block">
+              <img
+                src={post.featuredImage.node.sourceUrl}
+                alt={post.featuredImage.node.altText || post.title}
+                class="w-full h-auto rounded-xl object-cover"
+                width={post.featuredImage.node.mediaDetails?.width}
+                height={post.featuredImage.node.mediaDetails?.height}
+                loading="eager"
+              />
+            </div>
+          )}
         </div>
       </div>
     </header>
@@ -168,9 +188,9 @@ const primaryCategory = post.categories?.nodes?.[0];
       <!-- Article Content -->
       <article class="lg:col-span-8 xl:col-span-9">
 
-        <!-- Featured Image (default/minimal style) -->
+        <!-- Featured Image (mobile only - desktop shows in header) -->
         {heroStyle !== 'fullbleed' && post.featuredImage?.node && (
-          <figure class="mb-8 lg:mb-12 -mx-4 sm:mx-0">
+          <figure class="mb-8 -mx-4 sm:mx-0 lg:hidden">
             <img
               src={post.featuredImage.node.sourceUrl}
               alt={post.featuredImage.node.altText || post.title}
@@ -187,18 +207,18 @@ const primaryCategory = post.categories?.nodes?.[0];
           </figure>
         )}
 
-        <!-- Article Body -->
+        <!-- Article Body - Practical UI Typography -->
         <div
           id="article-content"
           class="article-content prose prose-lg max-w-none
             prose-headings:text-neutral-900 prose-headings:font-bold prose-headings:scroll-mt-24
-            prose-h2:text-2xl prose-h2:md:text-3xl prose-h2:mt-12 prose-h2:mb-6
-            prose-h3:text-xl prose-h3:md:text-2xl prose-h3:mt-8 prose-h3:mb-4
-            prose-h4:text-lg prose-h4:md:text-xl prose-h4:mt-6 prose-h4:mb-3
-            prose-p:text-neutral-700 prose-p:leading-relaxed prose-p:mb-6
+            prose-h2:text-2xl prose-h2:md:text-3xl prose-h2:mt-14 prose-h2:mb-6
+            prose-h3:text-xl prose-h3:md:text-2xl prose-h3:mt-10 prose-h3:mb-4
+            prose-h4:text-lg prose-h4:md:text-xl prose-h4:mt-8 prose-h4:mb-3
+            prose-p:text-neutral-700 prose-p:leading-relaxed prose-p:mb-5
             prose-a:text-primary-600 prose-a:font-medium prose-a:underline prose-a:underline-offset-2 hover:prose-a:text-primary-700
             prose-strong:text-neutral-900 prose-strong:font-semibold
-            prose-ul:my-6 prose-ol:my-6
+            prose-ul:my-5 prose-ol:my-5
             prose-li:text-neutral-700 prose-li:mb-2 prose-li:marker:text-primary-500
             prose-blockquote:border-l-4 prose-blockquote:border-primary-500 prose-blockquote:bg-primary-50 prose-blockquote:py-4 prose-blockquote:px-6 prose-blockquote:rounded-r-lg prose-blockquote:not-italic prose-blockquote:text-neutral-700
             prose-img:rounded-xl prose-img:mx-auto prose-img:shadow-md
