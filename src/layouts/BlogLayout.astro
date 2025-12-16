@@ -99,12 +99,12 @@ const primaryCategory = post.categories?.nodes?.[0];
         {primaryCategory && (
           <a
             href={`${lang === 'es' ? '/es/terapia-aba' : '/aba-therapy'}/${primaryCategory.slug}/`}
-            class="inline-block px-3 py-1 text-sm font-medium text-white bg-primary-500 rounded-full no-underline hover:bg-primary-600 transition-colors mb-4"
+            class="inline-flex items-center min-h-[44px] px-4 text-sm font-medium text-white bg-primary-500 rounded-full no-underline hover:bg-primary-600 transition-colors mb-4"
           >
             {primaryCategory.name}
           </a>
         )}
-        <h1 class="text-4xl font-bold text-white leading-tight mb-4 text-balance">
+        <h1 class="text-5xl font-bold text-white leading-tight mb-4 text-balance">
           {post.title}
         </h1>
         <div class="flex flex-wrap items-center gap-4 text-sm text-white/80">
@@ -134,12 +134,12 @@ const primaryCategory = post.categories?.nodes?.[0];
         {primaryCategory && (
           <a
             href={`${lang === 'es' ? '/es/terapia-aba' : '/aba-therapy'}/${primaryCategory.slug}/`}
-            class="inline-block px-3 py-1 text-sm font-medium text-primary-700 bg-primary-100 rounded-full no-underline hover:bg-primary-200 transition-colors mb-4"
+            class="inline-flex items-center min-h-[44px] px-4 text-sm font-medium text-primary-700 bg-primary-100 rounded-full no-underline hover:bg-primary-200 transition-colors mb-4"
           >
             {primaryCategory.name}
           </a>
         )}
-        <h1 class="text-4xl font-bold text-neutral-900 leading-tight mb-6 text-balance">
+        <h1 class="text-5xl font-bold text-neutral-900 leading-tight mb-6 text-balance">
           {post.title}
         </h1>
         <div class="flex flex-wrap items-center gap-4 text-sm text-neutral-600">
@@ -213,9 +213,9 @@ const primaryCategory = post.categories?.nodes?.[0];
         <!-- Tags -->
         {post.tags?.nodes && post.tags.nodes.length > 0 && (
           <div class="mt-12 pt-8 border-t border-neutral-200">
-            <h2 class="text-sm font-bold text-neutral-500 uppercase tracking-wider mb-4">
+            <h3 class="text-sm font-bold text-neutral-500 uppercase tracking-wider mb-4">
               {lang === 'es' ? 'Temas' : 'Topics'}
-            </h2>
+            </h3>
             <div class="flex flex-wrap gap-2">
               {post.tags.nodes.map((tag) => (
                 <span class="px-4 py-2 text-sm font-medium text-neutral-700 bg-neutral-100 rounded-full hover:bg-neutral-200 transition-colors">

@@ -51,14 +51,14 @@ const primaryCategory = post.categories?.nodes?.[0];
   author={authorName}
   schema={schema}
 >
-  <article class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+  <article class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
     <!-- Breadcrumbs -->
     <div class="mb-6">
       <Breadcrumbs items={breadcrumbs} />
     </div>
 
     <!-- Article Header -->
-    <header class="mb-8">
+    <header class="mb-8 max-w-4xl">
       {primaryCategory && (
         <a
           href={`${lang === 'es' ? '/es/terapia-aba' : '/aba-therapy'}/${primaryCategory.slug}/`}
@@ -68,7 +68,7 @@ const primaryCategory = post.categories?.nodes?.[0];
         </a>
       )}
 
-      <h1 class="text-4xl font-bold text-neutral-900 leading-tight mb-4">
+      <h1 class="text-5xl font-bold text-neutral-900 leading-tight mb-4">
         {post.title}
       </h1>
 
@@ -120,14 +120,14 @@ const primaryCategory = post.categories?.nodes?.[0];
     )}
 
     <!-- Article Content -->
-    <div class="prose prose-lg max-w-none" set:html={post.content} />
+    <div class="prose prose-lg max-w-4xl" set:html={post.content} />
 
     <!-- Tags -->
     {post.tags?.nodes && post.tags.nodes.length > 0 && (
       <div class="mt-8 pt-6 border-t border-neutral-200">
-        <h2 class="text-sm font-bold text-neutral-600 uppercase tracking-widest mb-3">
+        <h3 class="text-sm font-bold text-neutral-600 uppercase tracking-widest mb-3">
           {t(lang, 'blog.tags')}
-        </h2>
+        </h3>
         <div class="flex flex-wrap gap-2">
           {post.tags.nodes.map((tag) => (
             <span class="px-3 py-1 text-sm text-neutral-600 bg-neutral-100 rounded-full">

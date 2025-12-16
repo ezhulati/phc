@@ -57,7 +57,7 @@ const socialLinks = [
     <div class="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-4 lg:gap-12">
       <!-- Brand Column -->
       <div class="sm:col-span-2 lg:col-span-1">
-        <a href={lang === 'es' ? '/es/' : '/'} class="inline-block no-underline">
+        <a href={lang === 'es' ? '/es/' : '/'} class="inline-flex items-center min-h-[44px] no-underline">
           <img
             src="/images/brand/Prospera_Blue_Green.png"
             alt="Prospera Healthcare"
@@ -113,7 +113,7 @@ const socialLinks = [
               <li>
                 <a
                   href={link.href}
-                  class="block py-2 text-base text-neutral-200 hover:text-white transition-colors no-underline"
+                  class="flex items-center min-h-[44px] text-base text-neutral-200 hover:text-white transition-colors no-underline"
                 >
                   {link.label}
                 </a>
@@ -129,18 +129,14 @@ const socialLinks = [
           {lang === 'es' ? 'Contacto' : 'Contact'}
         </h3>
         <address class="not-italic space-y-0">
-          <p class="py-2 text-base text-neutral-200">{cities.contact.address}</p>
-          <p>
-            <a href={`tel:${cities.contact.phone.replace(/[^0-9]/g, '')}`} class="block py-2 text-base text-neutral-200 hover:text-white transition-colors no-underline">
-              {cities.contact.phone}
-            </a>
-          </p>
-          <p>
-            <a href={`mailto:${cities.contact.email}`} class="block py-2 text-base text-neutral-200 hover:text-white transition-colors no-underline">
-              {cities.contact.email}
-            </a>
-          </p>
-          <p class="py-2 text-base text-neutral-300">{cities.contact.hours}</p>
+          <p class="min-h-[44px] flex items-center text-base text-neutral-200">{cities.contact.address}</p>
+          <a href={`tel:${cities.contact.phone.replace(/[^0-9]/g, '')}`} class="flex items-center min-h-[44px] text-base text-neutral-200 hover:text-white transition-colors no-underline">
+            {cities.contact.phone}
+          </a>
+          <a href={`mailto:${cities.contact.email}`} class="flex items-center min-h-[44px] text-base text-neutral-200 hover:text-white transition-colors no-underline">
+            {cities.contact.email}
+          </a>
+          <p class="min-h-[44px] flex items-center text-base text-neutral-300">{cities.contact.hours}</p>
         </address>
       </div>
     </div>
@@ -155,14 +151,14 @@ const socialLinks = [
       <div class="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
         {cities.regions.map((region) => (
           <div>
-            <h4 class="font-medium text-base mb-3">
-              <a href={`/${region.slug}/`} class="text-primary-400 hover:text-primary-300 transition-colors no-underline inline-flex items-center gap-1">
+            <h3 class="font-medium text-base mb-3">
+              <a href={`/${region.slug}/`} class="min-h-[44px] text-primary-400 hover:text-primary-300 transition-colors no-underline inline-flex items-center gap-1">
                 {lang === 'es' ? region.nameEs : region.name}
                 <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
                 </svg>
               </a>
-            </h4>
+            </h3>
             <ul class="flex flex-wrap items-center gap-x-1 gap-y-0">
               {cities.cities
                 .filter(city => city.region === region.slug)
@@ -170,7 +166,7 @@ const socialLinks = [
                   <li class="flex items-center">
                     <a
                       href={`/aba-therapy/texas/${city.slug}/`}
-                      class="py-2 px-1 text-base text-neutral-300 hover:text-white transition-colors no-underline whitespace-nowrap"
+                      class="min-h-[44px] flex items-center px-1 text-base text-neutral-300 hover:text-white transition-colors no-underline whitespace-nowrap"
                     >
                       {city.name}
                     </a>
@@ -199,7 +195,7 @@ const socialLinks = [
             <>
               <a
                 href={link.href}
-                class="py-2 px-2 text-base text-neutral-300 hover:text-white transition-colors no-underline"
+                class="min-h-[44px] flex items-center px-2 text-base text-neutral-300 hover:text-white transition-colors no-underline"
               >
                 {link.label}
               </a>
