@@ -26,6 +26,7 @@ import RelatedPosts from '@/components/blog/RelatedPosts.astro';
 import { getLangFromUrl, t } from '@/i18n/ui';
 import { formatDate, calculateReadingTime } from '@/lib/utils/dates';
 import { generateArticleSchema } from '@/lib/utils/schema';
+import { decodeHtmlEntities } from '@/lib/utils/get-page-data';
 import type { WPPost } from '@/lib/graphql/types';
 
 interface Props {
@@ -46,14 +47,16 @@ const lang = getLangFromUrl(Astro.url);
 const homeLabel = t(lang, 'nav.home');
 const homeHref = lang === 'es' ? '/es/' : '/';
 
-const title = post.seo?.title || post.title;
+// Decode HTML entities in title
+const postTitle = decodeHtmlEntities(post.title);
+const title = post.seo?.title ? decodeHtmlEntities(post.seo.title) : postTitle;
 const description = post.seo?.metaDesc || post.excerpt?.replace(/<[^>]*>/g, '').slice(0, 160);
 const canonicalUrl = `https://prosperahealthcare.com/${post.slug}/`;
 const ogImage = post.seo?.opengraphImage?.sourceUrl || post.featuredImage?.node?.sourceUrl;
 
 const breadcrumbs = [
   { name: homeLabel, href: homeHref },
-  { name: post.title, href: `/${post.slug}/` },
+  { name: postTitle, href: `/${post.slug}/` },
 ];
 
 const schema = generateArticleSchema(post, canonicalUrl);
@@ -88,7 +91,7 @@ const primaryCategory = post.categories?.nodes?.[0];
       <div class="absolute inset-0">
         <img
           src={post.featuredImage.node.sourceUrl}
-          alt={post.featuredImage.node.altText || post.title}
+          alt={post.featuredImage.node.altText || postTitle}
           class="w-full h-full object-cover"
           loading="eager"
         />
@@ -107,7 +110,7 @@ const primaryCategory = post.categories?.nodes?.[0];
           </a>
         )}
         <h1 class="text-5xl font-bold text-white leading-tight mb-4 text-balance">
-          {post.title}
+          {postTitle}
         </h1>
         <div class="flex flex-wrap items-center gap-4 text-sm text-white/80">
           <div class="flex items-center gap-2">
@@ -145,7 +148,7 @@ const primaryCategory = post.categories?.nodes?.[0];
               </a>
             )}
             <h1 class="text-4xl lg:text-5xl font-bold text-neutral-900 leading-tight mb-6 text-balance">
-              {post.title}
+              {postTitle}
             </h1>
             <div class="flex flex-wrap items-center gap-4 text-sm text-neutral-600">
               <div class="flex items-center gap-3">
@@ -168,7 +171,7 @@ const primaryCategory = post.categories?.nodes?.[0];
             <div class="hidden lg:block">
               <img
                 src={post.featuredImage.node.sourceUrl}
-                alt={post.featuredImage.node.altText || post.title}
+                alt={post.featuredImage.node.altText || postTitle}
                 class="w-full h-auto rounded-xl object-cover"
                 width={post.featuredImage.node.mediaDetails?.width}
                 height={post.featuredImage.node.mediaDetails?.height}
@@ -183,17 +186,17 @@ const primaryCategory = post.categories?.nodes?.[0];
 
   <!-- Main Content Area -->
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-12">
-    <div class="lg:grid lg:grid-cols-12 lg:gap-12">
+    <div class="lg:grid lg:grid-cols-[1fr,400px] lg:gap-8">
 
       <!-- Article Content -->
-      <article class="lg:col-span-8 xl:col-span-9">
+      <article>
 
         <!-- Featured Image (mobile only - desktop shows in header) -->
         {heroStyle !== 'fullbleed' && post.featuredImage?.node && (
           <figure class="mb-8 -mx-4 sm:mx-0 lg:hidden">
             <img
               src={post.featuredImage.node.sourceUrl}
-              alt={post.featuredImage.node.altText || post.title}
+              alt={post.featuredImage.node.altText || postTitle}
               class="w-full h-auto sm:rounded-xl"
               width={post.featuredImage.node.mediaDetails?.width}
               height={post.featuredImage.node.mediaDetails?.height}
@@ -212,9 +215,9 @@ const primaryCategory = post.categories?.nodes?.[0];
           id="article-content"
           class="article-content prose prose-lg max-w-none
             prose-headings:text-neutral-900 prose-headings:font-bold prose-headings:scroll-mt-24
-            prose-h2:text-2xl prose-h2:md:text-3xl prose-h2:mt-14 prose-h2:mb-6
-            prose-h3:text-xl prose-h3:md:text-2xl prose-h3:mt-10 prose-h3:mb-4
-            prose-h4:text-lg prose-h4:md:text-xl prose-h4:mt-8 prose-h4:mb-3
+            prose-h2:text-2xl prose-h2:md:text-3xl prose-h2:mt-14 prose-h2:mb-8
+            prose-h3:text-xl prose-h3:md:text-2xl prose-h3:mt-10 prose-h3:mb-5
+            prose-h4:text-lg prose-h4:md:text-xl prose-h4:mt-8 prose-h4:mb-4
             prose-p:text-neutral-700 prose-p:leading-relaxed prose-p:mb-5
             prose-a:text-primary-600 prose-a:font-medium prose-a:underline prose-a:underline-offset-2 hover:prose-a:text-primary-700
             prose-strong:text-neutral-900 prose-strong:font-semibold
@@ -250,7 +253,7 @@ const primaryCategory = post.categories?.nodes?.[0];
         <div class="mt-8 lg:hidden">
           <ShareButtons
             url={canonicalUrl}
-            title={post.title}
+            title={postTitle}
             description={description || ''}
           />
         </div>
@@ -266,7 +269,7 @@ const primaryCategory = post.categories?.nodes?.[0];
       </article>
 
       <!-- Sidebar (Desktop) -->
-      <aside class="hidden lg:block lg:col-span-4 xl:col-span-3">
+      <aside class="hidden lg:block">
         <div class="sticky top-24 space-y-8">
 
           <!-- Table of Contents -->
@@ -277,7 +280,7 @@ const primaryCategory = post.categories?.nodes?.[0];
           <!-- Share Buttons -->
           <ShareButtons
             url={canonicalUrl}
-            title={post.title}
+            title={postTitle}
             description={description || ''}
             layout="vertical"
           />
