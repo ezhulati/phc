@@ -3,6 +3,7 @@
  * Table of Contents Component
  * Auto-generates TOC from article headings with active state tracking
  */
+import { decodeHtmlEntities } from '@/lib/utils/get-page-data';
 
 interface Props {
   content: string;
@@ -20,8 +21,9 @@ function extractHeadings(html: string) {
   let match;
   while ((match = headingRegex.exec(html)) !== null) {
     const level = parseInt(match[1]);
-    const id = match[2] || match[3].toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
-    const text = match[3].trim();
+    const rawText = match[3].trim();
+    const text = decodeHtmlEntities(rawText);
+    const id = match[2] || text.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
 
     if (text) {
       headings.push({ id, text, level });

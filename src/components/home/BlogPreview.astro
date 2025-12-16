@@ -6,6 +6,7 @@
 
 import postsData from '@/data/posts.json';
 import { formatDate } from '@/lib/utils/dates';
+import { decodeHtmlEntities } from '@/lib/utils/get-page-data';
 import type { WPPost } from '@/lib/graphql/types';
 
 interface Props {
@@ -62,7 +63,7 @@ const viewAllText = lang === 'es' ? 'Ver todos los artículos' : 'View all artic
               <div class="relative h-48 overflow-hidden">
                 <img
                   src={post.featuredImage.node.sourceUrl}
-                  alt={post.featuredImage.node.altText || post.title}
+                  alt={post.featuredImage.node.altText || decodeHtmlEntities(post.title)}
                   class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                   loading="lazy"
                 />
@@ -75,7 +76,7 @@ const viewAllText = lang === 'es' ? 'Ver todos los artículos' : 'View all artic
                 </span>
               )}
               <h3 class="text-lg font-bold text-neutral-900 mt-2 line-clamp-2 group-hover:text-primary-600 transition-colors">
-                {post.title}
+                {decodeHtmlEntities(post.title)}
               </h3>
               <p class="text-base text-neutral-500 mt-2">
                 {formatDate(post.date, lang)}

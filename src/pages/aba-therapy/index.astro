@@ -12,6 +12,7 @@ import postsData from '@/data/posts.json';
 import categoriesData from '@/data/categories.json';
 import { formatDate } from '@/lib/utils/dates';
 import { generateServiceSchema } from '@/lib/utils/schema';
+import { decodeHtmlEntities } from '@/lib/utils/get-page-data';
 import type { WPPost, WPCategory } from '@/lib/graphql/types';
 
 // Type the imported JSON
@@ -136,7 +137,7 @@ const categoryGroups = [
             {post.featuredImage?.node && (
               <img
                 src={post.featuredImage.node.sourceUrl}
-                alt={post.featuredImage.node.altText || post.title}
+                alt={post.featuredImage.node.altText || decodeHtmlEntities(post.title)}
                 class="w-full h-48 object-cover"
                 loading="lazy"
               />
@@ -148,7 +149,7 @@ const categoryGroups = [
                 </span>
               )}
               <h3 class="text-lg font-semibold text-neutral-900 mt-2 line-clamp-2">
-                {post.title}
+                {decodeHtmlEntities(post.title)}
               </h3>
               <p class="text-sm text-neutral-500 mt-2">
                 {formatDate(post.date, 'en')}

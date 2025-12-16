@@ -5,6 +5,7 @@
  */
 
 import { formatDate } from '@/lib/utils/dates';
+import { decodeHtmlEntities } from '@/lib/utils/get-page-data';
 import type { WPPost } from '@/lib/graphql/types';
 
 interface Props {
@@ -37,7 +38,7 @@ const title = lang === 'es' ? 'Artículos relacionados' : 'Related articles';
               <div class="relative h-48 overflow-hidden">
                 <img
                   src={post.featuredImage.node.sourceUrl}
-                  alt={post.featuredImage.node.altText || post.title}
+                  alt={post.featuredImage.node.altText || decodeHtmlEntities(post.title)}
                   class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                   loading="lazy"
                 />
@@ -57,7 +58,7 @@ const title = lang === 'es' ? 'Artículos relacionados' : 'Related articles';
 
             <div class="p-5 lg:p-6">
               <h3 class="text-lg font-bold text-neutral-900 line-clamp-2 group-hover:text-primary-600 transition-colors mb-2">
-                {post.title}
+                {decodeHtmlEntities(post.title)}
               </h3>
 
               {post.excerpt && (

@@ -12,6 +12,7 @@ import postsData from '@/data/posts.json';
 import categoriesData from '@/data/categories.json';
 import { formatDate } from '@/lib/utils/dates';
 import { generateServiceSchema } from '@/lib/utils/schema';
+import { decodeHtmlEntities } from '@/lib/utils/get-page-data';
 import type { WPPost, WPCategory } from '@/lib/graphql/types';
 
 // Type the imported JSON
