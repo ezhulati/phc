@@ -9,6 +9,7 @@ import Breadcrumbs from '@/components/common/Breadcrumbs.astro';
 import { getLangFromUrl, t } from '@/i18n/ui';
 import { formatDate, calculateReadingTime } from '@/lib/utils/dates';
 import { generateArticleSchema } from '@/lib/utils/schema';
+import { decodeHtmlEntities } from '@/lib/utils/get-page-data';
 import type { WPPost } from '@/lib/graphql/types';
 
 interface Props {
@@ -22,14 +23,15 @@ const lang = getLangFromUrl(Astro.url);
 const homeLabel = t(lang, 'nav.home');
 const homeHref = lang === 'es' ? '/es/' : '/';
 
-const title = post.seo?.title || post.title;
+const postTitle = decodeHtmlEntities(post.title);
+const title = post.seo?.title ? decodeHtmlEntities(post.seo.title) : postTitle;
 const description = post.seo?.metaDesc || post.excerpt?.replace(/<[^>]*>/g, '').slice(0, 160);
 const canonicalUrl = `https://prosperahealthcare.com/${post.slug}/`;
 const ogImage = post.seo?.opengraphImage?.sourceUrl || post.featuredImage?.node?.sourceUrl;
 
 const breadcrumbs = [
   { name: homeLabel, href: homeHref },
-  { name: post.title, href: `/${post.slug}/` },
+  { name: postTitle, href: `/${post.slug}/` },
 ];
 
 const schema = generateArticleSchema(post, canonicalUrl);
@@ -70,7 +72,7 @@ const primaryCategory = post.categories?.nodes?.[0];
       )}
 
       <h1 class="text-5xl font-bold text-neutral-900 leading-tight mb-4">
-        {post.title}
+        {postTitle}
       </h1>
 
       <!-- Meta Info -->
@@ -107,7 +109,7 @@ const primaryCategory = post.categories?.nodes?.[0];
       <figure class="mb-8 -mx-4 sm:mx-0">
         <img
           src={post.featuredImage.node.sourceUrl}
-          alt={post.featuredImage.node.altText || post.title}
+          alt={post.featuredImage.node.altText || postTitle}
           class="w-full h-auto rounded-lg sm:rounded-xl"
           width={post.featuredImage.node.mediaDetails?.width}
           height={post.featuredImage.node.mediaDetails?.height}

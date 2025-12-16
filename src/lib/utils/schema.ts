@@ -3,6 +3,7 @@
  */
 
 import type { WPPost, WPLocation, WPPage } from '../graphql/types';
+import { decodeHtmlEntities } from './get-page-data';
 
 const ORGANIZATION = {
   '@type': 'Organization',
@@ -52,7 +53,7 @@ export function generateArticleSchema(post: WPPost, canonicalUrl: string) {
   return {
     '@context': 'https://schema.org',
     '@type': 'Article',
-    headline: post.title,
+    headline: decodeHtmlEntities(post.title),
     description: post.seo?.metaDesc || post.excerpt?.replace(/<[^>]*>/g, '').slice(0, 160),
     image: post.featuredImage?.node?.sourceUrl,
     datePublished: post.date,
